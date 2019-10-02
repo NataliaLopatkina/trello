@@ -1,0 +1,44 @@
+.boards {
+    padding-top: 40px;
+    overflow: hidden;
+
+    &__button-create {
+        font-size: 14px;
+        line-height: calc(20 / 14);
+        color: #172b4d;
+        width: 190px;
+        height: 95px;
+        padding: 8px;
+        box-sizing: border-box;
+        border-radius: 3px;
+        border: none;
+        background-color: rgba(9,30,66,.04);
+        margin-bottom: 10px;
+    }
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        margin: -8px;
+    }
+
+    &__item {
+        margin: 8px;
+    }
+}
+
+.board {
+    background-color: #97a0af;
+    padding: 8px;
+    border-radius: 3px;
+    width: 190px;
+    height: 95px;
+    box-sizing: border-box;
+
+    &__title {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: calc(20 / 16);
+        color: #ffffff;
+    }
+}

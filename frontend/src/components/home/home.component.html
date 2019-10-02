@@ -1,0 +1,43 @@
+<header class="header-home">
+    <div class="header-home__box">
+        <nav class="nav header-home__item">
+            <a class="card link-home nav__link" [routerLink]="['/home']">
+                <svg class="link-home__icon">
+                    <use xlink:href="../../assets/svg-sprite.svg#home"></use>
+                </svg>
+            </a>
+            <div class="card search">
+                <input type="text" class="search__field">
+                <svg class="search__icon">
+                    <use xlink:href="../../assets/svg-sprite.svg#search"></use>
+                </svg>
+            </div>
+        </nav>
+        <div class="logo-home header-home__item">
+            <a href="#5" class="logo-home__link">
+                <svg class="logo-home__icon">
+                    <use xlink:href="../../assets/svg-sprite.svg#logo"></use>
+                </svg>
+            </a>
+        </div>
+        <div class="logout header-home__item">
+            <a class="logout__link" [routerLink]="['/login']">
+                <svg class="card logout__icon">
+                    <use xlink:href="../../assets/svg-sprite.svg#logout"></use>
+                </svg>
+            </a>
+        </div>
+    </div>
+</header>
+<main class="main-home">
+    <div class="box">
+        <div class="boards">
+            <button class="boards__button-create" type="button">Создать доску</button>
+            <div class="boards__list">
+                <div class="board boards__item">
+                    <p class="board__title">Title</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

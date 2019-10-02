@@ -1,0 +1,19 @@
+.not-found {
+    text-align: center;
+    padding-top: 150px;
+    height: 100vh;
+    box-sizing: border-box;
+    background: linear-gradient(135deg, #0079bf, #5067c5);
+
+    &__title {
+        font-size: 150px;
+        color: #ffffff;
+        margin-bottom: 20px;
+    }
+
+    &__text {
+        font-size: 100px;
+        font-weight: 700;
+        color: #ffffff;
+    }
+}

@@ -1,0 +1,25 @@
+<header class="header">
+    <div class="header__content">
+        <div class="logo">
+            <a href="" class="logo__link">
+                <svg class="logo__image">
+                    <use xlink:href="../../assets/svg-sprite.svg#logo"></use>
+                </svg>
+            </a>
+        </div>
+
+        <div class="header-actions">
+            <a [routerLink]="['/login']" class="button header-actions__link">Войти</a>
+            <a [routerLink]="['/registration']" class="button button--fill header-actions__link">Зарегистрироваться</a>
+        </div>
+    </div>
+</header>
+
+<main class="main">
+    <div class="main-hero">
+        <div class="box">
+            <h1 class="main-hero__title">Trello способствует более тесному сотрудничеству и увеличению 
+                эффективности работы.</h1>
+        </div>
+    </div>
+</main>

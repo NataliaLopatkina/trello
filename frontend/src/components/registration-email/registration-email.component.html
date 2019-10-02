@@ -1,0 +1,55 @@
+<div class="authentication">
+    <div class="authentication__box">
+        <div class="authentication__title-block">
+            <h1 class="authentication__title">Создать аккаунт Trello</h1>
+            <a class="authentication__link" [routerLink]="['/login']">или войдите в аккаунт</a>
+        </div>
+        <form class="form" [formGroup]="registrationFormEmail">
+            <div class="form__item">
+                <label for="email" class="form__label">Электронная почта
+                    <span class="form__required">*</span>
+                </label>
+                <input id="email" type="email" placeholder="например, example@mail.com" class="form__field"
+                    formControlName="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                <div class="error"
+                    *ngIf="registrationFormEmail.controls['email'].errors && !registrationFormEmail.controls['email'].pristine">
+                    <span class="error__text" *ngIf="registrationFormEmail.controls['email'].errors.required">Email is
+                        required!</span>
+                    <span class="error__text" *ngIf="registrationFormEmail.controls['email'].errors.pattern">Email is
+                        not valid!</span>
+                </div>
+            </div>
+            <div class="form__item">
+                <label for="name" class="form__label">Имя
+                    <span class="form__required">*</span>
+                </label>
+                <input id="name" type="text" placeholder="например, John" class="form__field" formControlName="name"
+                    required>
+                <div class="error"
+                    *ngIf="registrationFormEmail.controls['name'].errors && !registrationFormEmail.controls['name'].pristine">
+                    <span class="error__text" *ngIf="registrationFormEmail.controls['name'].errors.required">Name is
+                        required!</span>
+                </div>
+            </div>
+            <div class="form__item">
+                <label for="password" class="form__label">Пароль
+                    <span class="form__required">*</span>
+                </label>
+                <input id="password" type="password" placeholder="например, &bull;&bull;&bull;&bull;&bull;"
+                    class="form__field" formControlName="password" required minlength="5">
+                <div class="error"
+                    *ngIf="registrationFormEmail.controls['password'].errors && !registrationFormEmail.controls['password'].pristine">
+                    <span class="error__text"
+                        *ngIf="registrationFormEmail.controls['password'].errors.required">Password is
+                        required!</span>
+                    <span class="error__text"
+                        *ngIf="registrationFormEmail.controls['password'].errors.minlength">Minimum
+                        password length 5 characters</span>
+                </div>
+            </div>
+            <button class="form__button" type="submit" [disabled]="!registrationFormEmail.valid" 
+            (click)="submit()">Создать новый
+                аккаунт</button>
+        </form>
+    </div>
+</div>
