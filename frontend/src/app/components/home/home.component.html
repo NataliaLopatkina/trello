@@ -14,7 +14,7 @@
             </div>
         </nav>
         <div class="logo-home header-home__item">
-            <a href="#5" class="logo-home__link">
+            <a [routerLink]="['home']" class="logo-home__link">
                 <svg class="logo-home__icon">
                     <use xlink:href="../../assets/svg-sprite.svg#logo"></use>
                 </svg>
@@ -41,3 +41,4 @@
         </div>
     </div>
 </main>
+<app-notification></app-notification>
