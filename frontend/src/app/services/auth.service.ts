@@ -12,4 +12,9 @@ export class AuthService {
         const data = {name: user.name, email: user.email, password: user.password};
         return this.httpClient.post('http://localhost:3000/registration', data);
     }
+
+    public login(user: User) {
+        const data = {email: user.email, password: user.password};
+        return this.httpClient.post('http://localhost:3000/registration', data);
+    }
 }

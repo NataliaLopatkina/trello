@@ -39,8 +39,7 @@ export class RegistrationEmailComponent implements OnInit {
 
             (error)=> {
                 const text = 'Почта уже используется другим аккаунтом. Вы можете использовать вход.';
-                this.notificationService.addNotification.next(true);
-                this.notificationService.addNotificationText.next(text)
+                this.notificationService.error(text);
             }
         )
     }

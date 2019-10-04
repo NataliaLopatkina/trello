@@ -388,6 +388,10 @@ a {
     text-decoration: none;
 }
 
+.page {
+    padding-top: 80px;
+}
+
 .button {
     font-size: 17px;
     font-weight: 500;
@@ -442,10 +446,6 @@ a {
 }
 
 // Authentication
-
-.page-authentication {
-    padding-top: 80px;
-}
 
 .authentication {
 
@@ -582,6 +582,7 @@ a {
 .header-home {
     background: #026aa7;
     padding: 4px;
+    margin-top: -80px;
 
     &__box {
         display: flex;
