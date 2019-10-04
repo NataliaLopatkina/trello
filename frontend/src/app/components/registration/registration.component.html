@@ -20,13 +20,13 @@
                 </div>
             </div>
             <button class="form__button" type="submit" [disabled]="!registrationForm.valid"
-                (click)="submit()">Создать новый
-                аккаунт</button>
+                (click)="submit()">Создать новый аккаунт</button>
             <button class="form__button-service">
-                <span class="form__button-icon"></span>
+                <svg class="form__button-icon">
+                    <use xlink:href="../../assets/svg-sprite.svg#vk"></use>
+                </svg>
                 <a class="form__button-text">Зарегистрироваться с помощью</a>
             </button>
         </form>
-
     </div>
 </div>

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { AuthService } from '../../services/auth.service';
+import { NotificationService } from '../../services/notification.service';
+
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -13,7 +16,9 @@ export class LoginComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private router: Router) { }
+        private authService: AuthService,
+        private router: Router,
+        private notificationService: NotificationService) { }
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
@@ -22,7 +27,24 @@ export class LoginComponent implements OnInit {
         })
     }
 
-    submit() {
-        this.router.navigate(['/home']);
+    login() {
+        this.authService.login(this.loginForm.value)
+        .subscribe(
+            (data)=> {
+                this.router.navigate(['/home']);
+                this.notificationService.deleteNotification();
+            },
+
+            (error)=> {
+                if (error.error.password === false) {
+                    const text = 'Неверный пароль';
+                    this.notificationService.error(text);
+
+                } else if (error.error.email === false) {
+                    const text = 'Аккаунт с таким адресом электронной почты не существует';
+                    this.notificationService.error(text);
+                }
+            }
+        )
     }
 }

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRouterModule } from './app-router.module';
 import { AppComponent } from './app.component';
@@ -16,6 +16,8 @@ import { NotificationComponent } from './components/notification/notification.co
 
 import { NotificationService } from './services/notification.service';
 import { AuthService } from './services/auth.service';
+
+import { JwtInterceptor } from './helpers/jwt.interceptor';
 
 @NgModule({
     declarations: [
@@ -37,7 +39,8 @@ import { AuthService } from './services/auth.service';
     ],
     providers: [
         NotificationService,
-        AuthService
+        AuthService,
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
     ],
     bootstrap: [AppComponent]
 })

@@ -22,14 +22,14 @@ exports.getUser = async function(req, res, next) {
                     const tokenLife = { expiresIn: '3h' };
                     const accessToken  = jwt.sign(userData, tokenSecret, tokenLife);
 
-                    return res.status(200).json({ message: 'Logged in!', accessToken: accessToken, user: user });
+                    return res.status(200).json({ message: 'Logged in!', accessToken: accessToken });
                 }
 
                 throw new Error('Неверный пароль')
             }
 
             catch(e) {
-                return res.status(404).json({message: e.message, email: false})
+                return res.status(404).json({message: e.message, password: false})
             }
         }
 
@@ -37,6 +37,6 @@ exports.getUser = async function(req, res, next) {
     }
 
     catch(e) {
-        return res.status(404).json({ message: e.message, password: false })
+        return res.status(404).json({ message: e.message, email: false })
     }
 }

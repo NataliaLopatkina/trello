@@ -409,6 +409,7 @@ a {
 
 .header {
     background: linear-gradient(135deg, #0079bf, #5067c5);
+    margin-top: -80px;
 
     &__content {
         display: flex;
@@ -556,12 +557,23 @@ a {
         border: 2px solid #CDD2D4;
         width: 100%;
         padding: 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         &:active {
             background: #eee;
             border: 2px solid #CDD2D4;
             outline: none;
         }
+    }
+
+    &__button-icon {
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
+        color: #003366;
+        margin-right: 10px;
     }
 }
 
@@ -671,10 +683,12 @@ a {
 .logout {
     text-align: right;
 
-    &__link {
+    &__button {
         width: 28px;
         height: 28px;
-        display: inline-block;
+        padding: 0;
+        border: none;
+        background: none;
     }
 
     &__icon {
@@ -709,5 +723,6 @@ a {
         color: #fbedeb;
         padding: 0;
         outline: none;
+        margin-left: 5px;
     }
 }

@@ -33,8 +33,9 @@ export class RegistrationEmailComponent implements OnInit {
     registration() {
         this.authService.registration(this.registrationFormEmail.value)
         .subscribe(
-            (response) => {
-                this.router.navigate(['/login']);
+            (data) => {
+                this.router.navigate(['/home']);
+                this.notificationService.deleteNotification();
             },
 
             (error)=> {

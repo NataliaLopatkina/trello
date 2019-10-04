@@ -36,9 +36,11 @@
                 </div>
             </div>
             <button class="form__button" type="submit" [disabled]="!loginForm.valid"
-                (click)="submit()">Создать новый аккаунт</button>
+                (click)="login()">Войти</button>
             <button class="form__button-service">
-                <span class="form__button-icon"></span>
+                <svg class="form__button-icon">
+                    <use xlink:href="../../assets/svg-sprite.svg#vk"></use>
+                </svg>
                 <a class="form__button-text">Войти с помощью</a>
             </button>
         </form>
