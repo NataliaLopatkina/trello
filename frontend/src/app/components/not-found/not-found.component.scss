@@ -1,9 +1,10 @@
 .not-found {
     text-align: center;
     padding-top: 150px;
-    height: 100vh;
+    height: calc(100vh + 150px);
     box-sizing: border-box;
     background: linear-gradient(135deg, #0079bf, #5067c5);
+    margin-top: -150px;
 
     &__title {
         font-size: 150px;

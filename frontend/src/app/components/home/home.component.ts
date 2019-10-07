@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import { Board } from '../../models/board';
 import { AuthService } from '../../services/auth.service';
 import { BoardService } from '../../services/board.service';
+import { PopupService } from '../../services/popup.service';
  
 @Component({
     selector: 'app-home',
@@ -13,18 +14,18 @@ import { BoardService } from '../../services/board.service';
 export class HomeComponent implements OnInit {
 
     popup: boolean = false;
-    boardForm: FormGroup;
+    boards: Board [] = [];
+    searchForm: FormGroup;
 
     constructor(
-        private formBuilder: FormBuilder,
         private authService: AuthService,
         private boardService: BoardService,
-        private router: Router ) { }
+        private popupService: PopupService,
+        private formBuilder: FormBuilder ) { }
 
     ngOnInit() {
-        this.boardForm = this.formBuilder.group({
-            title: ['', [Validators.required]]
-        })
+        this.drawBoards();
+        this.addSearchForm();
     }
 
     logout() {
@@ -32,23 +33,37 @@ export class HomeComponent implements OnInit {
     }
 
     addBoard() {
-        this.popup = true;
+        this.popupService.popup();
     }
 
-    removePopup() {
-        this.popup = false;
+    drawBoards() {
+        this.boardService.getBoards()
+        .subscribe(
+            (response: any) => {
+                this.boards = response.data;
+            },
+
+            (error) => {
+                console.log(error)
+            }
+        )
     }
 
-    createBoard() {
-        this.boardService.createBoard(this.boardForm.value)
+    addSearchForm() {
+        this.searchForm = this.formBuilder.group({
+            search: ['', Validators.required]
+        })
+    }
+
+    search() {
+        this.boardService.searchBoards(this.searchForm.value.search)
         .subscribe(
             (response)=> {
                 console.log(response)
             },
-
             (error)=> {
                 console.log(error)
             }
-        );
+        )
     }
 }

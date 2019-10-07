@@ -1,0 +1,49 @@
+<section class="popup-board" *ngIf="popup">
+    <div class="popup-board__box">
+        <h3 class="visually-hidden">Создать доску</h3>
+        <form class="popup-board__form" [formGroup]="boardForm">
+            <div class="popup-board__content">
+                <div class="popup-board__field-block" [ngStyle]="{'background': color}">
+                    <input class="popup-board__field" type="text" placeholder="Добавить заголовок доски"
+                        formControlName="title" required>
+                    <button class="popup-board__button-close" (click)="removePopup()">&times;</button>
+                </div>
+                <div class="popup-background">
+                    <ul class="popup-background__list">
+                        <li class="popup-background__item">
+                            <button class="popup-background__button popup-background__button--red" 
+                                data-color="red"></button>
+                        </li>
+                        <li class="popup-background__item">
+                            <button class="popup-background__button popup-background__button--blue"
+                                data-color="blue"></button>
+                        </li>
+                        <li class="popup-background__item">
+                            <button class="popup-background__button popup-background__button--orange"
+                                data-color="orange"></button>
+                        </li>
+                        <li class="popup-background__item">
+                            <button class="popup-background__button popup-background__button--green"
+                                data-color="green"></button>
+                        </li>
+                        <li class="popup-background__item">
+                            <button class="popup-background__button popup-background__button--yellow"
+                                data-color="yellow"></button>
+                        </li>
+                        <li class="popup-background__item">
+                            <button class="popup-background__button popup-background__button--violet"
+                                data-color="violet"></button>
+                        </li>
+                        <li class="popup-background__item">
+                            <button class="popup-background__button popup-background__button--pink"
+                                data-color="pink"></button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <button class="popup-board__button-create" type="submit" [disabled]="!boardForm.valid"
+                (click)="createBoard()">Создать
+                доску</button>
+        </form>
+    </div>
+</section>

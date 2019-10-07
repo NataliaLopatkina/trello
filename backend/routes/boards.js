@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const boardsController = require('../controllers/board.controller');
+const boardsController = require('../controllers/boards.controller');
 
-router.post('/', boardsController.createBoard)
+router.get('/', boardsController.getBoards)
 
 module.exports = router;

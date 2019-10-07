@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { PopupComponent } from './components/popup/popup.component';
 
 import { NotificationService } from './services/notification.service';
 import { AuthService } from './services/auth.service';
@@ -28,7 +29,8 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
         LoginComponent,
         NotFoundComponent,
         HomeComponent,
-        NotificationComponent
+        NotificationComponent,
+        PopupComponent
     ],
     imports: [
         BrowserModule,

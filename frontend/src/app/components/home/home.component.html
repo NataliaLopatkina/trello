@@ -7,10 +7,14 @@
                 </svg>
             </a>
             <div class="card search">
-                <input type="text" class="search__field">
-                <svg class="search__icon">
-                    <use xlink:href="../../assets/svg-sprite.svg#search"></use>
-                </svg>
+                <form class="search__form" [formGroup]="searchForm">
+                    <input type="text" class="search__field" formControlName="search">
+                    <button class="search__button" (click)="search(boards)">
+                        <svg class="search__icon">
+                            <use xlink:href="../../assets/svg-sprite.svg#search"></use>
+                        </svg>
+                    </button>
+                </form>
             </div>
         </nav>
         <div class="logo-home header-home__item">
@@ -32,26 +36,13 @@
 <main class="main-home">
     <div class="box">
         <div class="boards">
+            <ul class="boards__list">
+                <li class="board boards__item" *ngFor="let board of boards">
+                    <p class="board__title">{{board.title}}</p>
+                </li>
+            </ul>
             <button class="boards__button-create" type="button" (click)="addBoard()">Создать доску</button>
-            <div class="boards__list">
-                <div class="board boards__item">
-                    <p class="board__title">Title</p>
-                </div>
-            </div>
         </div>
     </div>
 </main>
-<section class="popup-board" *ngIf="popup">
-    <div class="popup-board__content">
-        <h3 class="visually-hidden">Создать доску</h3>
-        <form class="popup-board__form" [formGroup]="boardForm">
-            <div class="popup-board__header">
-                <input class="popup-board__field" type="text" placeholder="Добавить заголовок доски"
-                    formControlName="title" required>
-                <button class="popup-board__button-close" (click)="removePopup()">&times;</button>
-            </div>
-            <button class="popup-board__button-create" type="submit" [disabled]="!boardForm.valid"
-                (click)="createBoard()">Создать доску</button>
-        </form>
-    </div>
-</section>
+<app-popup></app-popup>
