@@ -2,7 +2,8 @@ const boardService = require('../services/board');
 
 exports.createBoard = async function(req, res, next) {
     const { title } = req.body;
-    const query = {title};
+    const authorId = req.user.id;
+    const query = { title, authorId };
 
     try {
         await boardService.createBoard(query);

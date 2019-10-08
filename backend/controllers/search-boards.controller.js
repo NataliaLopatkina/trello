@@ -4,7 +4,8 @@ const boardService = require('../services/board');
 
 exports.searchBoards = async function (req, res, next) {
     const { value} = req.query;
-    const query = { where: { title: { [Op.iLike]: `%${value}%`}}};
+    const authorId = req.user.id;
+    const query = { where: { title: { [Op.iLike]: `%${value}%`, authorId: authorId}}};
 
     try {
         const boards = await boardService.searchBoards(query);

@@ -1,44 +1,12 @@
-<header class="header-home">
-    <div class="header-home__box">
-        <nav class="nav header-home__item">
-            <a class="card link-home nav__link" [routerLink]="['/home']">
-                <svg class="link-home__icon">
-                    <use xlink:href="../../assets/svg-sprite.svg#home"></use>
-                </svg>
-            </a>
-            <div class="card search">
-                <form class="search__form" [formGroup]="searchForm">
-                    <input type="text" class="search__field" formControlName="search">
-                    <button class="search__button" (click)="search(boards)">
-                        <svg class="search__icon">
-                            <use xlink:href="../../assets/svg-sprite.svg#search"></use>
-                        </svg>
-                    </button>
-                </form>
-            </div>
-        </nav>
-        <div class="logo-home header-home__item">
-            <a [routerLink]="['/home']" class="logo-home__link">
-                <svg class="logo-home__icon">
-                    <use xlink:href="../../assets/svg-sprite.svg#logo"></use>
-                </svg>
-            </a>
-        </div>
-        <div class="logout header-home__item">
-            <button class="logout__button" (click)="logout()">
-                <svg class="card logout__icon">
-                    <use xlink:href="../../assets/svg-sprite.svg#logout"></use>
-                </svg>
-            </button>
-        </div>
-    </div>
-</header>
+<app-header-home></app-header-home>
 <main class="main-home">
     <div class="box">
         <div class="boards">
             <ul class="boards__list">
                 <li class="board boards__item" *ngFor="let board of boards">
-                    <p class="board__title">{{board.title}}</p>
+                    <a href="#5" class="board__link">
+                        <p class="board__title">{{board.title}}</p>
+                    </a>
                 </li>
             </ul>
             <button class="boards__button-create" type="button" (click)="addBoard()">Создать доску</button>

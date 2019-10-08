@@ -10,7 +10,7 @@
                     <span class="form__required">*</span>
                 </label>
                 <input id="email" type="email" placeholder="например, example@mail.com" class="form__field"
-                    formControlName="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                    formControlName="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required value="authService.getEmail">
                 <div class="error"
                     *ngIf="registrationFormEmail.controls['email'].errors && !registrationFormEmail.controls['email'].pristine">
                     <span class="error__text" *ngIf="registrationFormEmail.controls['email'].errors.required">Email is

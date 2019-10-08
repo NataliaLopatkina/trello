@@ -7,6 +7,7 @@ import { RegistrationEmailComponent } from './components/registration-email/regi
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
+import { BoardComponent } from './components/board/board.component';
 
 import { AuthGuard } from './guards/auth.guard';
 
@@ -28,7 +29,11 @@ const routes: Routes = [
     },
 
     {
-        path: 'home', component: HomeComponent, canActivate: [AuthGuard]
+        path: 'boards', component: HomeComponent, canActivate: [AuthGuard]
+    },
+
+    {
+        path: 'board', component: BoardComponent, canActivate: [AuthGuard]
     },
 
     {

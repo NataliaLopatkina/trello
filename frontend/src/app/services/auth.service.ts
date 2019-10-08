@@ -10,7 +10,8 @@ import { User } from '../models/user';
 
 export class AuthService {
 
-    isAuth = false;
+    isAuth: boolean = false;
+    email: string = '';
 
     constructor(
         private httpClient: HttpClient,
@@ -40,7 +41,11 @@ export class AuthService {
 
     public logout() {
         this.isAuth = false;
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
         localStorage.removeItem('accessToken');
+    }
+
+    public getEmail(registrationEmail) {
+        this.email = registrationEmail;
     }
 }
