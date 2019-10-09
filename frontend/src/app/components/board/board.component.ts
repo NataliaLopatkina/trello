@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
+import { PopupService } from '../../services/popup.service';
+import { TaskService } from '../../services/task.service';
+
+import { Task } from '../../models/task';
+
 @Component({
     selector: 'app-board',
     templateUrl: './board.component.html',
@@ -8,35 +13,39 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 })
 export class BoardComponent implements OnInit {
 
-    todo = [
-        'Get to work',
-        'Pick up groceries',
-        'Go home',
-        'Fall asleep'
-    ];
+    todo: Task [] = [];
 
-    doing = [
-        'Get up',
-    ];
+    doing = [];
+    done = [];
 
-    done = [
-        'Get up',
-    ];
+    constructor(
+        private popupService: PopupService,
+        private taskService: TaskService) { }
+
+    ngOnInit() {
+        this.taskService.getTasks()
+        .subscribe(
+            (response: any)=> {
+                this.todo = response['data'];
+                console.log(this.todo)
+            },
+
+            (error)=> {
+                console.log(error)
+            }
+        )
+    }
 
     drop(event: CdkDragDrop<string[]>) {
-        if (event.previousContainer === event.container) {
-            moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        if (event.previousContainer !== event.container) {
+            transferArrayItem(event.previousContainer.data, event.container.data,
+                event.previousIndex, event.currentIndex)
         } else {
-            transferArrayItem(event.previousContainer.data,
-                event.container.data,
-                event.previousIndex,
-                event.currentIndex);
+            moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
         }
     }
 
-    constructor() { }
-
-    ngOnInit() {
+    addTask() {
+        this.popupService.popup();
     }
-
 }

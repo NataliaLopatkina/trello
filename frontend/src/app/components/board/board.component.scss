@@ -23,6 +23,7 @@
 
 .tasks {
     display: flex;
+    align-items: flex-start;
 
     &__column {
         background-color: #ebecf0;
@@ -31,6 +32,7 @@
         width: 272px;
         padding-top: 10px;
         margin-right: 8px;
+        position: relative;
 
         &:last-child {
             margin-right: 0;
@@ -43,13 +45,11 @@
         line-height: calc(20 / 14);
         color: #172b4d;
         padding-left: 16px;
-        margin-bottom: 10px;
     }
 
     &__list {
+        padding: 10px 8px;
         list-style: none;
-        padding-left: 8px;
-        padding-right: 8px;
     }
 
     &__item {
@@ -74,11 +74,16 @@
         padding: 8px;
         width: 100%;
         border: none;
+        margin-top: -10px;
         background: transparent;
         transition: background 0.25s ease;
 
         &:hover {
             background: rgba(9, 30, 66, 0.08);
+        }
+
+        &:focus {
+            outline: none;
         }
     }
 

@@ -17,9 +17,11 @@ import { NotificationComponent } from './components/notification/notification.co
 import { PopupComponent } from './components/popup/popup.component';
 import { BoardComponent } from './components/board/board.component';
 import { HeaderHomeComponent } from './components/header-home/header-home.component';
+import { TaskComponent } from './components/task/task.component';
 
 import { NotificationService } from './services/notification.service';
 import { AuthService } from './services/auth.service';
+import { TaskService } from './services/task.service';
 
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 
@@ -35,7 +37,8 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
         NotificationComponent,
         PopupComponent,
         BoardComponent,
-        HeaderHomeComponent
+        HeaderHomeComponent,
+        TaskComponent
     ],
     imports: [
         BrowserModule,
@@ -48,6 +51,7 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
     providers: [
         NotificationService,
         AuthService,
+        TaskService,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
     ],
     bootstrap: [AppComponent]
