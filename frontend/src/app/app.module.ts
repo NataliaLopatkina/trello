@@ -8,15 +8,16 @@ import { AppRouterModule } from './app-router.module';
 import { AppComponent } from './app.component';
 
 import { MainComponent } from './components/main/main.component';
-import { RegistrationComponent } from './components/registration/registration.component';
 import { RegistrationEmailComponent } from './components/registration-email/registration-email.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { HomeComponent } from './components/home/home.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { BoardsComponent } from './components/boards/boards.component';
 import { PopupComponent } from './components/popup/popup.component';
 import { BoardComponent } from './components/board/board.component';
 import { HeaderHomeComponent } from './components/header-home/header-home.component';
+import { SearchBoardsComponent } from './components/search-boards/search-boards.component';
 import { TaskComponent } from './components/task/task.component';
 
 import { NotificationService } from './services/notification.service';
@@ -29,15 +30,16 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
     declarations: [
         AppComponent,
         MainComponent,
-        RegistrationComponent,
         RegistrationEmailComponent,
+        RegistrationComponent,
         LoginComponent,
-        NotFoundComponent,
-        HomeComponent,
         NotificationComponent,
+        NotFoundComponent,
+        BoardsComponent,
         PopupComponent,
         BoardComponent,
         HeaderHomeComponent,
+        SearchBoardsComponent,
         TaskComponent
     ],
     imports: [

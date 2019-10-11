@@ -1,0 +1,8 @@
+<section class="search-boards" *ngIf="boards">
+    <h2 class="visually-hidden">Список найденных досок</h2>
+    <ul class="search-boards__list">
+        <li class="search-boards__item" *ngFor="let board of boards">
+            <a href="#5" class="search-boards__title">{{board.title}}</a>
+        </li>
+    </ul>
+</section>

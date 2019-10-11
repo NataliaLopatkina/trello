@@ -11,7 +11,6 @@ import { User } from '../models/user';
 export class AuthService {
 
     isAuth: boolean = false;
-    email: string = '';
 
     constructor(
         private httpClient: HttpClient,
@@ -43,9 +42,5 @@ export class AuthService {
         this.isAuth = false;
         this.router.navigate(['/']);
         localStorage.removeItem('accessToken');
-    }
-
-    public getEmail(registrationEmail) {
-        this.email = registrationEmail;
     }
 }

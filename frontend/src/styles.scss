@@ -553,6 +553,7 @@ a {
         font-weight: 700;
         line-height: calc(42 / 16);
         color: rgba(0,0,0,0.54);
+        background: transparent;
         border-radius: 3px;
         border: 2px solid #CDD2D4;
         width: 100%;
@@ -564,6 +565,9 @@ a {
         &:active {
             background: #eee;
             border: 2px solid #CDD2D4;
+        }
+
+        &:focus {
             outline: none;
         }
     }

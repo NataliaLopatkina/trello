@@ -7,11 +7,11 @@ import { BoardService } from '../../services/board.service';
 import { PopupService } from '../../services/popup.service';
  
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss']
+    selector: 'app-boards',
+    templateUrl: './boards.component.html',
+    styleUrls: ['./boards.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class BoardsComponent implements OnInit, OnDestroy {
 
     popup: boolean = false;
     boards: Board [] = [];
