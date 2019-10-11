@@ -1,3 +1,5 @@
+import { Subscription } from 'rxjs';
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -13,6 +15,7 @@ export class TaskComponent implements OnInit, OnDestroy {
 
     popup: boolean = false;
     taskForm: FormGroup;
+    subscription: Subscription;
 
     constructor(
         private popupService: PopupService,
@@ -20,7 +23,7 @@ export class TaskComponent implements OnInit, OnDestroy {
         private taskService: TaskService) { }
 
     ngOnInit() {
-        this.popupService.addPopup.subscribe(
+        this.subscription = this.popupService.addPopup.subscribe(
             (popupCreate: { popup: boolean }) => {
                 if (popupCreate) {
                     this.popup = popupCreate.popup;
@@ -38,7 +41,7 @@ export class TaskComponent implements OnInit, OnDestroy {
     }
 
     addTask() {
-        this.taskService.createTask(this.taskForm.value)
+        this.subscription = this.taskService.createTask(this.taskForm.value)
         
         .subscribe(
             (response: any)=> {
@@ -54,7 +57,7 @@ export class TaskComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.popupService.addPopup.unsubscribe();
+        this.subscription.unsubscribe();
     }
 
     closePopupTask() {

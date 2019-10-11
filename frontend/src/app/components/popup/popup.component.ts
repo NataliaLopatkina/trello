@@ -1,3 +1,5 @@
+import { Subscription } from 'rxjs';
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,6 +16,7 @@ export class PopupComponent implements OnInit, OnDestroy {
 
     popup: boolean = false;
     boardForm: FormGroup;
+    subscription: Subscription;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -26,7 +29,7 @@ export class PopupComponent implements OnInit, OnDestroy {
             title: ['', [Validators.required]]
         })
 
-        this.popupService.addPopup.subscribe(
+        this.subscription = this.popupService.addPopup.subscribe(
             (popupCreate: { popup: boolean }) => {
                 if (popupCreate) {
                     this.popup = popupCreate.popup;
@@ -36,7 +39,9 @@ export class PopupComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.popupService.addPopup.unsubscribe();
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 
     removePopup() {
@@ -44,7 +49,7 @@ export class PopupComponent implements OnInit, OnDestroy {
     }
 
     createBoard() {
-        this.boardService.createBoard(this.boardForm.value)
+        this.subscription = this.boardService.createBoard(this.boardForm.value)
         .subscribe(
             (response) => {
                 this.popup = false;

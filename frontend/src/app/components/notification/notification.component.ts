@@ -1,3 +1,5 @@
+import { Subscription } from 'rxjs';
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { NotificationService } from '../../services/notification.service';
@@ -11,11 +13,12 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
     message: boolean = false;
     messageText: string = '';
+    subscription: Subscription;
 
     constructor(private notificationService: NotificationService) { }
 
     ngOnInit() {
-        this.notificationService.addNotification.subscribe(
+        this.subscription = this.notificationService.addNotification.subscribe(
             (notification: {message: boolean, messageText: string})=> {
                 if (notification) {
                     this.message = notification.message;
@@ -26,7 +29,9 @@ export class NotificationComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.notificationService.addNotification.unsubscribe();
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 
     removeNotification() {

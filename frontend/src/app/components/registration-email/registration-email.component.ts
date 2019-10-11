@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -11,10 +13,11 @@ import { NotificationService } from '../../services/notification.service';
     templateUrl: './registration-email.component.html',
     styleUrls: ['./registration-email.component.scss']
 })
-export class RegistrationEmailComponent implements OnInit {
+export class RegistrationEmailComponent implements OnInit, OnDestroy {
 
     registrationFormEmail: FormGroup;
     users: User[] = [];
+    subscription: Subscription;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -31,7 +34,7 @@ export class RegistrationEmailComponent implements OnInit {
     }
 
     registration() {
-        this.authService.registration(this.registrationFormEmail.value)
+        this.subscription = this.authService.registration(this.registrationFormEmail.value)
         .subscribe(
             (data) => {
                 this.router.navigate(['/boards']);
@@ -43,5 +46,9 @@ export class RegistrationEmailComponent implements OnInit {
                 this.notificationService.error(text);
             }
         )
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 }

@@ -20,6 +20,8 @@
     "@angular/platform-browser": "~8.2.8",
     "@angular/platform-browser-dynamic": "~8.2.8",
     "@angular/router": "~8.2.8",
+    "drag-drop": "5.0.1",
+    "ngx-drag-drop": "2.0.0",
     "rxjs": "~6.4.0",
     "sequelize": "^5.19.2",
     "tslib": "^1.10.0",

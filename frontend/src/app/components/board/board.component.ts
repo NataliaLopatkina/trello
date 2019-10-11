@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 import { PopupService } from '../../services/popup.service';
@@ -11,23 +13,22 @@ import { Task } from '../../models/task';
     templateUrl: './board.component.html',
     styleUrls: ['./board.component.scss']
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
 
+    subscription: Subscription;
     todo: Task [] = [];
-
-    doing = [];
-    done = [];
+    doing: Task [] = [];
+    done: Task [] = [];
 
     constructor(
         private popupService: PopupService,
         private taskService: TaskService) { }
 
     ngOnInit() {
-        this.taskService.getTasks()
+        this.subscription = this.taskService.getTasks()
         .subscribe(
             (response: any)=> {
-                this.todo = response['data'];
-                console.log(this.todo)
+                this.todo = response.data;
             },
 
             (error)=> {
@@ -47,5 +48,11 @@ export class BoardComponent implements OnInit {
 
     addTask() {
         this.popupService.popup();
+    }
+
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 }

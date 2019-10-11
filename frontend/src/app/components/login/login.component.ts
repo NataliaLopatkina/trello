@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -10,9 +12,10 @@ import { NotificationService } from '../../services/notification.service';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
     loginForm: FormGroup;
+    subscription: Subscription;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -28,7 +31,7 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        this.authService.login(this.loginForm.value)
+        this.subscription = this.authService.login(this.loginForm.value)
         .subscribe(
             (data)=> {
                 this.router.navigate(['/boards']);
@@ -46,5 +49,11 @@ export class LoginComponent implements OnInit {
                 }
             }
         )
+    }
+
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 }

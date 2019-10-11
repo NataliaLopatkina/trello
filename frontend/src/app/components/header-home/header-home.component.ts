@@ -1,4 +1,4 @@
-import { SubscriptionLike } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -16,7 +16,7 @@ export class HeaderHomeComponent implements OnInit, OnDestroy {
 
     searchForm: FormGroup;
     boards: Board[] = [];
-    subscription: SubscriptionLike;
+    subscription: Subscription;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -53,6 +53,8 @@ export class HeaderHomeComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        //this.subscription.unsubscribe();
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 }
