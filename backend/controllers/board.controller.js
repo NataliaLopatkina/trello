@@ -14,3 +14,16 @@ exports.createBoard = async function(req, res, next) {
         return res.status(400).json({message: 'Board not added!'})
     }
 }
+
+exports.updateBoard = async function(req, res, next) {
+    const { title, id } = req.body;
+
+    try {
+        // const board = await boardService.updateBoard({where: {id: id}});
+        // console.log(board)
+    }
+
+    catch(e) {
+        console.log(e)
+    }
+}
