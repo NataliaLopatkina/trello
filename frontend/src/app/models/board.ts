@@ -1,5 +1,5 @@
 export class Board {
-    id?: string;
+    id?: number;
     title?: string;
     color?: string;
 }

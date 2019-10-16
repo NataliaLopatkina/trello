@@ -21,7 +21,7 @@ export class BoardService {
 
     public updateTitleBoard(board: Board) {
         const data = { title: board.title, id: board.id }
-        return this.httpClient.put('http://localhost:3000/board', data)
+        return this.httpClient.patch('http://localhost:3000/board', data)
     }
 
     public getColorBoard() {
@@ -29,7 +29,7 @@ export class BoardService {
     }
 
     public getIdBoard() {
-        return localStorage.getItem('id');
+        return +localStorage.getItem('id');
     }
 
     public getBoards() {

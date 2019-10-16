@@ -6,6 +6,7 @@ import { RegistrationEmailComponent } from './components/registration-email/regi
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { HomeComponent } from './components/home/home.component';
 import { BoardsComponent } from './components/boards/boards.component';
 import { BoardComponent } from './components/board/board.component';
 
@@ -29,11 +30,11 @@ const routes: Routes = [
     },
 
     {
-        path: 'boards', component: BoardsComponent, canActivate: [AuthGuard]
+        path: 'home', component: HomeComponent, canActivate: [AuthGuard]
     },
 
     {
-        path: 'board/:nameBoard', component: BoardComponent, canActivate: [AuthGuard]
+        path: 'boards/:nameBoard', component: BoardComponent, canActivate: [AuthGuard]
     },
 
     {

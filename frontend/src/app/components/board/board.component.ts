@@ -25,6 +25,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     nameBoard: string = '';
     color: string = '';
     formNameBoard: FormGroup;
+    edit: boolean = false;
 
     constructor(
         private popupService: PopupService,
@@ -88,5 +89,11 @@ export class BoardComponent implements OnInit, OnDestroy {
                 console.log(error)
             }
         )
+
+        this.edit = false;
+    }
+
+    editTitleBoard() {
+        this.edit = true;
     }
 }

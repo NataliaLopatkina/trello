@@ -407,37 +407,6 @@ a {
     }
 }
 
-.header {
-    background: linear-gradient(135deg, #0079bf, #5067c5);
-    margin-top: -80px;
-
-    &__content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 9px 16px;
-    }
-}
-
-.logo {
-    &__image {
-        width: 130px;
-        height: 50px;
-        fill: currentColor;
-        color: #ffffff;
-    }
-}
-
-.header-actions {
-    &__link {
-        margin-right: 8px;
-
-        &:last-child {
-            margin-right: 0;
-        }
-    }
-}
-
 .box {
     width: 1140px;
     padding-left: 15px;
