@@ -1,3 +1,5 @@
+import { map } from 'rxjs/operators';
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -10,8 +12,25 @@ export class BoardService {
     constructor(private httpClient: HttpClient) {}
 
     public createBoard(board: Board) {
-        const data = {title: board.title}
-        return this.httpClient.post('http://localhost:3000/board', data)
+        const data = {title: board.title, color: board.color}
+        return this.httpClient.post<any>('http://localhost:3000/board', data)
+            .pipe(map(response=> {
+                localStorage.setItem('color', JSON.stringify(response.color).replace(/['"]+/g, ''));
+                console.log(response)
+            }))
+    }
+
+    public updateTitleBoard(board: Board) {
+        const data = { title: board.title, id: board.id }
+        return this.httpClient.put('http://localhost:3000/board', data)
+    }
+
+    public getColorBoard() {
+        return localStorage.getItem('color');
+    }
+
+    public getIdBoard() {
+        return localStorage.getItem('id');
     }
 
     public getBoards() {

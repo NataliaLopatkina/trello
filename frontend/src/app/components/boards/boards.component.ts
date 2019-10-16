@@ -1,6 +1,7 @@
 import { Subscription } from 'rxjs';
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Board } from '../../models/board';
 import { BoardService } from '../../services/board.service';
@@ -19,7 +20,8 @@ export class BoardsComponent implements OnInit, OnDestroy {
 
     constructor(
         private boardService: BoardService,
-        private popupService: PopupService ) { }
+        private popupService: PopupService,
+        private router: Router) { }
 
     ngOnInit() {
         this.drawBoards();
@@ -48,5 +50,11 @@ export class BoardsComponent implements OnInit, OnDestroy {
         if (this.subscription) {
             this.subscription.unsubscribe();
         }
+    }
+
+    selectBoard(board) {
+        this.router.navigate(['board', board.title]);
+        localStorage.setItem('color', board.color);
+        localStorage.setItem('id', board.id);
     }
 }

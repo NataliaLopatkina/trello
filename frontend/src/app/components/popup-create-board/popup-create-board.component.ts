@@ -50,11 +50,12 @@ export class PopupCreateBoardComponent implements OnInit, OnDestroy {
     }
 
     createBoard() {
-        this.subscription = this.boardService.createBoard(this.boardForm.value)
+        const data = { title: this.boardForm.value.title, color: this.color }
+        this.subscription = this.boardService.createBoard(data)
         .subscribe(
             (response) => {
                 this.popup = false;
-                this.router.navigate(['/board'])
+                this.router.navigate(['board', this.boardForm.value.title])
             },
 
             (error) => {
@@ -80,7 +81,7 @@ export class PopupCreateBoardComponent implements OnInit, OnDestroy {
     }
 
     addYellowColor() {
-        this.color = 'yellow';
+        this.color = '#f7cc00';
     }
 
     addVioletColor() {

@@ -1,7 +1,10 @@
 <app-header-home></app-header-home>
-<main class="main-home">
+<main class="main-home" [ngStyle]="{'background': color}">
     <div class="tasks-header">
-        <p class="tasks-header__name-board">Name board</p>
+        <p class="tasks-header__name-board">{{nameBoard}}</p>
+        <form class="tasks-header__form" [formGroup]="formNameBoard">
+            <input class="task-header__field-name" (keyup.enter)="click()" formControlName="title">
+        </form>
         <button class="tasks-header__button-invite">Пригласить</button>
     </div>
     <div class="tasks">

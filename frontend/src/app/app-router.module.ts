@@ -33,7 +33,7 @@ const routes: Routes = [
     },
 
     {
-        path: 'board', component: BoardComponent, canActivate: [AuthGuard]
+        path: 'board/:nameBoard', component: BoardComponent, canActivate: [AuthGuard]
     },
 
     {
