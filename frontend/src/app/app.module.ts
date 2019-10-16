@@ -14,7 +14,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { BoardsComponent } from './components/boards/boards.component';
-import { PopupComponent } from './components/popup/popup.component';
+import { PopupCreateBoardComponent } from './components/popup-create-board/popup-create-board.component';
 import { BoardComponent } from './components/board/board.component';
 import { HeaderHomeComponent } from './components/header-home/header-home.component';
 import { SearchBoardsComponent } from './components/search-boards/search-boards.component';
@@ -36,7 +36,7 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
         NotificationComponent,
         NotFoundComponent,
         BoardsComponent,
-        PopupComponent,
+        PopupCreateBoardComponent,
         BoardComponent,
         HeaderHomeComponent,
         SearchBoardsComponent,

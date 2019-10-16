@@ -4,41 +4,47 @@
         <p class="tasks-header__name-board">Name board</p>
         <button class="tasks-header__button-invite">Пригласить</button>
     </div>
-    <div class="box">
-        <div class="tasks">
-            <div class="tasks__column">
-                <h2 class="tasks__column-title">To do</h2>
-                <div class="tasks__list" cdkDropList [cdkDropListData]="todo" (cdkDropListDropped)="drop($event)"
+    <div class="tasks">
+        <div class="box tasks__box">
+            <div class="tasks__column" cdkDropList [cdkDropListData]="todo" (cdkDropListDropped)="drop($event)"
                 [cdkDropListConnectedTo]="[doingList, doneList]" #todoList="cdkDropList">
-                    <div class="tasks__item" *ngFor="let item of todo" cdkDrag>{{item.title}}</div>
+                <div class="tasks__column-box">
+                    <h2 class="tasks__column-title">To do</h2>
+                    <div class="tasks__list" >
+                        <div class="tasks__item" *ngFor="let item of todo" cdkDrag>{{item.title}}</div>
+                    </div>
+                    <button class="tasks__button-add" (click)="addTask()">
+                        <span class="tasks__button-plus">+</span>
+                        <span class="tasks__button-text">Добавить карточку</span>
+                    </button>
+                    <app-task></app-task>
                 </div>
-                <button class="tasks__button-add" (click)="addTask()">
-                    <span class="tasks__button-plus">+</span>
-                    <span class="tasks__button-text">Добавить карточку</span>
-                </button>
-                <app-task></app-task>
             </div>
-            <div class="tasks__column">
-                <h2 class="tasks__column-title">Doing</h2>
-                <div class="tasks__list" cdkDropList [cdkDropListData]="doing" (cdkDropListDropped)="drop($event)"
+            <div class="tasks__column" cdkDropList [cdkDropListData]="doing" (cdkDropListDropped)="drop($event)"
                 [cdkDropListConnectedTo]="[todoList, doneList]" #doingList="cdkDropList">
-                    <div class="tasks__item" *ngFor="let item of doing" cdkDrag>{{item.title}}</div>
+                <div class="tasks__column-box" >
+                    <h2 class="tasks__column-title">Doing</h2>
+                    <div class="tasks__list">
+                        <div class="tasks__item" *ngFor="let item of doing" cdkDrag>{{item.title}}</div>
+                    </div>
+                    <button class="tasks__button-add">
+                        <span class="tasks__button-plus">+</span>
+                        <span class="tasks__button-text">Добавить карточку</span>
+                    </button>
                 </div>
-                <button class="tasks__button-add">
-                    <span class="tasks__button-plus">+</span>
-                    <span class="tasks__button-text">Добавить карточку</span>
-                </button>
             </div>
-            <div class="tasks__column">
-                <h2 class="tasks__column-title">Done</h2>
-                <div class="tasks__list" cdkDropList [cdkDropListData]="done" (cdkDropListDropped)="drop($event)"
-                    [cdkDropListConnectedTo]="[todoList, doingList]" #doneList="cdkDropList">
-                    <div class="tasks__item" *ngFor="let item of done" cdkDrag>{{item.title}}</div>
+            <div class="tasks__column"cdkDropList [cdkDropListData]="done" (cdkDropListDropped)="drop($event)"
+                [cdkDropListConnectedTo]="[todoList, doingList]" #doneList="cdkDropList">
+                <div class="tasks__column-box">
+                    <h2 class="tasks__column-title">Done</h2>
+                    <div class="tasks__list">
+                        <div class="tasks__item" *ngFor="let item of done" cdkDrag>{{item.title}}</div>
+                    </div>
+                    <button class="tasks__button-add">
+                        <span class="tasks__button-plus">+</span>
+                        <span class="tasks__button-text">Добавить карточку</span>
+                    </button>
                 </div>
-                <button class="tasks__button-add">
-                    <span class="tasks__button-plus">+</span>
-                    <span class="tasks__button-text">Добавить карточку</span>
-                </button>
             </div>
         </div>
     </div>

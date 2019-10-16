@@ -1,4 +1,4 @@
-.popup-board {
+.popup-create-board {
     width: 100%;
     height: 100vh;
     background: rgba(0,0,0,0.75);
@@ -88,7 +88,7 @@
     }
 }
 
-.popup-background {
+.background-board {
     width: 92px;
     overflow: hidden;
 
@@ -112,6 +112,10 @@
         border: none;
         border-radius: 3px;
         padding: 0;
+
+        &:focus {
+            outline: none;
+        }
     }
 
     &__button--red {

@@ -8,15 +8,16 @@ import { PopupService } from '../../services/popup.service';
 import { BoardService } from '../../services/board.service';
 
 @Component({
-    selector: 'app-popup',
-    templateUrl: './popup.component.html',
-    styleUrls: ['./popup.component.scss']
+    selector: 'app-popup-create-board',
+    templateUrl: './popup-create-board.component.html',
+    styleUrls: ['./popup-create-board.component.scss']
 })
-export class PopupComponent implements OnInit, OnDestroy {
+export class PopupCreateBoardComponent implements OnInit, OnDestroy {
 
     popup: boolean = false;
     boardForm: FormGroup;
     subscription: Subscription;
+    color: string = "#97a0af";
 
     constructor(
         private formBuilder: FormBuilder,
@@ -60,5 +61,33 @@ export class PopupComponent implements OnInit, OnDestroy {
                 console.log(error)
             }
         );
+    }
+
+    addRedColor() {
+        this.color = 'red';
+    }
+
+    addBlueColor() {
+        this.color = 'blue';
+    }
+
+    addOrangeColor() {
+        this.color = 'orange';
+    }
+
+    addGreenColor() {
+        this.color = 'green';
+    }
+
+    addYellowColor() {
+        this.color = 'yellow';
+    }
+
+    addVioletColor() {
+        this.color = 'violet';
+    }
+
+    addPinkColor() {
+        this.color = 'pink';
     }
 }
