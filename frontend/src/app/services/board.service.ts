@@ -16,7 +16,6 @@ export class BoardService {
         return this.httpClient.post<any>('http://localhost:3000/board', data)
             .pipe(map(response=> {
                 localStorage.setItem('color', JSON.stringify(response.color).replace(/['"]+/g, ''));
-                console.log(response)
             }))
     }
 
