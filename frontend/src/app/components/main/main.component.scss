@@ -1,1 +1,44 @@
+.header {
+    background: linear-gradient(135deg, #0079bf, #5067c5);
+    margin-top: -80px;
 
+    &__content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 9px 16px;
+    }
+}
+
+.logo {
+    &__image {
+        width: 130px;
+        height: 50px;
+        fill: currentColor;
+        color: #ffffff;
+    }
+}
+
+.header-actions {
+    &__link {
+        margin-right: 8px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+.hero {
+    padding-top: 50px;
+    background: linear-gradient(135deg, #0079bf, #5067c5);
+    height: calc(100vh - 122px);
+
+    &__title {
+        font-size: 50px;
+        font-weight: 500;
+        line-height: calc(60 / 50);
+        color: #ffffff;
+        text-align: center;
+    }
+}
