@@ -1,1 +1,17 @@
+<app-header-home></app-header-home>
+<main class="main">
+    <div class="box">
+        <div class="boards">
+            <ul class="boards__list">
+                <li class="board boards__item" *ngFor="let board of boards" [ngStyle]="{'background': board.color}">
+                    <button class="board__button" (click)="selectBoard(board)">
+                        <p class="board__title">{{board.title}}</p>
+                    </button>
+                </li>
+            </ul>
+            <button class="boards__button-create" type="button" (click)="addBoard()">Создать доску</button>
+        </div>
+    </div>
+</main>
+<app-popup-create-board></app-popup-create-board>
 

@@ -6,17 +6,6 @@
                     <use xlink:href="../../assets/svg-sprite.svg#home"></use>
                 </svg>
             </a>
-            <div class="card search">
-                <form class="search__form" [formGroup]="searchForm">
-                    <input type="text" class="search__field" formControlName="search">
-                    <button class="search__button" (click)="search(boards)">
-                        <svg class="search__icon">
-                            <use xlink:href="../../assets/svg-sprite.svg#search"></use>
-                        </svg>
-                    </button>
-                </form>
-                <app-search-boards></app-search-boards>
-            </div>
         </nav>
         <div class="logo-home header-home__item">
             <a routerLink="/boards" class="logo-home__link">

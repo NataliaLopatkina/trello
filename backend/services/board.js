@@ -11,7 +11,3 @@ exports.updateBoard = async function (query) {
 exports.getBoards = async function (query) {
     return await Board.findAll(query);
 }
-
-exports.searchBoards = async function (query) {
-    return await Board.findAll(query);
-}

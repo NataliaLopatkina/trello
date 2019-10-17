@@ -10,33 +10,9 @@
                 </div>
                 <div class="background-board">
                     <ul class="background-board__list">
-                        <li class="background-board__item">
-                            <button class="background-board__button background-board__button--red" 
-                                (click)="addRedColor()"></button>
-                        </li>
-                        <li class="background-board__item">
-                            <button class="background-board__button background-board__button--blue"
-                                (click)="addBlueColor()"></button>
-                        </li>
-                        <li class="background-board__item">
-                            <button class="background-board__button background-board__button--orange"
-                                (click)="addOrangeColor()"></button>
-                        </li>
-                        <li class="background-board__item">
-                            <button class="background-board__button background-board__button--green"
-                                (click)="addGreenColor()"></button>
-                        </li>
-                        <li class="background-board__item">
-                            <button class="background-board__button background-board__button--yellow"
-                                (click)="addYellowColor()"></button>
-                        </li>
-                        <li class="background-board__item">
-                            <button class="background-board__button background-board__button--violet"
-                                (click)="addVioletColor()"></button>
-                        </li>
-                        <li class="background-board__item">
-                            <button class="background-board__button background-board__button--pink"
-                                (click)="addPinkColor()"></button>
+                        <li class="background-board__item" *ngFor="let color of colors">
+                            <button class="background-board__button" [ngStyle]="{'background': color}" 
+                                (click)="addColor(color)"></button>
                         </li>
                     </ul>
                 </div>

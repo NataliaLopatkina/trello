@@ -17,7 +17,8 @@ export class PopupCreateBoardComponent implements OnInit, OnDestroy {
     popup: boolean = false;
     boardForm: FormGroup;
     subscription: Subscription;
-    color: string = "#97a0af";
+    color: string = '#97a0af';
+    colors: Array<string> = ['red', 'blue', 'orange', 'green', '#f7cc00', 'violet', 'pink']
 
     constructor(
         private formBuilder: FormBuilder,
@@ -55,7 +56,7 @@ export class PopupCreateBoardComponent implements OnInit, OnDestroy {
         .subscribe(
             (response) => {
                 this.popup = false;
-                this.router.navigate(['board', this.boardForm.value.title])
+                this.router.navigate(['boards', this.boardForm.value.title])
             },
 
             (error) => {
@@ -64,31 +65,7 @@ export class PopupCreateBoardComponent implements OnInit, OnDestroy {
         );
     }
 
-    addRedColor() {
-        this.color = 'red';
-    }
-
-    addBlueColor() {
-        this.color = 'blue';
-    }
-
-    addOrangeColor() {
-        this.color = 'orange';
-    }
-
-    addGreenColor() {
-        this.color = 'green';
-    }
-
-    addYellowColor() {
-        this.color = '#f7cc00';
-    }
-
-    addVioletColor() {
-        this.color = 'violet';
-    }
-
-    addPinkColor() {
-        this.color = 'pink';
+    addColor(color) {
+        this.color = color;
     }
 }

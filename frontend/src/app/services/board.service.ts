@@ -9,14 +9,22 @@ import { Board } from '../models/board';
 
 export class BoardService {
 
+    color: string = '';
+    title: string = '';
+
     constructor(private httpClient: HttpClient) {}
+
+    public initBoard(board: Board) {
+        this.color = board.color;
+        this.title = board.title;
+    }
 
     public createBoard(board: Board) {
         const data = {title: board.title, color: board.color}
         return this.httpClient.post<any>('http://localhost:3000/board', data)
-            .pipe(map(response=> {
-                localStorage.setItem('color', JSON.stringify(response.color).replace(/['"]+/g, ''));
-            }))
+        .pipe(map(response=> {
+            this.initBoard(response);
+        }))
     }
 
     public updateTitleBoard(board: Board) {
@@ -24,20 +32,7 @@ export class BoardService {
         return this.httpClient.patch('http://localhost:3000/board', data)
     }
 
-    public getColorBoard() {
-        return localStorage.getItem('color');
-    }
-
-    public getIdBoard() {
-        return +localStorage.getItem('id');
-    }
-
     public getBoards() {
         return this.httpClient.get('http://localhost:3000/boards');
-    }
-
-    public searchBoards(valueSearch) {
-        const params = { value: valueSearch }
-        return this.httpClient.get('http://localhost:3000/boards/search', { params })
     }
 }

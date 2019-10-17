@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const sequelize = require('./sequelize');
 const verifyToken = require('./middelwares/verify-token');
-const { registrationRoute, loginRoute, boardRoute, boardsRoute, searchRoute, taskRoute } = require('./routes');
+const { registrationRoute, loginRoute, boardRoute, boardsRoute, taskRoute } = require('./routes');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -17,7 +17,6 @@ app.use('/registration', registrationRoute);
 app.use('/login', loginRoute);
 app.use('/board', verifyToken, boardRoute);
 app.use('/boards', verifyToken, boardsRoute);
-app.use('/boards/search', verifyToken, searchRoute);
 app.use('/task', verifyToken, taskRoute);
 
 app.use(function (err, req, res, next) {
