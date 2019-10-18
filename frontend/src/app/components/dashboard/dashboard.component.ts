@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     selectBoard(board) {
-        this.router.navigate(['dashboard', board.title]);
+        this.router.navigate(['dashboard/', board.id, board.title]);
         this.boardService.initBoard(board);
     }
 }
