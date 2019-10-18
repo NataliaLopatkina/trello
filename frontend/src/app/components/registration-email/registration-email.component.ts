@@ -26,6 +26,6 @@ export class RegistrationEmailComponent implements OnInit {
 
     registrationEmail() {
         const email = this.registrationEmailForm.value.email;
-        this.router.navigate(['registration', email]);
+        this.router.navigate(['auth/registration', email]);
     }
 }

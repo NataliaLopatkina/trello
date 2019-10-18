@@ -56,7 +56,7 @@ export class PopupCreateBoardComponent implements OnInit, OnDestroy {
         .subscribe(
             (response) => {
                 this.popup = false;
-                this.router.navigate(['boards', this.boardForm.value.title])
+                this.router.navigate(['dashboard', this.boardForm.value.title])
             },
 
             (error) => {

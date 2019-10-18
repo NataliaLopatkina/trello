@@ -20,7 +20,7 @@
                         <span class="tasks__button-plus">+</span>
                         <span class="tasks__button-text">Добавить карточку</span>
                     </button>
-                    <app-task></app-task>
+                    <app-card></app-card>
                 </div>
             </div>
             <div class="tasks__column" cdkDropList [cdkDropListData]="doing" (cdkDropListDropped)="drop($event)"
@@ -30,10 +30,11 @@
                     <div class="tasks__list">
                         <div class="tasks__item" *ngFor="let item of doing" cdkDrag>{{item.title}}</div>
                     </div>
-                    <button class="tasks__button-add">
+                    <button class="tasks__button-add" (click)="addTask()">
                         <span class="tasks__button-plus">+</span>
                         <span class="tasks__button-text">Добавить карточку</span>
                     </button>
+                    <app-card></app-card>
                 </div>
             </div>
             <div class="tasks__column" cdkDropList [cdkDropListData]="done" (cdkDropListDropped)="drop($event)"
@@ -43,13 +44,13 @@
                     <div class="tasks__list">
                         <div class="tasks__item" *ngFor="let item of done" cdkDrag>{{item.title}}</div>
                     </div>
-                    <button class="tasks__button-add">
+                    <button class="tasks__button-add" (click)="addTask()">
                         <span class="tasks__button-plus">+</span>
                         <span class="tasks__button-text">Добавить карточку</span>
                     </button>
+                    <app-card></app-card>
                 </div>
             </div>
         </div>
     </div>
 </main>
-

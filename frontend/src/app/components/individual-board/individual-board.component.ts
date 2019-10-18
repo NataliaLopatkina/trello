@@ -78,19 +78,19 @@ export class IndividualBoardComponent implements OnInit, OnDestroy {
     }
 
     click() {
-        const data = { title: this.formNameBoard.value.title, id: this.boardService.getIdBoard() }
-        this.boardService.updateTitleBoard(data)
-            .subscribe(
-                (response) => {
-                    console.log(response)
-                },
+        // const data = { title: this.formNameBoard.value.title, id: this.boardService.getIdBoard() }
+        // this.boardService.updateTitleBoard(data)
+        //     .subscribe(
+        //         (response) => {
+        //             console.log(response)
+        //         },
 
-                (error) => {
-                    console.log(error)
-                }
-            )
+        //         (error) => {
+        //             console.log(error)
+        //         }
+        //     )
 
-        this.edit = false;
+        // this.edit = false;
     }
 
     editTitleBoard() {

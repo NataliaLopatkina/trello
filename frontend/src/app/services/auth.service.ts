@@ -40,7 +40,7 @@ export class AuthService {
 
     public logout() {
         this.isAuth = false;
-        this.router.navigate(['/']);
+        this.router.navigate(['']);
         localStorage.removeItem('accessToken');
     }
 }

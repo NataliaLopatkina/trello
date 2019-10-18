@@ -1,23 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 
-import { AppRouterModule } from './app-router.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
+
 import { AppComponent } from './app.component';
-
 import { MainComponent } from './components/main/main.component';
-import { RegistrationEmailComponent } from './components/registration-email/registration-email.component';
-import { RegistrationComponent } from './components/registration/registration.component';
-import { LoginComponent } from './components/login/login.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { BoardsComponent } from './components/boards/boards.component';
-import { PopupCreateBoardComponent } from './components/popup-create-board/popup-create-board.component';
-import { IndividualBoardComponent } from './components/individual-board/individual-board.component';
-import { HeaderHomeComponent } from './components/header-home/header-home.component';
-import { TaskComponent } from './components/task/task.component';
 
 import { NotificationService } from './services/notification.service';
 import { AuthService } from './services/auth.service';
@@ -29,24 +22,17 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
     declarations: [
         AppComponent,
         MainComponent,
-        RegistrationEmailComponent,
-        RegistrationComponent,
-        LoginComponent,
         NotificationComponent,
         NotFoundComponent,
-        BoardsComponent,
-        PopupCreateBoardComponent,
-        IndividualBoardComponent,
-        HeaderHomeComponent,
-        TaskComponent
     ],
     imports: [
         BrowserModule,
-        AppRouterModule,
+        AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        DragDropModule
+        AuthModule,
+        DashboardModule
     ],
     providers: [
         NotificationService,

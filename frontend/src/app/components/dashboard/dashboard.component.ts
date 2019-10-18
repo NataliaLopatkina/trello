@@ -9,10 +9,10 @@ import { PopupService } from '../../services/popup.service';
 
 @Component({
     selector: 'app-boards',
-    templateUrl: './boards.component.html',
-    styleUrls: ['./boards.component.scss']
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss']
 })
-export class BoardsComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy {
 
     popup: boolean = false;
     boards: Board[] = [];
@@ -53,7 +53,7 @@ export class BoardsComponent implements OnInit, OnDestroy {
     }
 
     selectBoard(board) {
-        this.router.navigate(['boards', board.title]);
+        this.router.navigate(['dashboard', board.title]);
         this.boardService.initBoard(board);
     }
 }

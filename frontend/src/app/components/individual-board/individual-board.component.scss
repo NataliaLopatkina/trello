@@ -73,7 +73,8 @@
         width: 272px;
         margin-right: 8px;
         position: relative;
-        height: calc(100vh - 88px);
+        min-height: calc(100vh - 92px);
+        height: 100%;
 
         &:last-child {
             margin-right: 0;

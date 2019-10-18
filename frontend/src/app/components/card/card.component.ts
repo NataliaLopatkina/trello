@@ -7,11 +7,11 @@ import { PopupService } from '../../services/popup.service';
 import { TaskService } from '../../services/task.service';
 
 @Component({
-    selector: 'app-task',
-    templateUrl: './task.component.html',
-    styleUrls: ['./task.component.scss']
+    selector: 'app-card',
+    templateUrl: './card.component.html',
+    styleUrls: ['./card.component.scss']
 })
-export class TaskComponent implements OnInit, OnDestroy {
+export class CardComponent implements OnInit, OnDestroy {
 
     popup: boolean = false;
     taskForm: FormGroup;
