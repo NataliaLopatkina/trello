@@ -40,8 +40,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     registration() {
         this.subscription = this.authService.registration(this.registrationForm.value)
         .subscribe(
-            (data) => {
-                this.router.navigate(['boards']);
+            (response) => {
+                this.router.navigate(['dashboard']);
                 this.notificationService.deleteNotification();
             },
 

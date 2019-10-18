@@ -11,6 +11,7 @@ import { User } from '../models/user';
 export class AuthService {
 
     isAuth: boolean = false;
+    userId: number;
 
     constructor(
         private httpClient: HttpClient,
@@ -30,6 +31,7 @@ export class AuthService {
         return this.httpClient.post<any>('http://localhost:3000/login', data)
             .pipe(map(response => {
                 localStorage.setItem('accessToken', JSON.stringify(response.accessToken));
+                this.userId = response.user.id;
                 this.isAuth = true;
             }))
     }

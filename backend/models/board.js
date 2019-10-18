@@ -3,10 +3,10 @@ module.exports = (sequelize, DataTypes) => {
     const Board = sequelize.define('Board', {
         title: DataTypes.STRING,
         color: DataTypes.STRING,
-        authorId: DataTypes.INTEGER
+        owner: DataTypes.INTEGER
     }, {});
     Board.associate = function (models) {
-        // associations can be defined here
+        Board.belongsTo(models.User, {foreignKey: 'owner', as: 'user'})
     };
     return Board;
 };

@@ -22,7 +22,7 @@ exports.getUser = async function(req, res, next) {
                     const tokenLife = { expiresIn: '3h' };
                     const accessToken  = jwt.sign(userData, tokenSecret, tokenLife);
 
-                    return res.status(200).json({ message: 'Logged in!', accessToken: accessToken });
+                    return res.status(200).json({ message: 'Logged in!', accessToken: accessToken, user});
                 }
 
                 throw new Error('Неверный пароль')

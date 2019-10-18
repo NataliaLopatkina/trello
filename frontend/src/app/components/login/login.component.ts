@@ -33,8 +33,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     login() {
         this.subscription = this.authService.login(this.loginForm.value)
         .subscribe(
-            (data)=> {
-                this.router.navigate(['dashboard']);
+            (response) => {
+                const id = this.authService.userId;
+                this.router.navigate(['dashboard/user' + id + '/' + 'boards']);
                 this.notificationService.deleteNotification();
             },
 

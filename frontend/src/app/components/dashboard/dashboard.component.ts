@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             .subscribe(
                 (response: any) => {
                     if (response) {
-                        this.boards = response.data;
+                        this.boards = response.boards;
                     }
                 },
 

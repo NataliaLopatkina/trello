@@ -7,11 +7,11 @@ import { IndividualBoardComponent } from '../../components/individual-board/indi
 
 const routes: Routes = [
     {
-        path: '', component: DashboardComponent, canActivate: [AuthGuard]
+        path: ':id/boards', component: DashboardComponent, canActivate: [AuthGuard]
     },
 
     {
-        path: ':nameBoard', component: IndividualBoardComponent, canActivate: [AuthGuard]
+        path: 'b/:nameBoard', component: IndividualBoardComponent, canActivate: [AuthGuard]
     }
 ];
 

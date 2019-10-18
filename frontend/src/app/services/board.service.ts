@@ -33,6 +33,6 @@ export class BoardService {
     }
 
     public getBoards() {
-        return this.httpClient.get('http://localhost:3000/boards');
+        return this.httpClient.get('http://localhost:3000/board');
     }
 }

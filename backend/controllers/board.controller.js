@@ -2,8 +2,8 @@ const boardService = require('../services/board');
 
 exports.createBoard = async function(req, res, next) {
     const { title, color } = req.body;
-    const authorId = req.user.id;
-    const query = { title, authorId, color };
+    const owner = req.user.id;
+    const query = { title, owner, color };
 
     try {
         const board = await boardService.createBoard(query);
@@ -15,15 +15,22 @@ exports.createBoard = async function(req, res, next) {
     }
 }
 
-exports.updateBoard = async function(req, res, next) {
-    const { title, id } = req.body;
+exports.getBoards = async function (req, res, next) {
+
+    const myId = req.user.id;
+    const query = { where: { owner: myId } }
 
     try {
-        // const board = await boardService.updateBoard({where: {id: id}});
-        // console.log(board)
+        const boards = await boardService.getBoards(query);
+
+        if (boards.length > 0) {
+            return res.status(200).json({ message: 'Boards are found!', boards })
+        }
+
+        throw new Error('Boards are not found!')
     }
 
-    catch(e) {
-        console.log(e)
+    catch (e) {
+        return res.status(204).json({ message: e.message })
     }
 }
