@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     popup: boolean = false;
     boards: Board[] = [];
     subscription: Subscription;
+    counter: number = 1;
 
     constructor(
         private boardService: BoardService,
@@ -54,6 +55,5 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     selectBoard(board) {
         this.router.navigate(['dashboard/', board.id, board.title]);
-        this.boardService.initBoard(board);
     }
 }

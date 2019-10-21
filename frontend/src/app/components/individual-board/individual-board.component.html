@@ -1,12 +1,6 @@
 <app-header-home></app-header-home>
 <main class="main" [ngStyle]="{'background': color}">
-    <div class="tasks-header">
-        <p class="tasks-header__name-board" (click)="editTitleBoard()" *ngIf="edit == false">{{nameBoard}}</p>
-        <form class="tasks-header__form" [formGroup]="formNameBoard" *ngIf="edit">
-            <input class="tasks-header__field-name" (keyup.enter)="click()" formControlName="title">
-        </form>
-        <button class="tasks-header__button-invite">Пригласить</button>
-    </div>
+    <app-board-header></app-board-header>
     <div class="tasks">
         <div class="box tasks__box">
             <div class="tasks__column" cdkDropList [cdkDropListData]="todo" (cdkDropListDropped)="drop($event)"
@@ -34,7 +28,6 @@
                         <span class="tasks__button-plus">+</span>
                         <span class="tasks__button-text">Добавить карточку</span>
                     </button>
-                    <app-card></app-card>
                 </div>
             </div>
             <div class="tasks__column" cdkDropList [cdkDropListData]="done" (cdkDropListDropped)="drop($event)"
@@ -48,7 +41,6 @@
                         <span class="tasks__button-plus">+</span>
                         <span class="tasks__button-text">Добавить карточку</span>
                     </button>
-                    <app-card></app-card>
                 </div>
             </div>
         </div>

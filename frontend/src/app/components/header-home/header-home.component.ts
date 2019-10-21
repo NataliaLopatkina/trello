@@ -1,9 +1,9 @@
 import { Subscription } from 'rxjs';
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Board } from '../../models/board';
-import { BoardService } from '../../services/board.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -16,10 +16,15 @@ export class HeaderHomeComponent implements OnInit, OnDestroy {
     subscription: Subscription;
 
     constructor(
-        private boardService: BoardService,
+        private router: Router,
         private authService: AuthService) { }
 
     ngOnInit() {
+    }
+
+    returnHome() {
+        const id = this.authService.userId;
+        this.router.navigate(['dashboard/user' + id + '/' + 'boards']);
     }
 
     logout() {

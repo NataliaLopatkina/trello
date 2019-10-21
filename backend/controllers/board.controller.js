@@ -7,7 +7,7 @@ exports.createBoard = async function(req, res, next) {
 
     try {
         const board = await boardService.createBoard(query);
-        return res.status(200).json({message: 'Board is added!', color: board.color})
+        return res.status(200).json({message: 'Board is added!', board})
     }
 
     catch(e) {
@@ -32,5 +32,38 @@ exports.getBoards = async function (req, res, next) {
 
     catch (e) {
         return res.status(204).json({ message: e.message })
+    }
+}
+
+exports.getBoard = async function (req, res, next) {
+
+    const { id } = req.params;
+
+    try {
+        const board = await boardService.getBoard({where: {id: id}});
+
+        if (board) {
+            return res.status(200).json({ message: 'Board is found!', board: board})
+        }
+
+        throw new Error('Board is not found!')
+    }
+
+    catch (e) {
+        return res.status(204).json({ message: e.message })
+    }
+}
+
+exports.updateBoard = async function (req, res, next) {
+    const { title } = req.body;
+    const { id } = req.params;
+
+    try {
+        await boardService.updateBoard(id, title)
+        return res.status(200).json({message: 'Title of board is updated!'})
+    }
+
+    catch(e) {
+        return status(400).json({message: 'Title of board is not updated!'})
     }
 }

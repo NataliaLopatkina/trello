@@ -22,7 +22,7 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
         AppComponent,
         MainComponent,
         NotificationComponent,
-        NotFoundComponent,
+        NotFoundComponent
     ],
     imports: [
         BrowserModule,

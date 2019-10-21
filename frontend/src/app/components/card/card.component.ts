@@ -2,6 +2,7 @@ import { Subscription } from 'rxjs';
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { PopupService } from '../../services/popup.service';
 import { TaskService } from '../../services/task.service';
@@ -13,14 +14,18 @@ import { TaskService } from '../../services/task.service';
 })
 export class CardComponent implements OnInit, OnDestroy {
 
+    idBoard: number;
     popup: boolean = false;
     taskForm: FormGroup;
     subscription: Subscription;
 
     constructor(
+        private activatedRoute: ActivatedRoute,
         private popupService: PopupService,
         private formBuilder: FormBuilder,
-        private taskService: TaskService) { }
+        private taskService: TaskService) { 
+            this.idBoard = activatedRoute.snapshot.params['idBoard'];
+        }
 
     ngOnInit() {
         this.subscription = this.popupService.addPopup.subscribe(
@@ -41,7 +46,8 @@ export class CardComponent implements OnInit, OnDestroy {
     }
 
     addTask() {
-        this.subscription = this.taskService.createTask(this.taskForm.value)
+        const data = { title: this.taskForm.value.title, boardId: this.idBoard }
+        this.subscription = this.taskService.createTask(data)
         
         .subscribe(
             (response: any)=> {
@@ -53,6 +59,7 @@ export class CardComponent implements OnInit, OnDestroy {
             }
         )
 
+        this.taskForm.value.title = '';
         this.popupService.deletePopup();
     }
 

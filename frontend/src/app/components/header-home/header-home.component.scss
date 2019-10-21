@@ -33,6 +33,7 @@
     width: 24px;
     display: block;
     text-align: center;
+    cursor: pointer;
 
     &__icon {
         width: 20px;
@@ -44,6 +45,11 @@
 
 .logo-home {
     text-align: center;
+
+    &__link {
+        display: block;
+        cursor: pointer;
+    }
 
     &__icon {
         width: 80px;
@@ -62,6 +68,10 @@
         padding: 0;
         border: none;
         background: none;
+
+        &:focus {
+            outline: none;
+        }
     }
 
     &__icon {

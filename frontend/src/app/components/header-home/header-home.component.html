@@ -1,14 +1,14 @@
 <header class="header-home">
     <div class="header-home__box">
         <nav class="nav header-home__item">
-            <a class="card link-home nav__link" routerLink="/dashboard">
+            <a class="card link-home nav__link" (click)="returnHome()">
                 <svg class="link-home__icon">
                     <use xlink:href="../../assets/svg-sprite.svg#home"></use>
                 </svg>
             </a>
         </nav>
         <div class="logo-home header-home__item">
-            <a routerLink="/dashboard" class="logo-home__link">
+            <a class="logo-home__link" (click)="returnHome()">
                 <svg class="logo-home__icon">
                     <use xlink:href="../../assets/svg-sprite.svg#logo"></use>
                 </svg>

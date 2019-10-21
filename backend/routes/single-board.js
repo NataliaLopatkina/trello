@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const boardController = require('../controllers/board.controller');
 
-router.post('/', boardController.createBoard)
-router.get('/', boardController.getBoards)
-router.patch('/:id', boardController.updateBoard)
+router.get('/:id', boardController.getBoard)
 
 module.exports = router;

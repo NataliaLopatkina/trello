@@ -1,11 +1,10 @@
 const taskService = require('../services/task');
 
 exports.createTask = async function (req, res, next) {
-    const { title } = req.body;
-    const query = { title };
+    const { title, boardId } = req.body;
 
     try {
-        await taskService.createTask(query);
+        await taskService.createTask({title: title, boardId: boardId});
         return res.status(200).json({ message: 'Task is added!' })
     }
 
