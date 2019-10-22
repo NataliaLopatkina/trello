@@ -1,7 +1,7 @@
 .board-header {
     display: flex;
     align-items: center;
-    padding: 8px 4px 0 10px;
+    padding: 8px 4px 8px 10px;
     position: relative;
 
     &__name-board {
@@ -9,7 +9,7 @@
         font-weight: 700;
         line-height: calc(32 / 18);
         color: #172b4d;
-        padding: 5px 10px;
+        padding: 2px 10px;
         cursor: pointer;
         background: transparent;
         border-radius: 3px;
@@ -46,7 +46,7 @@
         color: #172b4d;
         background: hsla(0, 0, 100%, 0.24);
         border: none;
-        padding: 5px 10px;
+        padding: 2px 10px;
         border-radius: 3px;
         transition: background 0.25s ease;
 

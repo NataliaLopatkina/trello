@@ -1,4 +1,5 @@
 const boardService = require('../services/board');
+const { Task } = require('../models');
 
 exports.createBoard = async function(req, res, next) {
     const { title, color } = req.body;
@@ -40,10 +41,32 @@ exports.getBoard = async function (req, res, next) {
     const { id } = req.params;
 
     try {
-        const board = await boardService.getBoard({where: {id: id}});
+        const board = await boardService.getBoard({ where: { id: id }});
 
         if (board) {
-            return res.status(200).json({ message: 'Board is found!', board: board})
+
+            try {
+                const board = await boardService.getBoard({
+                    where: {
+                        id: id
+                    },
+                    include: [{
+                        model: Task,
+                        where: { boardId: id },
+                        as: 'task',
+                    }]
+                })
+
+                if (board) {
+                    return res.status(200).json({message: 'Tasks of board is found!', board})
+                }
+
+                throw new Error('Tasks of board is not found!')
+            }
+
+            catch(e) {
+                return res.status(200).json({message: e.message, board})
+            }
         }
 
         throw new Error('Board is not found!')

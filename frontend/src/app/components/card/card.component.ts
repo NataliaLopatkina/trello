@@ -59,7 +59,6 @@ export class CardComponent implements OnInit, OnDestroy {
             }
         )
 
-        this.taskForm.value.title = '';
         this.popupService.deletePopup();
     }
 

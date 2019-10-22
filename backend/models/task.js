@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
         boardId: DataTypes.INTEGER
     }, {});
     Task.associate = function (models) {
-        // associations can be defined here
+        Task.belongsTo(models.Board, { foreignKey: 'boardId', as: 'board' })
     };
     return Task;
 };

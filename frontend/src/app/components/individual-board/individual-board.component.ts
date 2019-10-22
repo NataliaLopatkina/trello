@@ -2,6 +2,7 @@ import { Subscription } from 'rxjs';
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 import { BoardService } from '../../services/board.service';
 import { PopupService } from '../../services/popup.service';
@@ -17,7 +18,10 @@ export class IndividualBoardComponent implements OnInit, OnDestroy {
     idBoard: number;
     nameBoard: string = '';
     color: string = '';
-    popup: boolean;
+    todoTask: boolean = false;
+    todo: [] = [];
+    doing: [] = [];
+    done: [] = [];
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -37,6 +41,7 @@ export class IndividualBoardComponent implements OnInit, OnDestroy {
             (response: any) => {
                 this.nameBoard = response.board.title;
                 this.color = response.board.color;
+                this.todo = response.board.task;
             },
 
             (error) => {
@@ -45,8 +50,25 @@ export class IndividualBoardComponent implements OnInit, OnDestroy {
         )
     }
     
-    addTask() {
+    createTodoTask() {
+        this.todoTask = true;
+    }
+
+    createDoingTask() {
         this.popupService.popup()
+    }
+
+    createDoneTask() {
+        this.popupService.popup()
+    }
+
+    drop(event: CdkDragDrop<string[]>) {
+        if (event.previousContainer !== event.container) {
+            transferArrayItem(event.previousContainer.data, event.container.data,
+                event.previousIndex, event.currentIndex)
+        } else {
+            moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        }
     }
 
     ngOnDestroy() {

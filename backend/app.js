@@ -16,7 +16,7 @@ app.listen(3000);
 app.use('/registration', registrationRoute);
 app.use('/login', loginRoute);
 app.use('/board', verifyToken, boardRoute);
-app.use('/single-board', singleBoardRoute);
+app.use('/single-board', verifyToken, singleBoardRoute);
 app.use('/task', verifyToken, taskRoute);
 
 app.use(function (err, req, res, next) {

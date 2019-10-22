@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     }, {});
     Board.associate = function (models) {
         Board.belongsTo(models.User, {foreignKey: 'owner', as: 'user'})
+        Board.hasMany(models.Task, {foreignKey: 'boardId', as: 'task'})
     };
     return Board;
 };

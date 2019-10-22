@@ -597,3 +597,9 @@ a {
     height: 1px;
     margin: -1px;
 }
+
+// Main
+
+.main {
+    min-height: calc(100vh - 42px);
+}

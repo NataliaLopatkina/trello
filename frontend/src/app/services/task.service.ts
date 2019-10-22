@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Task } from '../models/task';
-import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 
