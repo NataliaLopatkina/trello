@@ -54,6 +54,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     selectBoard(board) {
-        this.router.navigate(['dashboard/', board.id, board.title]);
+        this.router.navigate(['dashboard/b', board.id, board.title]);
     }
 }

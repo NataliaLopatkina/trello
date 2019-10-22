@@ -33,28 +33,6 @@
         padding-left: 8px;
     }
 
-    &__cards {
-        padding: 5px 0;
-    }
-
-    &__card {
-        font-size: 14px;
-        line-height: calc(20 / 14);
-        color: #172b4d;
-        padding: 8px 8px 4px;
-        background-color: #fff;
-        border-radius: 3px;
-        box-shadow: 0 1px 0 rgba(9,30,66,.25);
-        cursor: pointer;
-        margin-bottom: 8px;
-        max-width: 300px;
-        min-height: 20px;
-
-        &:last-child {
-            margin-bottom: 0;
-        }
-    }
-
     &__button-add {
         display: flex;
         align-items: center;
@@ -88,5 +66,32 @@
         font-size: 14px;
         font-weight: 400;
         line-height: calc(20 / 14);
+    }
+}
+
+// Card
+
+.cards {
+    padding: 5px 0;
+
+    &__item {
+        font-size: 14px;
+        line-height: calc(20 / 14);
+        color: #172b4d;
+        display: inline-block;
+        padding: 8px 8px 4px;
+        background-color: #fff;
+        border-radius: 3px;
+        box-shadow: 0 1px 0 rgba(9,30,66,.25);
+        cursor: pointer;
+        margin-bottom: 8px;
+        max-width: 300px;
+        width: 100%;
+        box-sizing: border-box;
+        min-height: 20px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 }

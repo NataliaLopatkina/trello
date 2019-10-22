@@ -1,0 +1,22 @@
+<section class="update-task" *ngIf="popup">
+    <div class="update-task__box">
+        <header class="update-task__header">
+            <h3 class="update-task__title" *ngIf="update==false" (click)="editTitleTask()">{{titleTask}}</h3>
+            <form class="update-task__form-title" [formGroup]="formTitleTask" *ngIf="update">
+                <input class="update-task__field-title" type="text" formControlName="title" focus (focusout)="focusOut()">
+            </form>
+            <span class="update-task__column-text">в колонке</span>
+        </header>
+        <div class="update-task__content">
+            <p class="update-task__text">Описание</p>
+            <a href="#5" class="update-task__link">Добавить более подробное описание</a>
+            <form class="update-task__form">
+                <textarea class="update-task__field" placeholder="Добавить более подробное описание"></textarea>
+                <div class="update-task__actions">
+                    <button class="update-task__button">Сохранить</button>
+                    <button class="update-task__button-close" (click)="closePopup()">X</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

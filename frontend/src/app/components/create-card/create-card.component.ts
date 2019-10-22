@@ -8,11 +8,11 @@ import { PopupService } from '../../services/popup.service';
 import { TaskService } from '../../services/task.service';
 
 @Component({
-    selector: 'app-card',
-    templateUrl: './card.component.html',
-    styleUrls: ['./card.component.scss']
+    selector: 'app-create-card',
+    templateUrl: './create-card.component.html',
+    styleUrls: ['./create-card.component.scss']
 })
-export class CardComponent implements OnInit, OnDestroy {
+export class CreateCardComponent implements OnInit, OnDestroy {
 
     idBoard: number;
     popup: boolean = false;

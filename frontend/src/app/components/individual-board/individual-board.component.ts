@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Router } from '@angular/router';
 
 import { BoardService } from '../../services/board.service';
 import { PopupService } from '../../services/popup.service';
@@ -26,7 +27,8 @@ export class IndividualBoardComponent implements OnInit, OnDestroy {
     constructor(
         private activatedRoute: ActivatedRoute,
         private boardService: BoardService,
-        private popupService: PopupService) {
+        private popupService: PopupService,
+        private router: Router) {
         this.idBoard = activatedRoute.snapshot.params['idBoard'];
     }
 
@@ -54,12 +56,9 @@ export class IndividualBoardComponent implements OnInit, OnDestroy {
         this.todoTask = true;
     }
 
-    createDoingTask() {
-        this.popupService.popup()
-    }
-
-    createDoneTask() {
-        this.popupService.popup()
+    selectTask(task) {
+        this.popupService.popup();
+        //this.router.navigate(['dashboard/c', task.id, task.title]);
     }
 
     drop(event: CdkDragDrop<string[]>) {

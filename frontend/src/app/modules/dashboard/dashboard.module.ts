@@ -10,7 +10,8 @@ import { HeaderHomeComponent } from '../../components/header-home/header-home.co
 import { PopupCreateBoardComponent } from '../../components/popup-create-board/popup-create-board.component';
 import { BoardHeaderComponent } from '../../components/board-header/board-header.component';
 import { IndividualBoardComponent } from '../../components/individual-board/individual-board.component';
-import { CardComponent } from '../../components/card/card.component';
+import { CreateCardComponent } from '../../components/create-card/create-card.component';
+import { UpdateTaskComponent } from '../../components/update-task/update-task.component';
 
 import { FocusDirective } from '../../directives/focus.directive';
 
@@ -21,7 +22,8 @@ import { FocusDirective } from '../../directives/focus.directive';
         PopupCreateBoardComponent,
         BoardHeaderComponent,
         IndividualBoardComponent,
-        CardComponent,
+        CreateCardComponent,
+        UpdateTaskComponent,
         FocusDirective
     ],
     imports: [

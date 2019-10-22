@@ -18,8 +18,8 @@ export class PopupCreateBoardComponent implements OnInit, OnDestroy {
     popup: boolean = false;
     boardForm: FormGroup;
     subscription: Subscription;
-    color: string = '#97a0af';
-    colors: Array<string> = ['#FF6347', '#00CED1', '#F4A460', '#00FA9A', '#FFD700', '#DDA0DD', '#FF69B4']
+    color: string = 'rgb(131, 140, 145)';
+    colors: Array<string> = ['rgb(0, 121, 191)', 'rgb(210, 144, 52)', 'rgb(81, 152, 57)', 'rgb(176, 70, 50)', 'rgb(137, 96, 158)', 'rgb(205, 90, 145)', 'rgb(0, 174, 204)']
 
     constructor(
         private formBuilder: FormBuilder,
