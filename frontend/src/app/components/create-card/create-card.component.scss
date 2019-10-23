@@ -33,33 +33,7 @@
     }
 
     &__button-add {
-        font-size: 14px;
-        line-height: calc(20 / 14);
-        font-weight: 400;
-        color: #ffffff;
-        background-color: #5aac44;
-        box-shadow: none;
-        border: none;
         margin-right: 4px;
-        padding: 6px 12px;
-        transition: background 0.25s ease;
-
-        &:hover {
-            background: #61bd4f;
-        }
-
-        &:active {
-            background: #49852e;
-        }
-
-        &:focus {
-            outline: none;
-        }
-
-        &:disabled {
-            background: #f4f5f7;
-            color: #a5adba;
-        }
     }
 
     &__button-close {

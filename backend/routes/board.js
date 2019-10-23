@@ -3,7 +3,7 @@ const router = express.Router();
 const boardController = require('../controllers/board.controller');
 
 router.post('/', boardController.createBoard)
-router.get('/', boardController.getBoards)
+router.get('/:id', boardController.getBoard)
 router.patch('/:id', boardController.updateBoard)
 
 module.exports = router;

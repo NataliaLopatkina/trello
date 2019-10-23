@@ -16,26 +16,6 @@ exports.createBoard = async function(req, res, next) {
     }
 }
 
-exports.getBoards = async function (req, res, next) {
-
-    const myId = req.user.id;
-    const query = { where: { owner: myId } }
-
-    try {
-        const boards = await boardService.getBoards(query);
-
-        if (boards.length > 0) {
-            return res.status(200).json({ message: 'Boards are found!', boards })
-        }
-
-        throw new Error('Boards are not found!')
-    }
-
-    catch (e) {
-        return res.status(204).json({ message: e.message })
-    }
-}
-
 exports.getBoard = async function (req, res, next) {
 
     const { id } = req.params;
@@ -88,5 +68,25 @@ exports.updateBoard = async function (req, res, next) {
 
     catch(e) {
         return status(400).json({message: 'Title of board is not updated!'})
+    }
+}
+
+exports.getBoards = async function (req, res, next) {
+
+    const myId = req.user.id;
+    const query = { where: { owner: myId } }
+
+    try {
+        const boards = await boardService.getBoards(query);
+
+        if (boards.length > 0) {
+            return res.status(200).json({ message: 'Boards are found!', boards })
+        }
+
+        throw new Error('Boards are not found!')
+    }
+
+    catch (e) {
+        return res.status(204).json({ message: e.message })
     }
 }

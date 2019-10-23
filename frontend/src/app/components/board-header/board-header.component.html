@@ -1,7 +1,7 @@
 <div class="board-header">
     <p class="board-header__name-board" (click)="editTitleBoard()" *ngIf="edit==false">{{nameBoard}}</p>
-    <form class="board-header__form" [formGroup]="formRenameBoard" *ngIf="edit">
-        <input class="board-header__field-name" formControlName="title" focus (keyup.enter)="renameBoard()"
+    <form class="board-header__form" [formGroup]="formRenameBoard" *ngIf="edit" (keyup.enter)="renameBoard()">
+        <input class="board-header__field-name" formControlName="title" focus 
             (focusout)="focusOut()">
     </form>
     <button class="board-header__button-invite">Пригласить</button>

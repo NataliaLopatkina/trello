@@ -35,10 +35,10 @@ export class BoardService {
     }
 
     public getBoards() {
-        return this.httpClient.get('http://localhost:3000/board');
+        return this.httpClient.get('http://localhost:3000/boards');
     }
 
     public getBoard(id) {
-        return this.httpClient.get('http://localhost:3000/single-board/' + id)
+        return this.httpClient.get('http://localhost:3000/board/' + id)
     }
 } 

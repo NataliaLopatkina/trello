@@ -28,6 +28,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.drawBoards();
     }
 
+    ngOnChanges() {
+        this.drawBoards();
+    }
+
     addBoard() {
         this.popupService.popup();
     }

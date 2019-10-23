@@ -389,21 +389,51 @@ a {
 }
 
 .page {
+    color: #172b4d;
     padding-top: 80px;
 }
 
-.button {
-    font-size: 17px;
-    font-weight: 500;
-    line-height: calc(24 / 17);
-    color: #ffffff;
-    background: transparent;
-    padding: 8px;
-    border-radius: 5px;
+// .button {
+//     font-size: 17px;
+//     font-weight: 500;
+//     line-height: calc(24 / 17);
+//     color: #ffffff;
+//     background: transparent;
+//     padding: 8px;
+//     border-radius: 5px;
 
-    &--fill {
-        color: #0079BF;
-        background: #ffffff;
+//     &--fill {
+//         color: #0079BF;
+//         background: #ffffff;
+//     }
+// }
+
+.button {
+    font-size: 14px;
+    line-height: calc(20 / 14);
+    color: #ffffff;
+    background: #5aac44;
+    border: none;
+    border-radius: 3px;
+    padding: 6px 10px;
+    outline: none;
+    transition: background 0.25s ease;
+
+    &:disabled {
+        background: #f4f5f7;
+        color: #a5adba;
+    }
+
+    &:hover {
+        background: #61bd4f;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &:active {
+        background: #49852e;
     }
 }
 
