@@ -59,9 +59,10 @@ export class PopupCreateBoardComponent implements OnInit, OnDestroy {
             (response) => {
                 const id = this.boardService.id;
                 const title = this.boardService.title;
+                console.log(response)
                 
                 this.popup = false;
-                this.router.navigate(['dashboard/', id, title]);
+                this.router.navigate(['dashboard/b', id, title]);
             },
 
             (error) => {

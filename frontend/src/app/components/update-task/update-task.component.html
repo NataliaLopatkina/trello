@@ -1,20 +1,23 @@
 <section class="update-task" *ngIf="popup">
     <div class="update-task__box">
         <header class="update-task__header">
-            <h3 class="update-task__title" *ngIf="update==false" (click)="editTitleTask()">{{titleTask}}</h3>
-            <form class="update-task__form-title" [formGroup]="formTitleTask" *ngIf="update">
-                <input class="update-task__field-title" type="text" formControlName="title" focus (focusout)="focusOut()">
+            <h3 class="update-task__title" *ngIf="updateTitle==false" (click)="editTitleTask()">{{titleTask}}</h3>
+            <form class="update-task__form-title" [formGroup]="formTitleTask" *ngIf="updateTitle">
+                <input class="update-task__field-title" type="text" formControlName="title" focus
+                    (focusout)="focusOut()">
             </form>
-            <span class="update-task__column-text">в колонке</span>
+            <button class="update-task__close-popup" (click)="closePopup()">X</button>
         </header>
         <div class="update-task__content">
             <p class="update-task__text">Описание</p>
-            <a href="#5" class="update-task__link">Добавить более подробное описание</a>
-            <form class="update-task__form">
-                <textarea class="update-task__field" placeholder="Добавить более подробное описание"></textarea>
+            <a class="update-task__link" *ngIf="updateDescription==false" (click)="editDescriptionTask()">Добавить более
+                подробное описание</a>
+            <form class="update-task__form" *ngIf="updateDescription" [formGroup]="formDescriptionTask">
+                <textarea class="update-task__field" placeholder="Добавить более подробное описание"
+                    formControlName="description" focus (focusout)="focusOutDescription()"></textarea>
                 <div class="update-task__actions">
-                    <button class="update-task__button">Сохранить</button>
-                    <button class="update-task__button-close" (click)="closePopup()">X</button>
+                    <button class="update-task__button" (click)="addDescription()">Сохранить</button>
+                    <button class="update-task__button-close" (click)="closeUpdateDescription()">X</button>
                 </div>
             </form>
         </div>

@@ -13,10 +13,12 @@ import { PopupService } from '../../services/popup.service';
 export class UpdateTaskComponent implements OnInit, OnDestroy {
 
     subscription: Subscription;
-    popup: boolean = true;
+    popup: boolean = false;
     formTitleTask: FormGroup;
     titleTask: string = 'Task';
-    update: boolean = false;
+    updateTitle: boolean = false;
+    formDescriptionTask: FormGroup;
+    updateDescription: boolean = false;
 
     constructor(
         private popupService: PopupService,
@@ -30,8 +32,10 @@ export class UpdateTaskComponent implements OnInit, OnDestroy {
                 }
             }
         )
+    }
 
-        this.initFormTitleTask();
+    closePopup() {
+        this.popupService.deletePopup();
     }
 
     initFormTitleTask() {
@@ -40,16 +44,38 @@ export class UpdateTaskComponent implements OnInit, OnDestroy {
         })
     }
 
-    closePopup() {
-        this.popupService.deletePopup();
-    }
-
     editTitleTask() {
-        this.update = true;
+        this.updateTitle = true;
+        this.initFormTitleTask();
     }
 
     focusOut() {
-        this.update = false;
+        this.updateTitle = false;
+    }
+
+    initFormDescriptionTask() {
+        this.formDescriptionTask = this.formBuilder.group({
+            description: ['', Validators.required]
+        })
+    }
+
+    editDescriptionTask() {
+        this.updateDescription = true;
+        this.initFormDescriptionTask();
+    }
+
+    focusOutDescription() {
+        setTimeout(()=> {
+            this.updateDescription = false;
+        }, 200)
+    }
+
+    addDescription() {
+        console.log(this.formDescriptionTask.value);
+    }
+
+    closeUpdateDescription() {
+        this.updateDescription = false;
     }
 
     ngOnDestroy() {

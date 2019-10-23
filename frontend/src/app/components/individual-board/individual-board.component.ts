@@ -43,13 +43,23 @@ export class IndividualBoardComponent implements OnInit, OnDestroy {
             (response: any) => {
                 this.nameBoard = response.board.title;
                 this.color = response.board.color;
-                this.todo = response.board.task;
+                if (response.board.task) {
+                    const arrayTasks = response.board.task;
+                    this.todo = this.filterArray(arrayTasks, 'todo');
+                    this.doing = this.filterArray(arrayTasks, 'doing');
+                    this.done = this.filterArray(arrayTasks, 'done');
+                }
             },
 
             (error) => {
                 console.log(error)
             }
         )
+    }
+
+    filterArray(array, state) {
+        return array.filter((item)=>
+            item.state==state)
     }
     
     createTodoTask() {
