@@ -5,7 +5,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { PopupService } from '../../services/popup.service';
-import { AuthService } from '../../services/auth.service';
 import { BoardService } from '../../services/board.service';
 
 @Component({
@@ -24,15 +23,10 @@ export class PopupCreateBoardComponent implements OnInit, OnDestroy {
     constructor(
         private formBuilder: FormBuilder,
         private popupService: PopupService,
-        private authService: AuthService,
         private boardService: BoardService,
         private router: Router) { }
 
     ngOnInit() {
-        this.boardForm = this.formBuilder.group({
-            title: ['', [Validators.required]]
-        })
-
         this.subscription = this.popupService.addPopup.subscribe(
             (popupCreate: { popup: boolean }) => {
                 if (popupCreate) {
@@ -40,29 +34,25 @@ export class PopupCreateBoardComponent implements OnInit, OnDestroy {
                 }
             }
         )
+
+        this.initBoardForm();
     }
 
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
+    initBoardForm() {
+        this.boardForm = this.formBuilder.group({
+            title: ['', [Validators.required]]
+        })
     }
 
-    removePopup() {
-        this.popupService.deletePopup();
+    addColor(color) {
+        this.color = color;
     }
 
     createBoard() {
-        const data = { title: this.boardForm.value.title, color: this.color }
-        this.subscription = this.boardService.createBoard(data)
+        this.subscription = this.boardService.createBoard({ title: this.boardForm.value.title, color: this.color })
         .subscribe(
             (response) => {
-                const id = this.boardService.id;
-                const title = this.boardService.title;
-                console.log(response)
-                
-                this.popup = false;
-                this.router.navigate(['dashboard/b', id, title]);
+                this.router.navigate(['boards', this.boardService.id, this.boardService.title]);
             },
 
             (error) => {
@@ -71,7 +61,13 @@ export class PopupCreateBoardComponent implements OnInit, OnDestroy {
         );
     }
 
-    addColor(color) {
-        this.color = color;
+    removePopup() {
+        this.popupService.deletePopup();
+    }
+
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 }

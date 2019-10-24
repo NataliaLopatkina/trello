@@ -14,55 +14,63 @@ import { BoardService } from '../../services/board.service';
 export class BoardHeaderComponent implements OnInit, OnDestroy {
 
     subscription: Subscription;
-    nameBoard: string = '';
-    idBoard: number;
-    edit: boolean = false;
-    formRenameBoard: FormGroup;
+    board: any;
+    nameBoard: string;
+    // idBoard: number;
+    // edit: boolean = false;
+    // formRenameBoard: FormGroup;
+
+
 
     constructor(
         private activatedRoute: ActivatedRoute,
         private formBuilder: FormBuilder,
         private boardService: BoardService) {
-
-        this.nameBoard = activatedRoute.snapshot.params['nameBoard'];
-        this.idBoard = activatedRoute.snapshot.params['idBoard'];
     }
 
     ngOnInit() {
-        this.addFormRenameBoard();
+        // this.subscription = this.boardService.initBoard()
+        // .subscribe(
+        //     (data)=> {
+        //         this.board = data.board;
+        //         this.nameBoard = this.board.title;
+        //     }
+        // )
+        //this.addFormRenameBoard();
+
     }
 
-    addFormRenameBoard() {
-        this.formRenameBoard = this.formBuilder.group({
-            title: [this.nameBoard, Validators.required]
-        })
-    }
+    // addFormRenameBoard() {
+    //     this.formRenameBoard = this.formBuilder.group({
+    //         title: [this.nameBoard, Validators.required]
+    //     })
+    // }
 
-    editTitleBoard() {
-        this.edit = true;
-    }
+    // editTitleBoard() {
+    //     this.edit = true;
+    // }
 
-    focusOut() {
-        this.edit = false;
-    }
+    // focusOut() {
+    //     this.edit = false;
+    // }
 
-    renameBoard() {
-        this.subscription = this.boardService.renameBoard(this.idBoard, this.formRenameBoard.value.title)
-        .subscribe(
-            (response) => {
-                this.edit = false;
-                this.nameBoard = this.formRenameBoard.value.title;
-            },
+    // renameBoard() {
+    //     this.subscription = this.boardService.renameBoard(this.idBoard, this.formRenameBoard.value.title)
+    //     .subscribe(
+    //         (response) => {
+    //             this.edit = false;
+    //             this.nameBoard = this.formRenameBoard.value.title;
+    //         },
 
-            (error) => {
-                console.log(error)
-            }
-        )
-    }
+    //         (error) => {
+    //             console.log(error)
+    //         }
+    //     )
+    // }
 
-    ngOnDestroy() {
-        if(this.subscription) {
-            this.subscription.unsubscribe();
-        }
-    }
+    // ngOnDestroy() {
+    //     if(this.subscription) {
+    //         this.subscription.unsubscribe();
+    //     }
+    // }
 }

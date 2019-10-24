@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { map } from 'rxjs/operators';
 
+import { environment } from '../../environments/environment';
 import { User } from '../models/user';
 
 @Injectable({providedIn: 'root'})
@@ -11,7 +12,6 @@ import { User } from '../models/user';
 export class AuthService {
 
     isAuth: boolean = false;
-    userId: number;
 
     constructor(
         private httpClient: HttpClient,
@@ -19,21 +19,24 @@ export class AuthService {
     
     public registration(user: User) {
         const data = {name: user.name, email: user.email, password: user.password};
-        return this.httpClient.post('http://localhost:3000/registration', data);
-    }
-
-    public provideAccess() {
-        return this.isAuth;
+        return this.httpClient.post<any>(environment.baseUrl + 'registration', data)
     }
 
     public login(user: User) {
         const data = {email: user.email, password: user.password};
-        return this.httpClient.post<any>('http://localhost:3000/login', data)
+        return this.httpClient.post<any>(environment.baseUrl + 'login', data)
             .pipe(map(response => {
                 localStorage.setItem('accessToken', JSON.stringify(response.accessToken));
-                this.userId = response.user.id;
                 this.isAuth = true;
             }))
+    }
+
+    public authWithVk() {
+        return this.httpClient.get(environment.baseUrl + 'vkontakte')
+    }
+
+    public provideAccess() {
+        return this.isAuth;
     }
 
     public getToken(): string {

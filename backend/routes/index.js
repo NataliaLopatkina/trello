@@ -1,13 +1,13 @@
 const registrationRoute = require('./registration');
 const loginRoute = require('./login');
 const boardRoute = require('./board');
-const boardsRoute = require('./boards');
 const taskRoute = require('./task');
+const vkRoute = require('./vkontakte');
 
 module.exports = {
     registrationRoute,
     loginRoute,
     boardRoute,
-    boardsRoute,
-    taskRoute
+    taskRoute,
+    vkRoute
 }

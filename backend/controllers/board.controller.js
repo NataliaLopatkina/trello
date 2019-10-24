@@ -1,6 +1,24 @@
 const boardService = require('../services/board');
 const { Task } = require('../models');
 
+exports.getBoards = async function (req, res, next) {
+
+    const myId = req.user.id;
+
+    try {
+        const boards = await boardService.getBoards({ where: { owner: myId } });
+
+        if (boards.length > 0) {
+            return res.status(200).json({ message: 'Boards are found!', boards })
+        }
+
+        throw new Error('Boards are not found!')
+    }
+
+    catch (e) {
+        return res.status(204).json({ message: e.message })
+    }
+}
 exports.createBoard = async function(req, res, next) {
     const { title, color } = req.body;
     const owner = req.user.id;
@@ -71,22 +89,4 @@ exports.updateBoard = async function (req, res, next) {
     }
 }
 
-exports.getBoards = async function (req, res, next) {
 
-    const myId = req.user.id;
-    const query = { where: { owner: myId } }
-
-    try {
-        const boards = await boardService.getBoards(query);
-
-        if (boards.length > 0) {
-            return res.status(200).json({ message: 'Boards are found!', boards })
-        }
-
-        throw new Error('Boards are not found!')
-    }
-
-    catch (e) {
-        return res.status(204).json({ message: e.message })
-    }
-}

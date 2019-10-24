@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            email: ['', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
-            password: ['', [Validators.required, Validators.minLength(5)]]
+            email: ['nata.salimowa2015@yandex.ru', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
+            password: ['tosovu96', [Validators.required, Validators.minLength(5)]]
         })
     }
 
@@ -34,23 +34,30 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.subscription = this.authService.login(this.loginForm.value)
         .subscribe(
             (response) => {
-                const id = this.authService.userId;
-                this.router.navigate(['dashboard/user' + 1 + '/' + 'boards']);
+                this.router.navigate(['boards']);
                 this.notificationService.deleteNotification();
             },
 
             (error)=> {
-                if (error.error.password === false) {
-                    const text = 'Неверный пароль';
-                    this.notificationService.error(text);
-
-                } else if (error.error.email === false) {
-                    const text = 'Аккаунт с таким адресом электронной почты не существует';
-                    this.notificationService.error(text);
+                if (error.error.message === 'Неверный логин или пароль!') {
+                    this.notificationService.error(error.error.message);
                 }
             }
         )
     }
+
+    // authWithVk() {
+    //     this.subscription = this.authService.authWithVk()
+    //     .subscribe(
+    //         (response)=> {
+    //             console.log(response)
+    //         },
+
+    //         (error)=> {
+    //             console.log(error)
+    //         }
+    //     )
+    // }
 
     ngOnDestroy() {
         if (this.subscription) {

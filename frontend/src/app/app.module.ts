@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AuthModule } from './modules/auth/auth.module';
-import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { BoardsModule } from './modules/boards/boards.module';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './components/main/main.component';
@@ -29,7 +29,7 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
         AppRoutingModule,
         HttpClientModule,
         AuthModule,
-        DashboardModule
+        BoardsModule
     ],
     providers: [
         NotificationService,

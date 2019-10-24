@@ -2,22 +2,14 @@
     <div class="authentication__box">
         <div class="authentication__title-block">
             <h1 class="authentication__title">Вход в Trello</h1>
-            <a class="authentication__link" routerLink="../../auth/registration">или создайте аккаунт</a>
+            <a class="authentication__link" routerLink="/auth/registration">или создайте аккаунт</a>
         </div>
         <form class="form" [formGroup]="loginForm">
             <div class="form__item">
-                <label for="email" class="form__label">Электронная почта (или имя пользователя)
-                    <span class="form__required">*</span>
+                <label for="email" class="form__label">Электронная почта
                 </label>
                 <input id="email" type="email" placeholder="например, example@mail.com" class="form__field"
                     formControlName="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
-                <div class="error"
-                    *ngIf="loginForm.controls['email'].errors && !loginForm.controls['email'].pristine">
-                    <span class="error__text" *ngIf="loginForm.controls['email'].errors.required">Email is
-                        required!</span>
-                    <span class="error__text" *ngIf="loginForm.controls['email'].errors.pattern">Email is
-                        not valid!</span>
-                </div>
             </div>
             <div class="form__item">
                 <label for="password" class="form__label">Пароль
@@ -25,23 +17,14 @@
                 </label>
                 <input id="password" type="password" placeholder="например, &bull;&bull;&bull;&bull;&bull;"
                     class="form__field" formControlName="password" required minlength="5">
-                <div class="error"
-                    *ngIf="loginForm.controls['password'].errors && !loginForm.controls['password'].pristine">
-                    <span class="error__text"
-                        *ngIf="loginForm.controls['password'].errors.required">Password is
-                        required!</span>
-                    <span class="error__text"
-                        *ngIf="loginForm.controls['password'].errors.minlength">Minimum
-                        password length 5 characters</span>
-                </div>
             </div>
             <button class="form__button" type="submit" [disabled]="!loginForm.valid"
                 (click)="login()">Войти</button>
-            <button class="form__button-service">
+            <button class="form__button-service" (click)="authWithVk()">
                 <svg class="form__button-icon">
                     <use xlink:href="../../assets/svg-sprite.svg#vk"></use>
                 </svg>
-                <a class="form__button-text">Войти с помощью</a>
+                <a class="form__button-text">Войти с помощью vk</a>
             </button>
         </form>
     </div>

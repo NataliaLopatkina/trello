@@ -4,7 +4,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { NotificationService } from '../../services/notification.service';
 
@@ -15,10 +14,9 @@ import { NotificationService } from '../../services/notification.service';
 })
 export class RegistrationComponent implements OnInit, OnDestroy {
 
-    registrationForm: FormGroup;
-    users: User[] = [];
-    subscription: Subscription;
     email: string;
+    registrationForm: FormGroup;
+    subscription: Subscription;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -40,12 +38,13 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     registration() {
         this.subscription = this.authService.registration(this.registrationForm.value)
         .subscribe(
-            (response) => {
-                this.router.navigate(['dashboard']);
+            (response:any) => {
+                this.router.navigate(['boards']);
                 this.notificationService.deleteNotification();
             },
 
             (error)=> {
+                console.log(error)
                 if (error.status === 403) {
                     const text = 'Почта уже используется другим аккаунтом. Вы можете использовать вход.';
                     this.notificationService.error(text);

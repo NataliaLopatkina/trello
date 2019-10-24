@@ -8,16 +8,15 @@ import { BoardService } from '../../services/board.service';
 import { PopupService } from '../../services/popup.service';
 
 @Component({
-    selector: 'app-boards',
+    selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-    popup: boolean = false;
-    boards: Board[] = [];
     subscription: Subscription;
-    counter: number = 1;
+    boards: Board[] = [];
+    popup: boolean = false;
 
     constructor(
         private boardService: BoardService,
@@ -28,36 +27,34 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.drawBoards();
     }
 
-    ngOnChanges() {
-        this.drawBoards();
+    drawBoards() {
+        this.subscription = this.boardService.getBoards()
+        .subscribe(
+            (response: any) => {
+                if (response) {
+                    this.boards = response.boards;
+                }
+            },
+
+            (error) => {
+                console.log(error)
+            }
+        )
     }
 
     addBoard() {
         this.popupService.popup();
     }
 
-    drawBoards() {
-        this.subscription = this.boardService.getBoards()
-            .subscribe(
-                (response: any) => {
-                    if (response) {
-                        this.boards = response.boards;
-                    }
-                },
-
-                (error) => {
-                    console.log(error)
-                }
-            )
+    selectBoard(board) {
+        //this.boardService.sendBoardData(board);
+        this.boardService.getBoardData(board)
+        this.router.navigate(['boards/' + board.id + '/' + board.title]);
     }
 
     ngOnDestroy() {
         if (this.subscription) {
             this.subscription.unsubscribe();
         }
-    }
-
-    selectBoard(board) {
-        this.router.navigate(['dashboard/b', board.id, board.title]);
     }
 }

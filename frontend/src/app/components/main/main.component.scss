@@ -21,11 +21,23 @@
 
 .header-actions {
     &__link {
+        font-size: 17px;
+        font-weight: 500;
+        line-height: calc(24 / 17);
+        color: #ffffff;
+        background: transparent;
+        padding: 8px;
+        border-radius: 5px;
         margin-right: 8px;
 
         &:last-child {
             margin-right: 0;
         }
+    }
+
+    &__link--fill {
+        color: #0079BF;
+        background: #ffffff;
     }
 }
 
