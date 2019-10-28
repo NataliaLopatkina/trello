@@ -3,8 +3,8 @@ import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Board } from '../../models/board';
-import { AuthService } from '../../services/auth.service';
+import { Board } from '../../../../models/board';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
     selector: 'app-header-home',

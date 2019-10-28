@@ -5,8 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
 
-import { BoardService } from '../../services/board.service';
-import { PopupService } from '../../services/popup.service';
+import { BoardService } from '../../../../services/board.service';
+import { PopupService } from '../../../../services/popup.service';
 
 @Component({
     selector: 'app-individual-board',

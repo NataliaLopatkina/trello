@@ -3,9 +3,9 @@ import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Board } from '../../models/board';
-import { BoardService } from '../../services/board.service';
-import { PopupService } from '../../services/popup.service';
+import { Board } from '../../../../models/board';
+import { BoardService } from '../../../../services/board.service';
+import { PopupService } from '../../../../services/popup.service';
 
 @Component({
     selector: 'app-dashboard',

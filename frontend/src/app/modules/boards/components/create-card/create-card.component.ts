@@ -4,8 +4,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { PopupService } from '../../services/popup.service';
-import { TaskService } from '../../services/task.service';
+import { PopupService } from '../../../../services/popup.service';
+import { TaskService } from '../../../../services/task.service';
 
 @Component({
     selector: 'app-create-card',
