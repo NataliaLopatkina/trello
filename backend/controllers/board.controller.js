@@ -19,6 +19,21 @@ exports.getBoards = async function (req, res, next) {
         return res.status(204).json({ message: e.message })
     }
 }
+
+exports.removeBoard = async function (req, res, next) {
+    const { id } = req.params;
+
+    try {
+        await boardService.removeBoard({where: { id: id }})
+        return res.status(200).json({message: 'Board is removed!'})
+
+        
+    }
+
+    catch(e) {
+        return status(400).json({ message: 'Board is not removed!' })
+    } 
+}
 exports.createBoard = async function(req, res, next) {
     const { title, color } = req.body;
     const owner = req.user.id;

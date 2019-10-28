@@ -49,10 +49,11 @@ export class PopupCreateBoardComponent implements OnInit, OnDestroy {
     }
 
     createBoard() {
-        this.subscription = this.boardService.createBoard({ title: this.boardForm.value.title, color: this.color })
+        const data = { title: this.boardForm.value.title, color: this.color }
+        this.subscription = this.boardService.createBoard(data)
         .subscribe(
-            (response) => {
-                this.router.navigate(['boards', this.boardService.id, this.boardService.title]);
+            (response: any) => {
+                this.router.navigate(['boards/', response.board.id])
             },
 
             (error) => {

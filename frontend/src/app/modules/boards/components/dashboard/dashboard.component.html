@@ -7,6 +7,7 @@
                     <button class="board__button" (click)="selectBoard(board)">
                         <p class="board__title">{{board.title}}</p>
                     </button>
+                    <button class="board__button-remove" (click)="removeBoard(board)">x</button>
                 </li>
             </ul>
             <button class="boards__button-create" type="button" (click)="addBoard()">Создать доску</button>

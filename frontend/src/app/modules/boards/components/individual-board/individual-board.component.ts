@@ -15,63 +15,45 @@ import { PopupService } from '../../../../services/popup.service';
 })
 export class IndividualBoardComponent implements OnInit, OnDestroy {
 
-    // constructor(){}
-    // ngOnInit() {}
-    // ngOnDestroy(){}
-
     subscription: Subscription;
-    boardId: number;
+    idBoard: number;
     color: string = '';
-    board
-    // todoTask: boolean = false;
-    // todo: [] = [];
-    // doing: [] = [];
-    // done: [] = [];
+    tasks: Array<any> = [];
+    todoList: Array<any> = [];
+    doingList: Array<any> = [];
+    doneList: Array<any> = [];
 
     constructor(
         private activatedRoute: ActivatedRoute,
         private boardService: BoardService,
         private popupService: PopupService,
         private router: Router) {
-        // /this.idBoard = activatedRoute.snapshot.params['idBoard'];
-
-        // this.subscription = this.boardService.currentBoard
-        //     .subscribe((board) => {
-        //         this.board = board;
-        //         console.log(this.board)
-        //         // this.boardId = data.board.id;
-        //         // this.drawBoard(this.boardId)
-        //     })
+        this.idBoard = activatedRoute.snapshot.params['idBoard'];
     }
 
     ngOnInit() {
-        
-    }
-
-    drawBoard(id) {
-        this.subscription = this.boardService.getBoard(id)
-        .subscribe(
-            (response: any) => {
-                console.log(response)
-                //this.color = response.board.color;
-                // if (response.board.task) {
-                //     const arrayTasks = response.board.task;
-                //     // this.todo = this.filterArray(arrayTasks, 'todo');
-                //     // this.doing = this.filterArray(arrayTasks, 'doing');
-                //     // this.done = this.filterArray(arrayTasks, 'done');
-                // }
-            },
-
-            (error) => {
-                console.log(error)
+        this.boardService.getBoard(this.idBoard).subscribe()
+        this.boardService.board.subscribe(
+            (board: any)=> {
+                this.color = board.color;
+                if (board.task) {
+                    this.tasks = board.task;
+                    this.todoList = this.filterTasks(this.tasks, 'todo');
+                    this.doingList = this.filterTasks(this.tasks, 'doing');
+                    this.doneList = this.filterTasks(this.tasks, 'done');
+                }
             }
         )
     }
 
-    // filterArray(array, state) {
-    //     return array.filter((item)=>
-    //         item.state==state)
-    // }
+    getBoard(idBoard) {
+        this.subscription = this.boardService.getBoard(idBoard).subscribe()
+    }
+
+    filterTasks(array, state) {
+        return array.filter((item)=>
+            item.state==state)
+    }
     
 
     // selectTask(task) {
@@ -88,8 +70,8 @@ export class IndividualBoardComponent implements OnInit, OnDestroy {
     //     }
     // }
 
-    // ngOnDestroy() {
-    //     this.subscription.unsubscribe();
-    // }
+    ngOnDestroy() {
+        //this.subscription.unsubscribe();
+    }
 
 }

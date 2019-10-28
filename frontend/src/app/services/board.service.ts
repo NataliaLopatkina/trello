@@ -1,4 +1,4 @@
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Injectable } from '@angular/core';
@@ -11,55 +11,50 @@ import { Board } from '../models/board';
 
 export class BoardService {
 
+    board = new Subject();
     color: string = '';
-    title: string = '';
-    id: number;
-    private _board: object
+    tasks: Array<any> = [];
+    todoList: Array<any> = [];
+    doingList: Array<any> = [];
+    doneList: Array<any> = [];
 
-    // private subject = new BehaviorSubject<any>(this.board);
-    // currentBoard = this.subject.asObservable();
-
-    // sendBoardData(board: Board) {
-    //     this.subject.next({board})
-    // }
-
-    public set board(value: object) {
-        this.board = value;
-    }
-
-    public get board() : object {
-        return this.board
-    }
-    
-    public getBoardData(board) {
-        return board;
-    }
 
     constructor(private httpClient: HttpClient) {}
-
-    // private initBoard(board: Board) {
-    //     this.color = board.color;
-    //     this.title = board.title;
-    //     this.id = board.id;
-    // }
 
     public getBoards() {
         return this.httpClient.get(environment.baseUrl + 'board');
     }
 
+    public removeBoard(id) {
+        return this.httpClient.delete(environment.baseUrl + 'board/' + id)
+    }
+
     public createBoard(board: Board) {
         const data = {title: board.title, color: board.color}
         return this.httpClient.post<any>(environment.baseUrl + 'board', data)
-            .pipe(map(response=> {
-                this.sendBoardData(response.board);
-            }))
+    }
+
+    private filterTasks(array, state) {
+        return array.filter((item) =>
+            item.state==state)
     }
 
     public getBoard(id) {
-        return this.httpClient.get(environment.baseUrl + 'board/' + id)
+        return this.httpClient.get<any>(environment.baseUrl + 'board/' + id)
+            .pipe(map(response => {
+                this.board.next(response.board)
+                this.color = response.board.color;
+                if (response.board.task) {
+                    this.tasks = response.board.task;
+                    this.todoList = this.filterTasks(this.tasks, 'todo');
+                    this.doingList = this.filterTasks(this.tasks, 'doing');
+                    this.doneList = this.filterTasks(this.tasks, 'done');
+                }
+            }))
     }
 
-    public renameBoard(id, title) {
-        return this.httpClient.patch(environment.baseUrl + 'board' + id, { title})
+    public renameBoard(board: Board) {
+        const { id, title } = board;
+        return this.httpClient.patch(environment.baseUrl + 'board/' + id, { title})
     }
 } 

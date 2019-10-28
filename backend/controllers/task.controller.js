@@ -4,7 +4,7 @@ exports.createTask = async function (req, res, next) {
     const { title, boardId } = req.body;
 
     try {
-        await taskService.createTask({title: title, boardId: boardId});
+        await taskService.createTask({title: title, boardId: boardId, state: 'doing'});
         return res.status(200).json({ message: 'Task is added!' })
     }
 

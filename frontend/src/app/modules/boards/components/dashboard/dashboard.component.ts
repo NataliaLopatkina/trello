@@ -24,10 +24,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         private router: Router) { }
 
     ngOnInit() {
-        this.drawBoards();
+        this.getBoards();
     }
 
-    drawBoards() {
+    getBoards() {
         this.subscription = this.boardService.getBoards()
         .subscribe(
             (response: any) => {
@@ -42,14 +42,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
         )
     }
 
+    removeBoard(board) {
+        this.boardService.removeBoard(board.id).subscribe();
+        this.getBoards();
+    }
+
     addBoard() {
         this.popupService.popup();
     }
 
     selectBoard(board) {
-        //this.boardService.sendBoardData(board);
-        this.boardService.getBoardData(board)
-        this.router.navigate(['boards/' + board.id + '/' + board.title]);
+        this.router.navigate(['boards/' + board.id]);
     }
 
     ngOnDestroy() {

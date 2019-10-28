@@ -1,6 +1,6 @@
 <div class="board-header">
-    <p class="board-header__name-board" (click)="editTitleBoard()" *ngIf="edit==false">{{nameBoard}}</p>
-    <form class="board-header__form" [formGroup]="formRenameBoard" *ngIf="edit" (keyup.enter)="renameBoard()">
+    <p class="board-header__name-board" (click)="editTitleBoard()" *ngIf="edit==false">{{titleBoard}}</p>
+    <form class="board-header__form" [formGroup]="formRenameBoard" *ngIf="edit" (keyup.enter)="updateNameBoard()">
         <input class="board-header__field-name" formControlName="title" focus 
             (focusout)="focusOut()">
     </form>

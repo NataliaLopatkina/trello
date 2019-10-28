@@ -11,7 +11,7 @@ const routes: Routes = [
     },
 
     {
-        path: ':idBoard/:nameBoard', component: IndividualBoardComponent, canActivate: [AuthGuard]
+        path: ':idBoard', component: IndividualBoardComponent, canActivate: [AuthGuard]
     }
 ];
 

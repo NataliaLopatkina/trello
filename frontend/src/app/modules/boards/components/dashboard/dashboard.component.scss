@@ -35,6 +35,13 @@
     width: 190px;
     height: 95px;
     box-sizing: border-box;
+    position: relative;
+
+    &:hover {
+        .board__button-remove {
+            display: block;
+        }
+    }
 
     &__button {
         width: 100%;
@@ -54,5 +61,25 @@
         font-weight: 700;
         line-height: calc(20 / 16);
         color: #ffffff;
+    }
+
+    &__button-remove {
+        font-size: 16px;
+        color: #97a0af;
+        width: 20px;
+        height: 20px;
+        border: none;
+        padding: 0;
+        background: white;
+        border: 1px solid #97a0af;
+        border-radius: 50%;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        display: none;
+
+        &:focus {
+            outline: none;
+        }
     }
 }

@@ -23,8 +23,8 @@ export class HeaderHomeComponent implements OnInit, OnDestroy {
     }
 
     returnHome() {
-        const id = this.authService.userId;
-        this.router.navigate(['dashboard/user' + id + '/' + 'boards']);
+        //const id = this.authService.userId;
+        //this.router.navigate(['dashboard/user' + id + '/' + 'boards']);
     }
 
     logout() {

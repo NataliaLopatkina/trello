@@ -404,11 +404,6 @@ a {
     outline: none;
     transition: background 0.25s ease;
 
-    &:disabled {
-        background: #f4f5f7;
-        color: #a5adba;
-    }
-
     &:hover {
         background: #61bd4f;
     }
@@ -419,6 +414,11 @@ a {
 
     &:active {
         background: #49852e;
+    }
+
+    &:disabled {
+        background: #f4f5f7;
+        color: #a5adba;
     }
 }
 

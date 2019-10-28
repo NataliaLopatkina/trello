@@ -1,8 +1,8 @@
 import { Subscription } from 'rxjs';
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { BoardService } from '../../../../services/board.service';
 
@@ -12,65 +12,55 @@ import { BoardService } from '../../../../services/board.service';
     styleUrls: ['./board-header.component.scss']
 })
 export class BoardHeaderComponent implements OnInit, OnDestroy {
-
+    
     subscription: Subscription;
-    board: any;
-    nameBoard: string;
-    // idBoard: number;
-    // edit: boolean = false;
-    // formRenameBoard: FormGroup;
-
-
-
+    titleBoard: string = '';
+    formRenameBoard: FormGroup;
+    edit: boolean = false;
+    idBoard: number;
+    
     constructor(
-        private activatedRoute: ActivatedRoute,
+        private boardService: BoardService,
         private formBuilder: FormBuilder,
-        private boardService: BoardService) {
-    }
+        private activatedRoute: ActivatedRoute){
+            this.idBoard = this.activatedRoute.snapshot.params['idBoard']
+        }
 
     ngOnInit() {
-        // this.subscription = this.boardService.initBoard()
-        // .subscribe(
-        //     (data)=> {
-        //         this.board = data.board;
-        //         this.nameBoard = this.board.title;
-        //     }
-        // )
-        //this.addFormRenameBoard();
+        this.subscription = this.boardService.board
+        .subscribe(
+            (board: any)=> {
+                this.titleBoard = board.title;
+            }
+        )
 
+        this.renameBoard();
     }
 
-    // addFormRenameBoard() {
-    //     this.formRenameBoard = this.formBuilder.group({
-    //         title: [this.nameBoard, Validators.required]
-    //     })
-    // }
+    renameBoard() {
+        this.formRenameBoard = this.formBuilder.group({
+            title: ['', Validators.required]
+        })
+    }
 
-    // editTitleBoard() {
-    //     this.edit = true;
-    // }
+    editTitleBoard() {
+        this.edit = true;
+    }
 
-    // focusOut() {
-    //     this.edit = false;
-    // }
+    focusOut() {
+        this.edit = false;
+    }
 
-    // renameBoard() {
-    //     this.subscription = this.boardService.renameBoard(this.idBoard, this.formRenameBoard.value.title)
-    //     .subscribe(
-    //         (response) => {
-    //             this.edit = false;
-    //             this.nameBoard = this.formRenameBoard.value.title;
-    //         },
+    updateNameBoard() {
+        const data = { id: this.idBoard, title: this.formRenameBoard.value.title }
+        this.boardService.renameBoard(data).subscribe();
+        this.titleBoard = this.formRenameBoard.value.title;
+        this.edit = false;
+    }
 
-    //         (error) => {
-    //             console.log(error)
-    //         }
-    //     )
-    // }
-
-    // ngOnDestroy() {
-    //     if(this.subscription) {
-    //         this.subscription.unsubscribe();
-    //     }
-    // }
+    ngOnDestroy(){
+        if(this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    }
 }

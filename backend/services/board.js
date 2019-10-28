@@ -4,6 +4,10 @@ exports.createBoard = async function (query) {
     return await Board.create(query);
 }
 
+exports.removeBoard = async function (query) {
+    return await Board.destroy(query);
+}
+
 exports.updateBoard = async function (id, title) {
     return await Board.update({title: title}, {where: {id: id}})
 }

@@ -3,6 +3,7 @@ const router = express.Router();
 const boardController = require('../controllers/board.controller');
 
 router.get('/', boardController.getBoards)
+router.delete('/:id', boardController.removeBoard)
 router.post('/', boardController.createBoard)
 router.get('/:id', boardController.getBoard)
 router.patch('/:id', boardController.updateBoard)
