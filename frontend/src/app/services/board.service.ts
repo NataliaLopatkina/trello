@@ -42,13 +42,10 @@ export class BoardService {
     public getBoard(id) {
         return this.httpClient.get<any>(environment.baseUrl + 'board/' + id)
             .pipe(map(response => {
-                this.board.next(response.board)
-                this.color = response.board.color;
-                if (response.board.task) {
-                    this.tasks = response.board.task;
-                    this.todoList = this.filterTasks(this.tasks, 'todo');
-                    this.doingList = this.filterTasks(this.tasks, 'doing');
-                    this.doneList = this.filterTasks(this.tasks, 'done');
+                if(response) {
+                    this.board.next(response.board)
+                } else {
+                    this.board.next(null);
                 }
             }))
     }

@@ -4,14 +4,13 @@ import { Subject } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 
 export class PopupService {
+    public popup = new Subject()
 
-    public popup() {
-        this.addPopup.next({ popup: true })
+    public addPopup() {
+        this.popup.next(true)
     }
 
     public deletePopup() {
-        this.addPopup.next({ popup: false })
+        this.popup.next(false)
     }
-
-    public addPopup = new Subject();
 }

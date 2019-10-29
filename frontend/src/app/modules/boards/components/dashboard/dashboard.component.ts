@@ -48,7 +48,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     addBoard() {
-        this.popupService.popup();
+        this.popupService.addPopup();
+        this.popupService.popup
+        .subscribe(
+            (popup: boolean)=> {
+                this.popup = popup;
+            }
+        )
     }
 
     selectBoard(board) {

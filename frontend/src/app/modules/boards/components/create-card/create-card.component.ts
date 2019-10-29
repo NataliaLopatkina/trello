@@ -4,7 +4,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { PopupService } from '../../../../services/popup.service';
 import { TaskService } from '../../../../services/task.service';
 
 @Component({
@@ -15,28 +14,29 @@ import { TaskService } from '../../../../services/task.service';
 export class CreateCardComponent implements OnInit, OnDestroy {
 
     idBoard: number;
-    popup: boolean = false;
     taskForm: FormGroup;
     subscription: Subscription;
+    createTask: boolean = false;
 
     constructor(
         private activatedRoute: ActivatedRoute,
-        private popupService: PopupService,
         private formBuilder: FormBuilder,
         private taskService: TaskService) { 
             this.idBoard = activatedRoute.snapshot.params['idBoard'];
         }
 
     ngOnInit() {
-        this.subscription = this.popupService.addPopup.subscribe(
-            (popupCreate: { popup: boolean }) => {
-                if (popupCreate) {
-                    this.popup = popupCreate.popup;
+        this.subscription = this.taskService.createTask
+            .subscribe(
+                (createTask: boolean) => {
+                    this.createTask = createTask
                 }
-            }
-        )
-
+            )
         this.addTaskForm();
+    }
+
+    removeFormCreateTask() {
+        this.taskService.removeFormCreateTask();
     }
 
     addTaskForm() {
@@ -47,26 +47,22 @@ export class CreateCardComponent implements OnInit, OnDestroy {
 
     addTask() {
         const data = { title: this.taskForm.value.title, boardId: this.idBoard }
-        this.subscription = this.taskService.createTask(data)
+        //this.subscription = this.taskService.createTask(data)
         
-        .subscribe(
-            (response: any)=> {
-                console.log(response)
-            },
+        // .subscribe(
+        //     (response: any)=> {
+        //         console.log(response)
+        //     },
 
-            (error)=> {
-                console.log(error)
-            }
-        )
+        //     (error)=> {
+        //         console.log(error)
+        //     }
+        // )
 
-        this.popupService.deletePopup();
+        // this.popupService.deletePopup();
     }
 
     ngOnDestroy() {
         this.subscription.unsubscribe();
-    }
-
-    closePopupTask() {
-        this.popupService.deletePopup();
     }
 }

@@ -30,7 +30,9 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
         this.subscription = this.boardService.board
         .subscribe(
             (board: any)=> {
-                this.titleBoard = board.title;
+                if(board) {
+                    this.titleBoard = board.title;
+                }
             }
         )
 

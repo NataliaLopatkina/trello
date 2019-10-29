@@ -27,11 +27,10 @@ export class PopupCreateBoardComponent implements OnInit, OnDestroy {
         private router: Router) { }
 
     ngOnInit() {
-        this.subscription = this.popupService.addPopup.subscribe(
-            (popupCreate: { popup: boolean }) => {
-                if (popupCreate) {
-                    this.popup = popupCreate.popup;
-                }
+        this.subscription = this.popupService.popup
+        .subscribe(
+            (popup: boolean)=> {
+                this.popup = popup;
             }
         )
 

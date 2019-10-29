@@ -14,69 +14,68 @@ export class UpdateTaskComponent implements OnInit, OnDestroy {
 
     subscription: Subscription;
     popup: boolean = false;
-    formTitleTask: FormGroup;
-    titleTask: string = 'Task';
-    updateTitle: boolean = false;
-    formDescriptionTask: FormGroup;
-    updateDescription: boolean = false;
+    // formTitleTask: FormGroup;
+    // titleTask: string = 'Task';
+    // updateTitle: boolean = false;
+    // formDescriptionTask: FormGroup;
+    // updateDescription: boolean = false;
 
     constructor(
         private popupService: PopupService,
         private formBuilder: FormBuilder) { }
 
     ngOnInit() {
-        this.subscription = this.popupService.addPopup.subscribe(
-            (popupCreate: { popup: boolean }) => {
-                if (popupCreate) {
-                    this.popup = popupCreate.popup;
-                }
+        this.subscription = this.popupService.popup.subscribe(
+            (popup: boolean)=> {
+                this.popup = popup;
             }
         )
     }
 
-    closePopup() {
+    removeFormUpdateTask() {
         this.popupService.deletePopup();
+        console.log('kkkkk')
     }
 
-    initFormTitleTask() {
-        this.formTitleTask = this.formBuilder.group({
-            title: [this.titleTask, Validators.required]
-        })
-    }
+    // initFormTitleTask() {
+    //     this.formTitleTask = this.formBuilder.group({
+    //         title: [this.titleTask, Validators.required]
+    //     })
+    // }
 
-    editTitleTask() {
-        this.updateTitle = true;
-        this.initFormTitleTask();
-    }
+    // editTitleTask() {
+    //     this.updateTitle = true;
+    //     this.initFormTitleTask();
+    // }
 
-    focusOut() {
-        this.updateTitle = false;
-    }
+    // focusOut() {
+    //     this.updateTitle = false;
+    // }
 
-    initFormDescriptionTask() {
-        this.formDescriptionTask = this.formBuilder.group({
-            description: ['', Validators.required]
-        })
-    }
+    // initFormDescriptionTask() {
+    //     this.formDescriptionTask = this.formBuilder.group({
+    //         description: ['', Validators.required]
+    //     })
+    // }
 
-    editDescriptionTask() {
-        this.updateDescription = true;
-        this.initFormDescriptionTask();
-    }
+    // editDescriptionTask() {
+    //     this.updateDescription = true;
+    //     this.initFormDescriptionTask();
+    // }
 
-    focusOutDescription() {
-        setTimeout(()=> {
-            this.updateDescription = false;
-        }, 200)
-    }
+    // focusOutDescription() {
+    //     setTimeout(()=> {
+    //         this.updateDescription = false;
+    //     }, 200)
+    // }
 
-    addDescription() {
-        console.log(this.formDescriptionTask.value);
-    }
+    // addDescription() {
+    //     console.log(this.formDescriptionTask.value);
+    // }
 
-    closeUpdateDescription() {
-        this.updateDescription = false;
-    }
+    // closeUpdateDescription() {
+    //     this.updateDescription = false;
+    // }
 
     ngOnDestroy() {
         if(this.subscription) {

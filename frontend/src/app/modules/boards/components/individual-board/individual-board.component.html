@@ -3,14 +3,30 @@
     <app-board-header></app-board-header>
     <div class="tasks">
         <div class="box tasks__box">
-            <div class="tasks-column">
+            <div class="tasks-column" *ngFor="let column of columns">
+                <div class="tasks-column__header">
+                    <h2 class="tasks-column__title">{{column.title}}</h2>
+                </div>
+                <div class="tasks-column__box" cdkDropList [cdkDropListData]=column.tasks (cdkDropListDropped)="drop($event)"
+                    [cdkDropListConnectedTo]="[column.connection1, column.connection2]" #column.connection="cdkDropList">
+                    <div class="cards">
+                        <a class="cards__item" *ngFor="let item of column.tasks" cdkDrag (click)="selectTask(item)">{{item}}</a>
+                    </div>
+                </div>
+                <button class="tasks-column__button-add" (click)="addTask()" *ngIf="createTask==false">
+                    <span class="tasks-column__button-plus">+</span>
+                    <span class="tasks-column__button-text">Добавить карточку</span>
+                </button>
+                <app-create-card></app-create-card>
+            </div>
+            <!-- <div class="tasks-column">
                 <div class="tasks-column__header">
                     <h2 class="tasks-column__title">To do</h2>
                 </div>
-                <div class="tasks-column__box" cdkDropList [cdkDropListData]="todo" (cdkDropListDropped)="drop($event)"
+                <div class="tasks-column__box" cdkDropList [cdkDropListData]="todoTasks" (cdkDropListDropped)="drop($event)"
                     [cdkDropListConnectedTo]="[doingList, doneList]" #todoList="cdkDropList">
                     <div class="cards">
-                        <a class="cards__item" *ngFor="let item of todo" cdkDrag
+                        <a class="cards__item" *ngFor="let item of todoTasks" cdkDrag
                             (click)="selectTask(item)">{{item.title}}</a>
                     </div>
                 </div>
@@ -24,10 +40,10 @@
                 <div class="tasks-column__header">
                     <h2 class="tasks-column__title">Doing</h2>
                 </div>
-                <div class="tasks-column__box" cdkDropList [cdkDropListData]="doing" (cdkDropListDropped)="drop($event)"
+                <div class="tasks-column__box" cdkDropList [cdkDropListData]="doingTasks" (cdkDropListDropped)="drop($event)"
                     [cdkDropListConnectedTo]="[todoList, doneList]" #doingList="cdkDropList">
                     <div class="cards">
-                        <a class="cards__item" *ngFor="let item of doing" cdkDrag
+                        <a class="cards__item" *ngFor="let item of doingTasks" cdkDrag
                             (click)="updateTask()">{{item.title}}</a>
                     </div>
                 </div>
@@ -35,15 +51,16 @@
                     <span class="tasks-column__button-plus">+</span>
                     <span class="tasks-column__button-text">Добавить карточку</span>
                 </button>
+                <app-create-card></app-create-card>
             </div>
             <div class="tasks-column">
                 <div class="tasks-column__header">
                     <h2 class="tasks-column__title">Done</h2>
                 </div>
-                <div class="tasks-column__box" cdkDropList [cdkDropListData]="done" (cdkDropListDropped)="drop($event)"
+                <div class="tasks-column__box" cdkDropList [cdkDropListData]="doneTasks" (cdkDropListDropped)="drop($event)"
                     [cdkDropListConnectedTo]="[todoList, doingList]" #doneList="cdkDropList">
                     <div class="cards">
-                        <a class="cards__item" *ngFor="let item of done" cdkDrag
+                        <a class="cards__item" *ngFor="let item of doneTasks" cdkDrag
                             (click)="updateTask()">{{item.title}}</a>
                     </div>
                 </div>
@@ -51,7 +68,8 @@
                     <span class="tasks-column__button-plus">+</span>
                     <span class="tasks-column__button-text">Добавить карточку</span>
                 </button>
-            </div>
+                <app-create-card></app-create-card>
+            </div> -->
         </div>
     </div>
 </main>

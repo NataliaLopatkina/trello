@@ -1,11 +1,11 @@
-<div class="create-task">
+<div class="create-task" *ngIf="createTask">
     <form class="create-task__form" [formGroup]="taskForm">
         <textarea class="create-task__field" formControlName="title" placeholder="Ввести заголовок для этой карточки"
             required></textarea>
         <div class="create-task__actions">
             <button class="button create-task__button-add" (click)="addTask()" [disabled]="!taskForm.valid">Добавить
                 карточку</button>
-            <button class="create-task__button-close" (click)="closePopupTask()">X</button>
+            <button class="create-task__button-close" (click)="removeFormCreateTask()">X</button>
         </div>
     </form>
 </div>
