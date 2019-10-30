@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from '../../guards/auth.guard';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { IndividualBoardComponent } from './components/individual-board/individual-board.component';
+import { BoardComponent } from './components/board/board.component';
 
 const routes: Routes = [
     {
@@ -11,7 +11,7 @@ const routes: Routes = [
     },
 
     {
-        path: ':idBoard', component: IndividualBoardComponent, canActivate: [AuthGuard]
+        path: ':idBoard', component: BoardComponent, canActivate: [AuthGuard]
     }
 ];
 
@@ -19,4 +19,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class BoardsRoutingModule { }
+export class BoardRoutingModule { }

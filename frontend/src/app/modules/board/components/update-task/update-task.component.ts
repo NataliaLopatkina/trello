@@ -3,8 +3,6 @@ import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { PopupService } from '../../../../services/popup.service';
-
 @Component({
     selector: 'app-update-task',
     templateUrl: './update-task.component.html',
@@ -21,19 +19,18 @@ export class UpdateTaskComponent implements OnInit, OnDestroy {
     // updateDescription: boolean = false;
 
     constructor(
-        private popupService: PopupService,
         private formBuilder: FormBuilder) { }
 
     ngOnInit() {
-        this.subscription = this.popupService.popup.subscribe(
-            (popup: boolean)=> {
-                this.popup = popup;
-            }
-        )
+        // this.subscription = this.popupService.popup.subscribe(
+        //     (popup: boolean)=> {
+        //         this.popup = popup;
+        //     }
+        // )
     }
 
     removeFormUpdateTask() {
-        this.popupService.deletePopup();
+        //this.popupService.deletePopup();
         console.log('kkkkk')
     }
 

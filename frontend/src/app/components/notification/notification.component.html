@@ -1,4 +1,4 @@
-<div class="notification" [class.notification--info]="messageInfo == true" *ngIf="message">
+<div class="notification" [class.notification--info]="info" *ngIf="message">
     <p class="notification__text">{{messageText}}</p>
     <button class="notification__button" (click)="removeNotification()">X</button>
 </div>

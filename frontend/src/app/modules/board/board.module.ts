@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-import { BoardsRoutingModule } from './boards-routing.module';
+import { BoardRoutingModule } from './board-routing.module';
 
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderHomeComponent } from './components/header-home/header-home.component';
 import { PopupCreateBoardComponent } from './components/popup-create-board/popup-create-board.component';
 import { BoardHeaderComponent } from './components/board-header/board-header.component';
-import { IndividualBoardComponent } from './components/individual-board/individual-board.component';
+import { BoardComponent } from './components/board/board.component';
 import { CreateCardComponent } from './components/create-card/create-card.component';
 import { UpdateTaskComponent } from './components/update-task/update-task.component';
 
@@ -21,7 +21,7 @@ import { FocusDirective } from '../../directives/focus.directive';
         HeaderHomeComponent,
         PopupCreateBoardComponent,
         BoardHeaderComponent,
-        IndividualBoardComponent,
+        BoardComponent,
         CreateCardComponent,
         UpdateTaskComponent,
         FocusDirective
@@ -30,8 +30,8 @@ import { FocusDirective } from '../../directives/focus.directive';
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        BoardsRoutingModule,
+        BoardRoutingModule,
         DragDropModule
     ]
 })
-export class BoardsModule { }
+export class BoardModule { }

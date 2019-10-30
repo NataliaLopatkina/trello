@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 import { Board } from '../../../../models/board';
 import { BoardService } from '../../../../services/board.service';
-import { PopupService } from '../../../../services/popup.service';
+import { NotificationService } from '../../../../services/notification.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -16,11 +16,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     subscription: Subscription;
     boards: Board[] = [];
-    popup: boolean = false;
+    popupCreateBoard: boolean = false;
 
     constructor(
         private boardService: BoardService,
-        private popupService: PopupService,
+        private notificationService: NotificationService,
         private router: Router) { }
 
     ngOnInit() {
@@ -44,17 +44,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     removeBoard(board) {
         this.boardService.removeBoard(board.id).subscribe();
+        this.notificationService.info('Доска удалена');
         this.getBoards();
     }
 
-    addBoard() {
-        this.popupService.addPopup();
-        this.popupService.popup
-        .subscribe(
-            (popup: boolean)=> {
-                this.popup = popup;
-            }
-        )
+    addPopupCreateBoard() {
+        this.popupCreateBoard = true;
+    }
+
+    removePopupCreateBoard($event) {
+        this.popupCreateBoard = $event;
     }
 
     selectBoard(board) {

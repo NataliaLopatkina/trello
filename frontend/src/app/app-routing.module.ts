@@ -14,7 +14,7 @@ export const routes: Routes = [
     },
 
     {
-        path: 'boards', loadChildren: ()=> import('./modules/boards/boards.module').then(m => m.BoardsModule)
+        path: 'boards', loadChildren: ()=> import('./modules/board/board.module').then(m => m.BoardModule)
     },
 
     {

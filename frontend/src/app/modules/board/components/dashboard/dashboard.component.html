@@ -10,9 +10,8 @@
                     <button class="board__button-remove" (click)="removeBoard(board)">x</button>
                 </li>
             </ul>
-            <button class="boards__button-create" type="button" (click)="addBoard()">Создать доску</button>
+            <button class="boards__button-create" type="button" (click)="addPopupCreateBoard()">Создать доску</button>
         </div>
     </div>
 </main>
-<app-popup-create-board></app-popup-create-board>
-
+<app-popup-create-board *ngIf="popupCreateBoard" (popupBoard)="removePopupCreateBoard($event)"></app-popup-create-board>

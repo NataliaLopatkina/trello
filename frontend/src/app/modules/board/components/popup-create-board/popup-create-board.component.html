@@ -1,23 +1,23 @@
-<section class="popup-create-board" *ngIf="popup">
+<section class="popup-create-board">
     <div class="popup-create-board__box">
         <h3 class="visually-hidden">Создать доску</h3>
-        <form class="popup-create-board__form" [formGroup]="boardForm">
+        <form class="popup-create-board__form" [formGroup]="formCreateBoard">
             <div class="popup-create-board__content">
                 <div class="popup-create-board__field-block" [ngStyle]="{'background': color}">
                     <input class="popup-create-board__field" type="text" placeholder="Добавить заголовок доски"
                         formControlName="title" required>
-                    <button class="popup-create-board__button-close" (click)="removePopup()">&times;</button>
+                    <button class="popup-create-board__button-close" (click)="removePopupCreateBoard()">&times;</button>
                 </div>
                 <div class="background-board">
                     <ul class="background-board__list">
                         <li class="background-board__item" *ngFor="let color of colors">
                             <button class="background-board__button" [ngStyle]="{'background': color}" 
-                                (click)="addColor(color)"></button>
+                                (click)="addColorBoard(color)"></button>
                         </li>
                     </ul>
                 </div>
             </div>
-            <button class="button popup-create-board__button-create" type="submit" [disabled]="!boardForm.valid"
+            <button class="button popup-create-board__button-create" type="submit" [disabled]="!formCreateBoard.valid"
                 (click)="createBoard()">Создать
                 доску</button>
         </form>

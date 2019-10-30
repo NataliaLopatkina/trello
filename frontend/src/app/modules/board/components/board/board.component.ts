@@ -6,14 +6,13 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 
 import { BoardService } from '../../../../services/board.service';
 import { TaskService } from '../../../../services/task.service';
-import { PopupService } from '../../../../services/popup.service';
 
 @Component({
-    selector: 'app-individual-board',
-    templateUrl: './individual-board.component.html',
-    styleUrls: ['./individual-board.component.scss']
+    selector: 'app-board',
+    templateUrl: './board.component.html',
+    styleUrls: ['./board.component.scss']
 })
-export class IndividualBoardComponent implements OnInit, OnDestroy {
+export class BoardComponent implements OnInit, OnDestroy {
 
     subscription: Subscription;
     idBoard: number;
@@ -52,7 +51,6 @@ export class IndividualBoardComponent implements OnInit, OnDestroy {
         private activatedRoute: ActivatedRoute,
         private boardService: BoardService,
         private taskService: TaskService,
-        private popupService: PopupService,
         private router: Router) {
         this.idBoard = activatedRoute.snapshot.params['idBoard'];
     }
@@ -107,12 +105,12 @@ export class IndividualBoardComponent implements OnInit, OnDestroy {
     }
 
     selectTask() {
-        this.popupService.addPopup();
-        this.popupService.popup.subscribe(
-            (popup: boolean)=> {
-                this.popup = popup
-            }
-        )
+        // this.popupService.addPopup();
+        // this.popupService.popup.subscribe(
+        //     (popup: boolean)=> {
+        //         this.popup = popup
+        //     }
+        // )
     }
 
     ngOnDestroy() {

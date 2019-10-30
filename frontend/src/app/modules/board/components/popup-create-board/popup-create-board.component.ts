@@ -1,10 +1,9 @@
 import { Subscription } from 'rxjs';
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { PopupService } from '../../../../services/popup.service';
 import { BoardService } from '../../../../services/board.service';
 
 @Component({
@@ -14,41 +13,30 @@ import { BoardService } from '../../../../services/board.service';
 })
 export class PopupCreateBoardComponent implements OnInit, OnDestroy {
 
-    popup: boolean = false;
-    boardForm: FormGroup;
+    @Output() popupBoard = new EventEmitter<boolean>();
+    popupCreateBoard: boolean = false;
+    formCreateBoard: FormGroup;
     subscription: Subscription;
     color: string = 'rgb(131, 140, 145)';
     colors: Array<string> = ['rgb(0, 121, 191)', 'rgb(210, 144, 52)', 'rgb(81, 152, 57)', 'rgb(176, 70, 50)', 'rgb(137, 96, 158)', 'rgb(205, 90, 145)', 'rgb(0, 174, 204)']
 
     constructor(
         private formBuilder: FormBuilder,
-        private popupService: PopupService,
         private boardService: BoardService,
         private router: Router) { }
 
     ngOnInit() {
-        this.subscription = this.popupService.popup
-        .subscribe(
-            (popup: boolean)=> {
-                this.popup = popup;
-            }
-        )
-
-        this.initBoardForm();
-    }
-
-    initBoardForm() {
-        this.boardForm = this.formBuilder.group({
+        this.formCreateBoard = this.formBuilder.group({
             title: ['', [Validators.required]]
         })
     }
 
-    addColor(color) {
+    addColorBoard(color) {
         this.color = color;
     }
 
     createBoard() {
-        const data = { title: this.boardForm.value.title, color: this.color }
+        const data = { title: this.formCreateBoard.value.title, color: this.color }
         this.subscription = this.boardService.createBoard(data)
         .subscribe(
             (response: any) => {
@@ -61,8 +49,8 @@ export class PopupCreateBoardComponent implements OnInit, OnDestroy {
         );
     }
 
-    removePopup() {
-        this.popupService.deletePopup();
+    removePopupCreateBoard() {
+        this.popupBoard.emit(this.popupCreateBoard);
     }
 
     ngOnDestroy() {
