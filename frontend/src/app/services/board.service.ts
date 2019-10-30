@@ -17,8 +17,6 @@ export class BoardService {
     todoList: Array<any> = [];
     doingList: Array<any> = [];
     doneList: Array<any> = [];
-
-
     constructor(private httpClient: HttpClient) {}
 
     public getBoards() {

@@ -22,30 +22,30 @@ export class BoardComponent implements OnInit, OnDestroy {
     doingTasks: Array<any> = [];
     doneTasks: Array<any> = [];
     createTask: boolean = false;
-    popup: boolean = false;
-    columns:any = [
-        {
-            title: 'To do',
-            connection: 'todoList',
-            connection1: 'doingList',
-            connection2: 'doneList',
-            tasks: ['Test', 'Test1'],
-        },
-        {
-            title: 'Doing',
-            connection: 'doingList',
-            connection1: 'todoList',
-            connection2: 'doneList',
-            tasks: ['Test2', 'Test3'],
-        },
-        {
-            title: 'Done',
-            connection: 'doneList',
-            connection1: 'todoList',
-            connection2: 'doingList',
-            tasks: ['Test4', 'Test5'],
-        }
-    ]
+    popupUpdateTask: boolean = false;
+    // columns:any = [
+    //     {
+    //         title: 'To do',
+    //         connection: 'todoList',
+    //         connection1: 'doingList',
+    //         connection2: 'doneList',
+    //         tasks: ['Test', 'Test1'],
+    //     },
+    //     {
+    //         title: 'Doing',
+    //         connection: 'doingList',
+    //         connection1: 'todoList',
+    //         connection2: 'doneList',
+    //         tasks: ['Test2', 'Test3'],
+    //     },
+    //     {
+    //         title: 'Done',
+    //         connection: 'doneList',
+    //         connection1: 'todoList',
+    //         connection2: 'doingList',
+    //         tasks: ['Test4', 'Test5'],
+    //     }
+    // ]
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -68,7 +68,7 @@ export class BoardComponent implements OnInit, OnDestroy {
                         this.doneTasks = this.filterTasks(this.tasksList, 'done');
                     }
                 } else {
-                    this.router.navigate(['*  '])
+                    this.router.navigate(['*'])
                 }
             }
         )
@@ -93,24 +93,24 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
 
     addTask() {
-        this.taskService.addFormCreateTask();
-        this.taskService.createTask
-        .subscribe(
-            (createTask: boolean)=> {
-                this.createTask = createTask;
-            }
-        )
+        // this.taskService.addFormCreateTask();
+        // this.taskService.createTask
+        // .subscribe(
+        //     (createTask: boolean)=> {
+        //         this.createTask = createTask;
+        //     }
+        // )
         
         this.createTask = !this.createTask
     }
 
-    selectTask() {
-        // this.popupService.addPopup();
-        // this.popupService.popup.subscribe(
-        //     (popup: boolean)=> {
-        //         this.popup = popup
-        //     }
-        // )
+    addPopupUpdateTask(task) {
+        this.popupUpdateTask = true;
+        this.taskService.task.next(task)
+    }
+
+    removePopupUpdateTask($event) {
+        this.popupUpdateTask = $event;
     }
 
     ngOnDestroy() {

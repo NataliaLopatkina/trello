@@ -1,18 +1,18 @@
-<section class="update-task" *ngIf="popup">
+<section class="update-task">
     <div class="update-task__box">
         <header class="update-task__header">
-            <h3 class="update-task__title" *ngIf="updateTitle==false" (click)="editTitleTask()">{{titleTask}}</h3>
-            <form class="update-task__form-title" [formGroup]="formTitleTask" *ngIf="updateTitle">
+            <h3 class="update-task__title" (click)="editTitleTask()" >{{titleTask}}</h3>
+            <form class="update-task__form-title" [formGroup]="formEditTitleTask" *ngIf="editTitle" (keyup.enter)="updateTitleTask()">
                 <input class="update-task__field-title" type="text" formControlName="title" focus
                     (focusout)="focusOut()">
             </form>
-            <button class="update-task__close-popup" (click)="removeFormUpdateTask()">X</button>
+            <button class="update-task__close-popup" (click)="removePopupUpdateTask()">X</button>
         </header>
-        <div class="update-task__content">
+        <!-- <div class="update-task__content">
             <p class="update-task__text">Описание</p>
-            <a class="update-task__link" *ngIf="updateDescription==false" (click)="editDescriptionTask()">Добавить более
+            <a class="update-task__link" (click)="editDescriptionTask()">Добавить более
                 подробное описание</a>
-            <form class="update-task__form" *ngIf="updateDescription" [formGroup]="formDescriptionTask">
+            <form class="update-task__form" [formGroup]="formDescriptionTask">
                 <textarea class="update-task__field" placeholder="Добавить более подробное описание"
                     formControlName="description" focus (focusout)="focusOutDescription()"></textarea>
                 <div class="update-task__actions">
@@ -20,6 +20,6 @@
                     <button class="update-task__button-close" (click)="closeUpdateDescription()">X</button>
                 </div>
             </form>
-        </div>
+        </div> -->
     </div>
 </section>

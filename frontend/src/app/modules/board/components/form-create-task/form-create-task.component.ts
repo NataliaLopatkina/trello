@@ -7,11 +7,11 @@ import { ActivatedRoute } from '@angular/router';
 import { TaskService } from '../../../../services/task.service';
 
 @Component({
-    selector: 'app-create-card',
-    templateUrl: './create-card.component.html',
-    styleUrls: ['./create-card.component.scss']
+    selector: 'app-form-create-task',
+    templateUrl: './form-create-task.component.html',
+    styleUrls: ['./form-create-task.component.scss']
 })
-export class CreateCardComponent implements OnInit, OnDestroy {
+export class FormCreateTaskComponent implements OnInit, OnDestroy {
 
     idBoard: number;
     taskForm: FormGroup;
@@ -26,17 +26,17 @@ export class CreateCardComponent implements OnInit, OnDestroy {
         }
 
     ngOnInit() {
-        this.subscription = this.taskService.createTask
-            .subscribe(
-                (createTask: boolean) => {
-                    this.createTask = createTask
-                }
-            )
+        // this.subscription = this.taskService.createTask
+        //     .subscribe(
+        //         (createTask: boolean) => {
+        //             this.createTask = createTask
+        //         }
+        //     )
         this.addTaskForm();
     }
 
     removeFormCreateTask() {
-        this.taskService.removeFormCreateTask();
+        //this.taskService.removeFormCreateTask();
     }
 
     addTaskForm() {
@@ -47,7 +47,7 @@ export class CreateCardComponent implements OnInit, OnDestroy {
 
     addTask() {
         const data = { title: this.taskForm.value.title, boardId: this.idBoard }
-        //this.subscription = this.taskService.createTask(data)
+        //this.subscription = this.taskService.addTask(data)
         
         // .subscribe(
         //     (response: any)=> {
@@ -58,11 +58,9 @@ export class CreateCardComponent implements OnInit, OnDestroy {
         //         console.log(error)
         //     }
         // )
-
-        // this.popupService.deletePopup();
     }
 
     ngOnDestroy() {
-        this.subscription.unsubscribe();
+        // /this.subscription.unsubscribe();
     }
 }
