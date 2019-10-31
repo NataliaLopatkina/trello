@@ -13,18 +13,16 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
     message: boolean = false;
     messageText: string = '';
-    info: boolean = false;
     subscription: Subscription;
 
     constructor(private notificationService: NotificationService) { }
 
     ngOnInit() {
         this.subscription = this.notificationService.addNotification.subscribe(
-            (notification: {message: boolean, messageText: string, info: boolean})=> {
+            (notification: {message: boolean, messageText: string})=> {
                 if (notification) {
                     this.message = notification.message;
                     this.messageText = notification.messageText;
-                    this.info = notification.info;
                 }
             }
         )

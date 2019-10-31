@@ -9,10 +9,6 @@ export class NotificationService {
         this.addNotification.next({message: true, messageText})
     }
 
-    public info(messageText: string) {
-        this.addNotification.next({message: true, messageText, info: true})
-    }
-
     public deleteNotification() {
         this.addNotification.next({message: false})
     }

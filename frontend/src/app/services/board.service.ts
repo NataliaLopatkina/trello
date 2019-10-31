@@ -12,11 +12,6 @@ import { Board } from '../models/board';
 export class BoardService {
 
     board = new Subject();
-    color: string = '';
-    tasks: Array<any> = [];
-    todoList: Array<any> = [];
-    doingList: Array<any> = [];
-    doneList: Array<any> = [];
     constructor(private httpClient: HttpClient) {}
 
     public getBoards() {

@@ -14,7 +14,6 @@ import { BoardService } from '../../../../services/board.service';
 export class PopupCreateBoardComponent implements OnInit, OnDestroy {
 
     @Output() popupBoard = new EventEmitter<boolean>();
-    popupCreateBoard: boolean = false;
     formCreateBoard: FormGroup;
     subscription: Subscription;
     color: string = 'rgb(131, 140, 145)';
@@ -50,7 +49,7 @@ export class PopupCreateBoardComponent implements OnInit, OnDestroy {
     }
 
     removePopupCreateBoard() {
-        this.popupBoard.emit(this.popupCreateBoard);
+        this.popupBoard.emit();
     }
 
     ngOnDestroy() {

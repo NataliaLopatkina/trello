@@ -1,25 +1,25 @@
 <section class="update-task">
     <div class="update-task__box">
         <header class="update-task__header">
-            <h3 class="update-task__title" (click)="editTitleTask()" >{{titleTask}}</h3>
+            <h3 class="update-task__title" (click)="editTitleTask(editTitle=true)" *ngIf="editTitle==false">{{titleTask}}</h3>
             <form class="update-task__form-title" [formGroup]="formEditTitleTask" *ngIf="editTitle" (keyup.enter)="updateTitleTask()">
                 <input class="update-task__field-title" type="text" formControlName="title" focus
-                    (focusout)="focusOut()">
+                    (focusout)="editTitle=false">
             </form>
             <button class="update-task__close-popup" (click)="removePopupUpdateTask()">X</button>
         </header>
-        <!-- <div class="update-task__content">
+        <div class="update-task__content">
             <p class="update-task__text">Описание</p>
-            <a class="update-task__link" (click)="editDescriptionTask()">Добавить более
+            <a class="update-task__link" (click)="editDescription=true" *ngIf="editDescription==false">Добавить более
                 подробное описание</a>
-            <form class="update-task__form" [formGroup]="formDescriptionTask">
+            <form class="update-task__form" [formGroup]="formEditDescriptionTask" *ngIf="editDescription">
                 <textarea class="update-task__field" placeholder="Добавить более подробное описание"
-                    formControlName="description" focus (focusout)="focusOutDescription()"></textarea>
+                    formControlName="description" focus required></textarea>
                 <div class="update-task__actions">
-                    <button class="button update-task__button" (click)="addDescription()">Сохранить</button>
-                    <button class="update-task__button-close" (click)="closeUpdateDescription()">X</button>
+                    <button class="button update-task__button" type="submit" (click)="addDescriptionTask(editDescription=false)" [disabled]="!formEditDescriptionTask.valid">Сохранить</button>
+                    <button class="update-task__button-close" (click)="editDescription=false">X</button>
                 </div>
             </form>
-        </div> -->
+        </div>
     </div>
 </section>

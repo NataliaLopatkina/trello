@@ -21,7 +21,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     todoTasks: Array<any> = [];
     doingTasks: Array<any> = [];
     doneTasks: Array<any> = [];
-    createTask: boolean = false;
+    formCreateTask: boolean = false;
     popupUpdateTask: boolean = false;
     // columns:any = [
     //     {
@@ -100,17 +100,11 @@ export class BoardComponent implements OnInit, OnDestroy {
         //         this.createTask = createTask;
         //     }
         // )
-        
-        this.createTask = !this.createTask
     }
 
     addPopupUpdateTask(task) {
         this.popupUpdateTask = true;
-        this.taskService.task.next(task)
-    }
-
-    removePopupUpdateTask($event) {
-        this.popupUpdateTask = $event;
+        console.log('Запрос на сервер на добавление таска!')
     }
 
     ngOnDestroy() {

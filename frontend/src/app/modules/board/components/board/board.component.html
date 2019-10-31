@@ -13,7 +13,7 @@
                         <a class="cards__item" *ngFor="let item of column.tasks" cdkDrag (click)="selectTask(item)">{{item}}</a>
                     </div>
                 </div>
-                <button class="tasks-column__button-add" (click)="addTask()" *ngIf="createTask==false">
+                <button class="tasks-column__button-add" (click)="addTask()" *ngIf="formCreateTask==false">
                     <span class="tasks-column__button-plus">+</span>
                     <span class="tasks-column__button-text">Добавить карточку</span>
                 </button>
@@ -30,11 +30,11 @@
                             (click)="addPopupUpdateTask(item)">{{item.title}}</a>
                     </div>
                 </div>
-                <button class="tasks-column__button-add" (click)="addTask()">
+                <button class="tasks-column__button-add" (click)="formCreateTask=true" *ngIf="formCreateTask==false">
                     <span class="tasks-column__button-plus">+</span>
                     <span class="tasks-column__button-text">Добавить карточку</span>
                 </button>
-                <app-form-create-task></app-form-create-task>
+                <app-form-create-task *ngIf="formCreateTask" (formTask)="formCreateTask=false"></app-form-create-task>
             </div>
             <div class="tasks-column">
                 <div class="tasks-column__header">
@@ -47,11 +47,11 @@
                             (click)="addPopupUpdateTask(item)">{{item.title}}</a>
                     </div>
                 </div>
-                <button class="tasks-column__button-add" (click)="addTask()">
+                <button class="tasks-column__button-add" (click)="formCreateTask=true" *ngIf="formCreateTask==false">
                     <span class="tasks-column__button-plus">+</span>
                     <span class="tasks-column__button-text">Добавить карточку</span>
                 </button>
-                <app-form-create-task></app-form-create-task>
+                <app-form-create-task *ngIf="formCreateTask" (formTask)="formCreateTask=false"></app-form-create-task>
             </div>
             <div class="tasks-column">
                 <div class="tasks-column__header">
@@ -64,13 +64,13 @@
                             (click)="addPopupUpdateTask(item)">{{item.title}}</a>
                     </div>
                 </div>
-                <button class="tasks-column__button-add" (click)="addTask()">
+                <button class="tasks-column__button-add" (click)="formCreateTask=true" *ngIf="formCreateTask==false">
                     <span class="tasks-column__button-plus">+</span>
                     <span class="tasks-column__button-text">Добавить карточку</span>
                 </button>
-                <app-form-create-task></app-form-create-task>
+                <app-form-create-task *ngIf="formCreateTask" (formTask)="formCreateTask=false"></app-form-create-task>
             </div>
         </div>
     </div>
 </main>
-<app-popup-update-task *ngIf="popupUpdateTask" (popupTask)="removePopupUpdateTask($event)"></app-popup-update-task>
+<app-popup-update-task *ngIf="popupUpdateTask" (popupTask)="popupUpdateTask=false"></app-popup-update-task>

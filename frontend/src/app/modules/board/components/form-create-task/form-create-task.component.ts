@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs';
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,10 +13,13 @@ import { TaskService } from '../../../../services/task.service';
 })
 export class FormCreateTaskComponent implements OnInit, OnDestroy {
 
+    @Output() formTask = new EventEmitter<boolean>();
+    formCreateTask: boolean = false;
+
     idBoard: number;
     taskForm: FormGroup;
     subscription: Subscription;
-    createTask: boolean = false;
+    createTaskForm: boolean = false;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -26,17 +29,11 @@ export class FormCreateTaskComponent implements OnInit, OnDestroy {
         }
 
     ngOnInit() {
-        // this.subscription = this.taskService.createTask
-        //     .subscribe(
-        //         (createTask: boolean) => {
-        //             this.createTask = createTask
-        //         }
-        //     )
         this.addTaskForm();
     }
 
     removeFormCreateTask() {
-        //this.taskService.removeFormCreateTask();
+        this.formTask.emit(this.formCreateTask);
     }
 
     addTaskForm() {
@@ -47,17 +44,6 @@ export class FormCreateTaskComponent implements OnInit, OnDestroy {
 
     addTask() {
         const data = { title: this.taskForm.value.title, boardId: this.idBoard }
-        //this.subscription = this.taskService.addTask(data)
-        
-        // .subscribe(
-        //     (response: any)=> {
-        //         console.log(response)
-        //     },
-
-        //     (error)=> {
-        //         console.log(error)
-        //     }
-        // )
     }
 
     ngOnDestroy() {
