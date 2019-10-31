@@ -21,38 +21,32 @@ export class BoardComponent implements OnInit, OnDestroy {
     todoTasks: Array<any> = [];
     doingTasks: Array<any> = [];
     doneTasks: Array<any> = [];
-    formCreateTask: boolean = false;
     popupUpdateTask: boolean = false;
-    // columns:any = [
-    //     {
-    //         title: 'To do',
-    //         connection: 'todoList',
-    //         connection1: 'doingList',
-    //         connection2: 'doneList',
-    //         tasks: ['Test', 'Test1'],
-    //     },
-    //     {
-    //         title: 'Doing',
-    //         connection: 'doingList',
-    //         connection1: 'todoList',
-    //         connection2: 'doneList',
-    //         tasks: ['Test2', 'Test3'],
-    //     },
-    //     {
-    //         title: 'Done',
-    //         connection: 'doneList',
-    //         connection1: 'todoList',
-    //         connection2: 'doingList',
-    //         tasks: ['Test4', 'Test5'],
-    //     }
-    // ]
+    state: string;
+    columns:any = [
+        {
+            title: 'To do',
+            id: 'todo',
+            tasks: ['task1', 'task2']
+        },
+        {
+            title: 'Doing',
+            id: 'doing',
+            tasks: ['task3', 'task4'],
+        },
+        {
+            title: 'Done',
+            id: 'done',
+            tasks: ['task6', 'task8'],
+        }
+    ]
 
     constructor(
         private activatedRoute: ActivatedRoute,
         private boardService: BoardService,
         private taskService: TaskService,
         private router: Router) {
-        this.idBoard = activatedRoute.snapshot.params['idBoard'];
+        this.idBoard = this.activatedRoute.snapshot.params['idBoard'];
     }
 
     ngOnInit() {
@@ -74,6 +68,10 @@ export class BoardComponent implements OnInit, OnDestroy {
         )
     }
 
+    getColumnIds() {
+        return this.columns.map(column => column.id);
+    }
+
     getBoard(idBoard) {
         this.subscription = this.boardService.getBoard(idBoard).subscribe()
     }
@@ -92,14 +90,8 @@ export class BoardComponent implements OnInit, OnDestroy {
         }
     }
 
-    addTask() {
-        // this.taskService.addFormCreateTask();
-        // this.taskService.createTask
-        // .subscribe(
-        //     (createTask: boolean)=> {
-        //         this.createTask = createTask;
-        //     }
-        // )
+    addFormCreateTask(columnId) {
+        this.state = columnId;
     }
 
     addPopupUpdateTask(task) {

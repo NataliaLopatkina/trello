@@ -3,72 +3,21 @@
     <app-board-header></app-board-header>
     <div class="tasks">
         <div class="box tasks__box">
-            <!-- <div class="tasks-column" *ngFor="let column of columns">
+            <div class="tasks-column" *ngFor="let column of columns">
                 <div class="tasks-column__header">
                     <h2 class="tasks-column__title">{{column.title}}</h2>
                 </div>
-                <div class="tasks-column__box" cdkDropList [cdkDropListData]=column.tasks (cdkDropListDropped)="drop($event)"
-                    [cdkDropListConnectedTo]="[column.connection1, column.connection2]" #column.connection="cdkDropList">
+                <div class="tasks-column__box" cdkDropList [cdkDropListData]="column.tasks" (cdkDropListDropped)="drop($event)"
+                    [cdkDropListConnectedTo]="getColumnIds()" id="{{column.id}}">
                     <div class="cards">
-                        <a class="cards__item" *ngFor="let item of column.tasks" cdkDrag (click)="selectTask(item)">{{item}}</a>
+                        <a class="cards__item" *ngFor="let item of column.tasks; let i=index" cdkDrag (click)="addPopupUpdateTask(item)">{{item + "-" +i}}</a>
                     </div>
                 </div>
-                <button class="tasks-column__button-add" (click)="addTask()" *ngIf="formCreateTask==false">
+                <button class="tasks-column__button-add" (click)="addFormCreateTask(column.id)" *ngIf="state!==column.id">
                     <span class="tasks-column__button-plus">+</span>
                     <span class="tasks-column__button-text">Добавить карточку</span>
                 </button>
-                <app-create-card></app-create-card>
-            </div> -->
-            <div class="tasks-column">
-                <div class="tasks-column__header">
-                    <h2 class="tasks-column__title">To do</h2>
-                </div>
-                <div class="tasks-column__box" cdkDropList [cdkDropListData]="todoTasks" (cdkDropListDropped)="drop($event)"
-                    [cdkDropListConnectedTo]="[doingList, doneList]" #todoList="cdkDropList">
-                    <div class="cards">
-                        <a class="cards__item" *ngFor="let item of todoTasks" cdkDrag
-                            (click)="addPopupUpdateTask(item)">{{item.title}}</a>
-                    </div>
-                </div>
-                <button class="tasks-column__button-add" (click)="formCreateTask=true" *ngIf="formCreateTask==false">
-                    <span class="tasks-column__button-plus">+</span>
-                    <span class="tasks-column__button-text">Добавить карточку</span>
-                </button>
-                <app-form-create-task *ngIf="formCreateTask" (formTask)="formCreateTask=false"></app-form-create-task>
-            </div>
-            <div class="tasks-column">
-                <div class="tasks-column__header">
-                    <h2 class="tasks-column__title">Doing</h2>
-                </div>
-                <div class="tasks-column__box" cdkDropList [cdkDropListData]="doingTasks" (cdkDropListDropped)="drop($event)"
-                    [cdkDropListConnectedTo]="[todoList, doneList]" #doingList="cdkDropList">
-                    <div class="cards">
-                        <a class="cards__item" *ngFor="let item of doingTasks" cdkDrag
-                            (click)="addPopupUpdateTask(item)">{{item.title}}</a>
-                    </div>
-                </div>
-                <button class="tasks-column__button-add" (click)="formCreateTask=true" *ngIf="formCreateTask==false">
-                    <span class="tasks-column__button-plus">+</span>
-                    <span class="tasks-column__button-text">Добавить карточку</span>
-                </button>
-                <app-form-create-task *ngIf="formCreateTask" (formTask)="formCreateTask=false"></app-form-create-task>
-            </div>
-            <div class="tasks-column">
-                <div class="tasks-column__header">
-                    <h2 class="tasks-column__title">Done</h2>
-                </div>
-                <div class="tasks-column__box" cdkDropList [cdkDropListData]="doneTasks" (cdkDropListDropped)="drop($event)"
-                    [cdkDropListConnectedTo]="[todoList, doingList]" #doneList="cdkDropList">
-                    <div class="cards">
-                        <a class="cards__item" *ngFor="let item of doneTasks" cdkDrag
-                            (click)="addPopupUpdateTask(item)">{{item.title}}</a>
-                    </div>
-                </div>
-                <button class="tasks-column__button-add" (click)="formCreateTask=true" *ngIf="formCreateTask==false">
-                    <span class="tasks-column__button-plus">+</span>
-                    <span class="tasks-column__button-text">Добавить карточку</span>
-                </button>
-                <app-form-create-task *ngIf="formCreateTask" (formTask)="formCreateTask=false"></app-form-create-task>
+                <app-form-create-task *ngIf="state==column.id" (formTask)="state='*'"></app-form-create-task>
             </div>
         </div>
     </div>

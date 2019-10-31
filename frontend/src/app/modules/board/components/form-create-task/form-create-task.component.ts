@@ -2,7 +2,7 @@ import { Subscription } from 'rxjs';
 
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { TaskService } from '../../../../services/task.service';
 
@@ -13,9 +13,7 @@ import { TaskService } from '../../../../services/task.service';
 })
 export class FormCreateTaskComponent implements OnInit, OnDestroy {
 
-    @Output() formTask = new EventEmitter<boolean>();
-    formCreateTask: boolean = false;
-
+    @Output() formTask = new EventEmitter();
     idBoard: number;
     taskForm: FormGroup;
     subscription: Subscription;
@@ -24,7 +22,8 @@ export class FormCreateTaskComponent implements OnInit, OnDestroy {
     constructor(
         private activatedRoute: ActivatedRoute,
         private formBuilder: FormBuilder,
-        private taskService: TaskService) { 
+        private taskService: TaskService,
+        private router: Router) { 
             this.idBoard = activatedRoute.snapshot.params['idBoard'];
         }
 
@@ -33,7 +32,7 @@ export class FormCreateTaskComponent implements OnInit, OnDestroy {
     }
 
     removeFormCreateTask() {
-        this.formTask.emit(this.formCreateTask);
+        this.formTask.emit();
     }
 
     addTaskForm() {
@@ -44,9 +43,21 @@ export class FormCreateTaskComponent implements OnInit, OnDestroy {
 
     addTask() {
         const data = { title: this.taskForm.value.title, boardId: this.idBoard }
+        this.subscription = this.taskService.addTask(data)
+        .subscribe(
+            (response: any)=> {
+                this.formTask.emit();
+
+            },
+            (error)=> {
+                console.log(error)
+            }
+        )
     }
 
     ngOnDestroy() {
-        // /this.subscription.unsubscribe();
+        if(this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 }
