@@ -107,7 +107,7 @@ exports.updateBoard = async function (req, res, next) {
     }
 
     catch(e) {
-        return status(400).json({message: 'Title of board is not updated!'})
+        return res.status(400).json({message: 'Title of board is not updated!'})
     }
 }
 

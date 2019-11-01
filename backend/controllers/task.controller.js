@@ -41,3 +41,20 @@ exports.getTasks = async function (req, res, next) {
         return res.status(204).json({message: e.message})
     }
 }
+
+exports.renameTask = async function (req, res, next) {
+    const { title } = req.body;
+    const { id } = req.params;
+
+    console.log(title)
+
+    try {
+        await taskService.renameTask(id, title)
+        return res.status(200).json({ message: 'Title of task is updated!' })
+    }
+
+    catch (e) {
+        console.log(e)
+        return res.status(400).json({ message: 'Title of task is not updated!' })
+    }
+}

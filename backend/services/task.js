@@ -15,3 +15,7 @@ exports.deleteTask = async function (query) {
 exports.getTask = async function (query) {
     return await Task.findOne(query)
 }
+
+exports.renameTask = async function (id, title) {
+    return await Task.update({ title: title }, { where: { id: id } })
+}
