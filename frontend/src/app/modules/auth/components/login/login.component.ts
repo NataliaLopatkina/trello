@@ -46,18 +46,18 @@ export class LoginComponent implements OnInit, OnDestroy {
         )
     }
 
-    // authWithVk() {
-    //     this.subscription = this.authService.authWithVk()
-    //     .subscribe(
-    //         (response)=> {
-    //             console.log(response)
-    //         },
+    authWithVk() {
+        this.subscription = this.authService.authWithVk()
+        .subscribe(
+            (response)=> {
+                console.log(response)
+            },
 
-    //         (error)=> {
-    //             console.log(error)
-    //         }
-    //     )
-    // }
+            (error)=> {
+                console.log(error)
+            }
+        )
+    }
 
     ngOnDestroy() {
         if (this.subscription) {

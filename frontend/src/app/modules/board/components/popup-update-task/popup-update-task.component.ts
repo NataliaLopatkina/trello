@@ -1,5 +1,9 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+import { TaskService } from '../../../../services/task.service';
 
 @Component({
     selector: 'app-popup-update-task',
@@ -9,20 +13,30 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class PopupUpdateTaskComponent implements OnInit {
 
     @Output() popupTask = new EventEmitter<boolean>();
+    @Input() task;
+    idTask: number;
     editTitle: boolean = false;
     formEditTitleTask: FormGroup;
-    titleTask: string = 'Test';
+    titleTask: string = '';
     formEditDescriptionTask: FormGroup;
-    editDescription: boolean = true;
+    editDescription: boolean = false;
+    description: string = 'Добавить более подробное описание';
+    subscription: Subscription;
 
     constructor(
-        private formBuilder: FormBuilder) { }
+        private formBuilder: FormBuilder,
+        private taskService: TaskService) { }
 
     ngOnInit() {
-
         this.formEditDescriptionTask = this.formBuilder.group({
             description: ['', Validators.required]
         })
+
+        this.titleTask = this.task.title;
+        this.idTask = this.task.id;
+        if(this.task.description) {
+            this.description = this.task.description;
+        }
     }
 
     removePopupUpdateTask() {
@@ -35,7 +49,23 @@ export class PopupUpdateTaskComponent implements OnInit {
         })
     }
 
+    updateTitleTask() {
+        if (this.titleTask !== this.formEditTitleTask.value.title) {
+            this.subscription = this.taskService.renameTask(this.formEditTitleTask.value.title, this.idTask)
+                .subscribe(
+                    (response) => {
+                        this.titleTask = this.formEditTitleTask.value.title;
+                    }
+                )
+        }
+    }
+
     addDescriptionTask() {
-        console.log('Запрос на сервер с добавлением или редактированием описания!');
+        this.subscription = this.taskService.updateDescriptionTask(this.formEditDescriptionTask.value.description, this.idTask)
+            .subscribe(
+                (response) => {
+                    this.description = this.formEditDescriptionTask.value.description;
+                }
+            )
     }
 }

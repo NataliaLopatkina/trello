@@ -11,7 +11,7 @@
                     [cdkDropListConnectedTo]="getColumnIds()" id="{{column.id}}">
                     <div class="cards" >
                         <a class="card cards__item" *ngFor="let item of column.tasks; let i=index" 
-                            cdkDrag (mousedown)="moveTask(item, i)">
+                            cdkDrag>
                             <div class="custom-placeholder" *cdkDragPlaceholder></div>
                             <span class="card__text" (click)="addPopupUpdateTask(item)">{{item.title}}</span>
                             <button class="card__remove-button" type="button" (click)="removeCard(item.id)">X</button>
@@ -27,4 +27,4 @@
         </div>
     </div>
 </main>
-<app-popup-update-task *ngIf="popupUpdateTask" (popupTask)="popupUpdateTask=false"></app-popup-update-task>
+<app-popup-update-task *ngIf="popupUpdateTask" (popupTask)="popupUpdateTask=false" [task]="task"></app-popup-update-task>

@@ -33,17 +33,25 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
                 if(board) {
                     this.titleBoard = board.title;
                 }
+
+                this.initFormRenameBoard();
             }
         )
+    }
 
+    initFormRenameBoard() {
         this.formRenameBoard = this.formBuilder.group({
-            title: ['', Validators.required]
+            title: [this.titleBoard, Validators.required]
         })
     }
 
     updateNameBoard() {
-        this.boardService.renameBoard({ id: this.idBoard}, {title: this.formRenameBoard.value.title }).subscribe();
-        this.titleBoard = this.formRenameBoard.value.title;
+        if (this.titleBoard !== this.formRenameBoard.value.title) {
+            this.subscription = this.boardService.renameBoard(this.idBoard, this.formRenameBoard.value.title).subscribe();
+            this.titleBoard = this.formRenameBoard.value.title;
+        } else {
+            return
+        }
     }
 
     ngOnDestroy(){

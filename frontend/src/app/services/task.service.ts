@@ -10,6 +10,7 @@ import { Task } from '../models/task';
 @Injectable({ providedIn: 'root' })
 
 export class TaskService {
+    
     constructor(private httpClient: HttpClient) { }
 
     public addTask(task: Task) {
@@ -17,8 +18,12 @@ export class TaskService {
         return this.httpClient.post(environment.baseUrl + 'task', data);
     }
 
-    public updateTask(title, id) {
+    public renameTask(title, id) {
         return this.httpClient.patch(environment.baseUrl + 'task/' + id, { title })
+    }
+
+    public updateDescriptionTask(descirption, id) {
+        return this.httpClient.patch(environment.baseUrl + 'task/' + id, { descirption })
     }
 
     public removeTask(id) {

@@ -2,7 +2,7 @@
     <div class="update-task__box">
         <header class="update-task__header">
             <h3 class="update-task__title" (click)="editTitleTask(editTitle=true)" *ngIf="editTitle==false">{{titleTask}}</h3>
-            <form class="update-task__form-title" [formGroup]="formEditTitleTask" *ngIf="editTitle" (keyup.enter)="updateTitleTask()">
+            <form class="update-task__form-title" [formGroup]="formEditTitleTask" *ngIf="editTitle" (keyup.enter)="updateTitleTask(editTitle=false)">
                 <input class="update-task__field-title" type="text" formControlName="title" focus
                     (focusout)="editTitle=false">
             </form>
@@ -10,8 +10,7 @@
         </header>
         <div class="update-task__content">
             <p class="update-task__text">Описание</p>
-            <a class="update-task__link" (click)="editDescription=true" *ngIf="editDescription==false">Добавить более
-                подробное описание</a>
+            <a class="update-task__link" (click)="editDescription=true" *ngIf="editDescription==false">{{description}}</a>
             <form class="update-task__form" [formGroup]="formEditDescriptionTask" *ngIf="editDescription">
                 <textarea class="update-task__field" placeholder="Добавить более подробное описание"
                     formControlName="description" focus required></textarea>

@@ -23,6 +23,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     popupUpdateTask: boolean = false;
     state: string;
     columns: Array<any>;
+    task: string;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -100,8 +101,9 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.state = columnId;
     }
 
-    addPopupUpdateTask() {
+    addPopupUpdateTask(task) {
         this.popupUpdateTask = true;
+        this.task = task;
     }
 
     addTask($event) {
@@ -130,7 +132,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
 
     moveTask(item) {
-        console.log(item)
+        console.log
     }
 
     ngOnDestroy() {
