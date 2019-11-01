@@ -14,17 +14,15 @@ import { TaskService } from '../../../../services/task.service';
 export class FormCreateTaskComponent implements OnInit, OnDestroy {
 
     @Output() formTask = new EventEmitter();
+    @Output() createTask = new EventEmitter();
     idBoard: number;
     taskForm: FormGroup;
     subscription: Subscription;
-    createTaskForm: boolean = false;
 
     constructor(
         private activatedRoute: ActivatedRoute,
-        private formBuilder: FormBuilder,
-        private taskService: TaskService,
-        private router: Router) { 
-            this.idBoard = activatedRoute.snapshot.params['idBoard'];
+        private formBuilder: FormBuilder) { 
+            this.idBoard = this.activatedRoute.snapshot.params['idBoard'];
         }
 
     ngOnInit() {
@@ -42,17 +40,7 @@ export class FormCreateTaskComponent implements OnInit, OnDestroy {
     }
 
     addTask() {
-        const data = { title: this.taskForm.value.title, boardId: this.idBoard }
-        this.subscription = this.taskService.addTask(data)
-        .subscribe(
-            (response: any)=> {
-                this.formTask.emit();
-
-            },
-            (error)=> {
-                console.log(error)
-            }
-        )
+        this.createTask.emit(this.taskForm.value.title);
     }
 
     ngOnDestroy() {

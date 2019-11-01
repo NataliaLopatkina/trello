@@ -12,6 +12,7 @@ import { Board } from '../models/board';
 export class BoardService {
 
     board = new Subject();
+    
     constructor(private httpClient: HttpClient) {}
 
     public getBoards() {
@@ -27,11 +28,6 @@ export class BoardService {
         return this.httpClient.post<any>(environment.baseUrl + 'board', data)
     }
 
-    private filterTasks(array, state) {
-        return array.filter((item) =>
-            item.state==state)
-    }
-
     public getBoard(id) {
         return this.httpClient.get<any>(environment.baseUrl + 'board/' + id)
             .pipe(map(response => {
@@ -41,10 +37,11 @@ export class BoardService {
                     this.board.next(null);
                 }
             }))
+
+            
     }
 
-    public renameBoard(board: Board) {
-        const { id, title } = board;
+    public renameBoard(id, title) {
         return this.httpClient.patch(environment.baseUrl + 'board/' + id, { title})
     }
 } 

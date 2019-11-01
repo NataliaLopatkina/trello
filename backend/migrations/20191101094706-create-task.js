@@ -8,9 +8,6 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            title: {
-                type: Sequelize.STRING
-            },
             description: {
                 type: Sequelize.STRING
             },
@@ -19,6 +16,9 @@ module.exports = {
             },
             state: {
                 type: Sequelize.STRING
+            },
+            order: {
+                type: Sequelize.INTEGER
             },
             createdAt: {
                 allowNull: false,

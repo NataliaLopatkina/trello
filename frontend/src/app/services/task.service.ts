@@ -13,16 +13,15 @@ export class TaskService {
     constructor(private httpClient: HttpClient) { }
 
     public addTask(task: Task) {
-        const data = { title: task.title, boardId: task.boardId };
+        const data = { title: task.title, boardId: task.boardId, state: task.state };
         return this.httpClient.post(environment.baseUrl + 'task', data);
     }
 
-    public getTasks() {
-        return this.httpClient.get(environment.baseUrl + 'task')
+    public updateTask(title, id) {
+        return this.httpClient.patch(environment.baseUrl + 'task/' + id, { title })
     }
 
-    public updateTask(task: Task) {
-        const { id, title } = task;
-        return this.httpClient.patch(environment.baseUrl + 'task/' + id, { title })
+    public removeTask(id) {
+        return this.httpClient.delete(environment.baseUrl + 'task/' + id)
     }
 }

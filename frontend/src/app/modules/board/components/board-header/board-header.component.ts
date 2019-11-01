@@ -42,8 +42,7 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
     }
 
     updateNameBoard() {
-        const data = { id: this.idBoard, title: this.formRenameBoard.value.title }
-        this.boardService.renameBoard(data).subscribe();
+        this.boardService.renameBoard({ id: this.idBoard}, {title: this.formRenameBoard.value.title }).subscribe();
         this.titleBoard = this.formRenameBoard.value.title;
     }
 

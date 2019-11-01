@@ -17,29 +17,12 @@ export class BoardComponent implements OnInit, OnDestroy {
     subscription: Subscription;
     idBoard: number;
     color: string = '';
-    tasksList: Array<any> = [];
-    todoTasks: Array<any> = [];
-    doingTasks: Array<any> = [];
-    doneTasks: Array<any> = [];
+    todoTasks: Array<any>;
+    doingTasks: Array<any>;
+    doneTasks: Array<any>;
     popupUpdateTask: boolean = false;
     state: string;
-    columns:any = [
-        {
-            title: 'To do',
-            id: 'todo',
-            tasks: ['task1', 'task2']
-        },
-        {
-            title: 'Doing',
-            id: 'doing',
-            tasks: ['task3', 'task4'],
-        },
-        {
-            title: 'Done',
-            id: 'done',
-            tasks: ['task6', 'task8'],
-        }
-    ]
+    columns: Array<any>;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -56,11 +39,14 @@ export class BoardComponent implements OnInit, OnDestroy {
                 if (board) {
                     this.color = board.color;
                     if (board.task) {
-                        this.tasksList = board.task;
-                        this.todoTasks = this.filterTasks(this.tasksList, 'todo');
-                        this.doingTasks = this.filterTasks(this.tasksList, 'doing');
-                        this.doneTasks = this.filterTasks(this.tasksList, 'done');
+                        const tasksList = board.task;
+                        this.todoTasks = this.filterTasks(tasksList, 'todo');
+                        this.doingTasks = this.filterTasks(tasksList, 'doing');
+                        this.doneTasks = this.filterTasks(tasksList, 'done');
                     }
+
+                    this.createColumnComponent();
+
                 } else {
                     this.router.navigate(['*'])
                 }
@@ -70,6 +56,26 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     getColumnIds() {
         return this.columns.map(column => column.id);
+    }
+
+    createColumnComponent() {
+        this.columns = [
+            {
+                title: 'To do',
+                id: 'todo',
+                tasks: this.todoTasks,
+            },
+            {
+                title: 'Doing',
+                id: 'doing',
+                tasks: this.doingTasks,
+            },
+            {
+                title: 'Done',
+                id: 'done',
+                tasks: this.doneTasks,
+            }
+        ]
     }
 
     getBoard(idBoard) {
@@ -94,9 +100,37 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.state = columnId;
     }
 
-    addPopupUpdateTask(task) {
+    addPopupUpdateTask() {
         this.popupUpdateTask = true;
-        console.log('Запрос на сервер на добавление таска!')
+    }
+
+    addTask($event) {
+        const data = { title: $event, boardId: this.idBoard, state: this.state }
+        this.subscription = this.taskService.addTask(data).subscribe(
+            (response)=> {
+                this.state = '*';
+                this.getBoard(this.idBoard);
+            },
+            (error)=> {
+                console.log(error)
+            }
+        )
+    }
+
+    removeCard(id) {
+        this.subscription = this.taskService.removeTask(id).subscribe(
+            (response)=> {
+                this.getBoard(this.idBoard);
+            },
+
+            (error)=> {
+                console.log(error)
+            }
+        )
+    }
+
+    moveTask(item) {
+        console.log(item)
     }
 
     ngOnDestroy() {
@@ -104,5 +138,4 @@ export class BoardComponent implements OnInit, OnDestroy {
             this.subscription.unsubscribe();
         }
     }
-
 }

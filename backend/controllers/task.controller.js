@@ -1,15 +1,28 @@
 const taskService = require('../services/task');
 
 exports.createTask = async function (req, res, next) {
-    const { title, boardId } = req.body;
+    const { title, boardId, state } = req.body;
 
     try {
-        await taskService.createTask({title: title, boardId: boardId, state: 'doing'});
+        await taskService.createTask({title: title, boardId: boardId, state: state});
         return res.status(200).json({ message: 'Task is added!' })
     }
 
     catch (e) {
-        return res.status(400).json({ message: 'Task not added!' })
+        return res.status(400).json({ message: 'Task is not added!' })
+    }
+}
+
+exports.deleteTask = async function (req, res, next) {
+    const { id } = req.params;
+
+    try {
+        await taskService.deleteTask({where: {id: id}});
+        return res.status(200).json({message: 'Task is removed!'})
+    }
+
+    catch (e) {
+        return res.status(400).json({message: 'Task is not deleted!'})
     }
 }
 
@@ -22,23 +35,6 @@ exports.getTasks = async function (req, res, next) {
         }
 
         throw new Error('Tasks are not found!')
-    }
-
-    catch(e) {
-        return res.status(204).json({message: e.message})
-    }
-}
-
-exports.getTask = async function (req, res, next) {
-    const { id } = req.body;
-    try {
-        const task = await taskService.getTask({where: {id: id}})
-
-        if (task) {
-            return res.status(200).json({message: 'Task is found', task})
-        }
-
-        throw new Error('Task is not found!')
     }
 
     catch(e) {
