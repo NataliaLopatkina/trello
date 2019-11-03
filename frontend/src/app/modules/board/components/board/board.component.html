@@ -6,6 +6,7 @@
             <div class="tasks-column" *ngFor="let column of columns">
                 <div class="tasks-column__header">
                     <h2 class="tasks-column__title">{{column.title}}</h2>
+                    <button class="tasks-column__button-sort" (click)="sortTasksList(column.id)">↑↓</button>
                 </div>
                 <div class="tasks-column__box" cdkDropList [cdkDropListData]="column.tasks" (cdkDropListDropped)="drop($event)"
                     [cdkDropListConnectedTo]="getColumnIds()" id="{{column.id}}">

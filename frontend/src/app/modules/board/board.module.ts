@@ -12,6 +12,7 @@ import { BoardHeaderComponent } from './components/board-header/board-header.com
 import { BoardComponent } from './components/board/board.component';
 import { FormCreateTaskComponent } from './components/form-create-task/form-create-task.component';
 import { PopupUpdateTaskComponent } from './components/popup-update-task/popup-update-task.component';
+import { InviteComponent } from './components/invite/invite.component';
 
 import { FocusDirective } from '../../directives/focus.directive';
 
@@ -24,6 +25,7 @@ import { FocusDirective } from '../../directives/focus.directive';
         BoardComponent,
         FormCreateTaskComponent,
         PopupUpdateTaskComponent,
+        InviteComponent,
         FocusDirective
     ],
     imports: [

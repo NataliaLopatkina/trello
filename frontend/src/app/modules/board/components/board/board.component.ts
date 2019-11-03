@@ -6,6 +6,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 
 import { BoardService } from '../../../../services/board.service';
 import { TaskService } from '../../../../services/task.service';
+import { nextTick } from 'q';
 
 @Component({
     selector: 'app-board',
@@ -24,6 +25,8 @@ export class BoardComponent implements OnInit, OnDestroy {
     state: string;
     columns: Array<any>;
     task: string;
+    typeSort: string = 'ascend';
+    tasks: Array<any> = [];
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -131,8 +134,34 @@ export class BoardComponent implements OnInit, OnDestroy {
         )
     }
 
-    moveTask(item) {
-        console.log
+    compareFunction(prev, next) {
+        if (prev.title < next.title) {
+            return -1
+        } else {
+            return 1
+        }
+    }
+
+    sortTasks(tasks) {
+        this.typeSort = this.typeSort === 'ascend' ? 'descend' : 'ascend';
+
+        if (this.typeSort === 'ascend') {
+            tasks.sort(this.compareFunction)
+
+        } else if (this.typeSort === 'descend') {
+            tasks.sort(this.compareFunction).reverse();
+        }
+    }
+
+    sortTasksList(id) {
+        if (id == 'todo') {
+            this.tasks = this.todoTasks;
+        } else if (id == 'doing') {
+            this.tasks = this.doingTasks;
+        } else {
+            this.tasks = this.doneTasks;
+        }
+        this.sortTasks(this.tasks);
     }
 
     ngOnDestroy() {

@@ -18,6 +18,7 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
     formRenameBoard: FormGroup;
     edit: boolean = false;
     idBoard: number;
+    inviteForm: boolean = false;
     
     constructor(
         private boardService: BoardService,

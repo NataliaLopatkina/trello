@@ -1,0 +1,16 @@
+<div class="invite-form">
+    <header class="invite-form__header">
+        <h3 class="invite-form__title">Пригласить на доску</h3>
+        <button class="invite-form__button-close" (click)="removeInvite()">X</button>
+    </header>
+
+    <form class="invite-form__content" [formGroup]="formInvitation">
+        <input type="email" class="invite-form__control" formControlName="email" placeholder="Адрес электронной почты" focus 
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+        <textarea class="invite-form__control invite-form__control--multiline" formControlName="text"
+            required></textarea>
+        <button class="button invite-form__button" type="submit" [disabled]="!formInvitation.valid">Отправить
+            приглашение</button>
+    </form>
+
+</div>

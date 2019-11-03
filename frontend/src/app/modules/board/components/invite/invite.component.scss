@@ -1,0 +1,91 @@
+.invite-form {
+    position: absolute;
+    background: #ffffff;
+    box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08);
+    border-radius: 3px;
+    width: 304px;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 12px;
+        border-bottom: 1px solid rgba(9, 30, 66, 0.13);
+    }
+
+    &__title {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: calc(40 / 14);
+        color: #5e6c84;
+        text-align: center;
+        width: calc(100% - 40px);
+    }
+
+    &__button-close {
+        font-size: 14px;
+        color:#6b778c;
+        padding: 0;
+        border: none;
+        background: none;
+        width: 28px;
+        height: 28px;
+        transition: color 0.25s ease;
+        outline: none;
+
+        &:hover {
+            color: #172b4d;
+        }
+    }
+
+    &__content {
+        padding: 12px;
+    }
+
+    &__control {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: calc(20 / 14);
+        padding: 4px 8px 4px 12px;
+        max-width: 512px;
+        width: 100%;
+        box-sizing: border-box;
+        background: #fafbfc;
+        border: none;
+        box-shadow: inset 0 0 0 2px #dfe1e6;
+        color: #172b4d;
+        border-radius: 3px;
+        min-height: 40px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        transition-property: background, box-shadow;
+        transition-duration: 0.25s;
+        transition-timing-function: ease;
+
+        &:hover {
+            background: #ebecf0;
+            box-shadow: inset 0 0 0 2px #dfe1e6;
+        }
+
+        &:focus {
+            box-shadow: inset 0 0 0 2px #0079bf;
+            outline: none;
+        }
+
+        &::placeholder {
+            opacity: 0.7;
+        }
+    }
+
+    &__control--multiline {
+        padding: 8px 12px;
+        min-height: 126px;
+        box-sizing: border-box;
+        resize: none;
+    }
+
+    &__button {
+        width: 100%;
+        min-height: 40px;
+    }
+}

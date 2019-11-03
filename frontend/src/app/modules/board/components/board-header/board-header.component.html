@@ -4,5 +4,9 @@
         <input class="board-header__field-name" formControlName="title" focus 
             (focusout)="edit=false">
     </form>
-    <button class="board-header__button-invite">Пригласить</button>
+    <div class="invite">
+        <button class="invite__button" type="button" (click)="inviteForm=true">Пригласить</button>
+        <app-invite *ngIf="inviteForm" (formInvite)="inviteForm=false"></app-invite>
+    </div>
+    
 </div>
