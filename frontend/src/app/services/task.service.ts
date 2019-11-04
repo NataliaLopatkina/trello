@@ -15,18 +15,22 @@ export class TaskService {
 
     public addTask(task: Task) {
         const data = { title: task.title, boardId: task.boardId, state: task.state };
-        return this.httpClient.post(environment.baseUrl + 'task', data);
+        return this.httpClient.post(environment.baseUrl + 'tasks', data);
     }
 
     public renameTask(title, id) {
-        return this.httpClient.patch(environment.baseUrl + 'task/' + id, { title })
+        return this.httpClient.patch(environment.baseUrl + 'tasks/' + id, { title })
     }
 
     public updateDescriptionTask(descirption, id) {
-        return this.httpClient.patch(environment.baseUrl + 'task/' + id, { descirption })
+        return this.httpClient.patch(environment.baseUrl + 'tasks/' + id, { descirption })
     }
 
     public removeTask(id) {
-        return this.httpClient.delete(environment.baseUrl + 'task/' + id)
+        return this.httpClient.delete(environment.baseUrl + 'tasks/' + id)
+    }
+
+    public moveTask(id, state, order) {
+        return this.httpClient.patch(environment.baseUrl + 'tasks/' + id + '/move', {state, order})
     }
 }

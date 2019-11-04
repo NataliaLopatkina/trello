@@ -1,5 +1,6 @@
 const boardService = require('../services/board');
 const { Task } = require('../models');
+const taskService = require('../services/task');
 
 exports.getBoards = async function (req, res, next) {
 
@@ -34,25 +35,25 @@ exports.removeBoard = async function (req, res, next) {
                 as: 'task',
             }]
         })
-        return res.status(200).json({message: 'Board is removed!'})
+        return res.status(200).json({ message: 'Board is removed!' })
     }
 
-    catch(e) {
+    catch (e) {
         return status(400).json({ message: 'Board is not removed!' })
-    } 
+    }
 }
-exports.createBoard = async function(req, res, next) {
+exports.createBoard = async function (req, res, next) {
     const { title, color } = req.body;
     const owner = req.user.id;
     const query = { title, owner, color };
 
     try {
         const board = await boardService.createBoard(query);
-        return res.status(200).json({message: 'Board is added!', board})
+        return res.status(200).json({ message: 'Board is added!', board })
     }
 
-    catch(e) {
-        return res.status(400).json({message: 'Board not added!'})
+    catch (e) {
+        return res.status(400).json({ message: 'Board not added!' })
     }
 }
 
@@ -61,38 +62,22 @@ exports.getBoard = async function (req, res, next) {
     const { id } = req.params;
 
     try {
-        const board = await boardService.getBoard({ where: { id: id }});
+        const board = await boardService.getBoard({ where: { id: id } });
 
-        if (board) {
-
-            try {
-                const board = await boardService.getBoard({
-                    where: {
-                        id: id
-                    },
-                    include: [{
-                        model: Task,
-                        where: { boardId: id },
-                        as: 'task',
-                    }]
-                })
-
-                if (board) {
-                    return res.status(200).json({message: 'Tasks of board is found!', board})
-                }
-
-                throw new Error('Tasks of board is not found!')
-            }
-
-            catch(e) {
-                return res.status(200).json({message: e.message, board})
-            }
+        if (!board) {
+            return res.status(404).json({ message: 'Board is not found!' })
         }
 
-        throw new Error('Board is not found!')
+        const todoTasks = await taskService.getTasks(id, 'todo')
+        const doingTasks = await taskService.getTasks(id, 'doing')
+        const doneTasks = await taskService.getTasks(id, 'done')
+
+        return res.status(200).json({ message: 'Tasks are found!', board, tasks: {todoTasks, doingTasks, doneTasks} })
+
     }
 
     catch (e) {
+        console.log(e)
         return res.status(204).json({ message: e.message })
     }
 }
@@ -103,11 +88,11 @@ exports.updateBoard = async function (req, res, next) {
 
     try {
         await boardService.updateBoard(id, title)
-        return res.status(200).json({message: 'Title of board is updated!'})
+        return res.status(200).json({ message: 'Title of board is updated!' })
     }
 
-    catch(e) {
-        return res.status(400).json({message: 'Title of board is not updated!'})
+    catch (e) {
+        return res.status(400).json({ message: 'Title of board is not updated!' })
     }
 }
 

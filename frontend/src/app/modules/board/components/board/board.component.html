@@ -8,11 +8,10 @@
                     <h2 class="tasks-column__title">{{column.title}}</h2>
                     <button class="tasks-column__button-sort" (click)="sortTasksList(column.id)">↑↓</button>
                 </div>
-                <div class="tasks-column__box" cdkDropList [cdkDropListData]="column.tasks" (cdkDropListDropped)="drop($event)"
+                <div class="tasks-column__box" cdkDropList [cdkDropListData]="column.tasks" (cdkDropListDropped)="drop($event, column.id)"
                     [cdkDropListConnectedTo]="getColumnIds()" id="{{column.id}}">
                     <div class="cards" >
-                        <a class="card cards__item" *ngFor="let item of column.tasks; let i=index" 
-                            cdkDrag>
+                        <a class="card cards__item" *ngFor="let item of column.tasks; let i=index" cdkDrag>
                             <div class="custom-placeholder" *cdkDragPlaceholder></div>
                             <span class="card__text" (click)="addPopupUpdateTask(item)">{{item.title}}</span>
                             <button class="card__remove-button" type="button" (click)="removeCard(item.id)">X</button>

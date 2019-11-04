@@ -1,14 +1,28 @@
 const taskService = require('../services/task');
 
 exports.createTask = async function (req, res, next) {
+
     const { title, boardId, state } = req.body;
+    console.log(req.body)
 
     try {
-        await taskService.createTask({title: title, boardId: boardId, state: state});
-        return res.status(200).json({ message: 'Task is added!' })
+        const tasks = await taskService.getTasks(boardId, state)
+
+        if(!tasks) {
+            const order = 0;
+            await taskService.createTask({title: title, boardId: boardId, state: state, order: order});
+            return res.status(200).json({ message: 'Task is added!' })
+        }
+
+        else  {
+            const order = tasks.length;
+            await taskService.createTask({title: title, boardId: boardId, state: state, order: order});
+            return res.status(200).json({ message: 'Task is added!' })
+        }
     }
 
     catch (e) {
+        console.log(e)
         return res.status(400).json({ message: 'Task is not added!' })
     }
 }
@@ -26,27 +40,9 @@ exports.deleteTask = async function (req, res, next) {
     }
 }
 
-exports.getTasks = async function (req, res, next) {
-    try {
-        const tasks = await taskService.getTasks();
-
-        if(tasks.length > 0) {
-            return res.status(200).json({ message: 'Tasks are found!', data: tasks })
-        }
-
-        throw new Error('Tasks are not found!')
-    }
-
-    catch(e) {
-        return res.status(204).json({message: e.message})
-    }
-}
-
 exports.renameTask = async function (req, res, next) {
     const { title } = req.body;
     const { id } = req.params;
-
-    console.log(title)
 
     try {
         await taskService.renameTask(id, title)
@@ -54,7 +50,21 @@ exports.renameTask = async function (req, res, next) {
     }
 
     catch (e) {
-        console.log(e)
         return res.status(400).json({ message: 'Title of task is not updated!' })
+    }
+}
+
+exports.moveTask = async function(req, res, next) {
+    const { state, order } = req.body;
+    const { id } = req.params;
+    
+    try {
+       await taskService.moveTask(id, state, order);
+       return res.status(200).json({message: 'Task is moved!'})
+        
+    }
+
+    catch(e) {
+        return res.status(400).json({message: 'Task is not moved!'})
     }
 }

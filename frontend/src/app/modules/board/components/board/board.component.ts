@@ -6,7 +6,6 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 
 import { BoardService } from '../../../../services/board.service';
 import { TaskService } from '../../../../services/task.service';
-import { nextTick } from 'q';
 
 @Component({
     selector: 'app-board',
@@ -40,21 +39,20 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.boardService.getBoard(this.idBoard).subscribe()
         this.boardService.board.subscribe(
             (board: any)=> {
-                if (board) {
-                    this.color = board.color;
-                    if (board.task) {
-                        const tasksList = board.task;
-                        this.todoTasks = this.filterTasks(tasksList, 'todo');
-                        this.doingTasks = this.filterTasks(tasksList, 'doing');
-                        this.doneTasks = this.filterTasks(tasksList, 'done');
-                    }
-
-                    this.createColumnComponent();
-
-                } else {
-                    this.router.navigate(['*'])
-                }
+                this.color = board.color;
             }
+        )
+        this.boardService.tasks.subscribe(
+            (tasks: any)=> {
+                if(tasks) {
+                    this.todoTasks = tasks.todoTasks;
+                    this.doingTasks = tasks.doingTasks;
+                    this.doneTasks = tasks.doneTasks;
+                }
+
+                this.createColumnComponent();
+            }
+            
         )
     }
 
@@ -86,17 +84,15 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.subscription = this.boardService.getBoard(idBoard).subscribe()
     }
 
-    filterTasks(array, state) {
-        return array.filter((item)=>
-            item.state==state)
-    }
-
-    drop(event: CdkDragDrop<string[]>) {
+    drop(event: CdkDragDrop<any>) {
         if (event.previousContainer !== event.container) {
-            transferArrayItem(event.previousContainer.data, event.container.data,
-                event.previousIndex, event.currentIndex)
+            transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex)
+            console.log(event)
+                this.taskService.moveTask(event.container.data[0].id, event.container.id, event.currentIndex).subscribe()
         } else {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+            console.log(event.previousIndex, event.currentIndex)
+            this.taskService.moveTask(event.container.data[0].id, event.container.id, event.currentIndex).subscribe()
         }
     }
 
