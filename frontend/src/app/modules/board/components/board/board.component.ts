@@ -4,8 +4,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
-import { BoardService } from '../../../../services/board.service';
-import { TaskService } from '../../../../services/task.service';
+import { BoardService } from '@services/board.service';
+import { TaskService } from '@services/task.service';
 
 @Component({
     selector: 'app-board',

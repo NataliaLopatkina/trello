@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { TaskService } from '../../../../services/task.service';
+import { TaskService } from '@services/task.service';
 
 @Component({
     selector: 'app-popup-update-task',

@@ -3,8 +3,8 @@ import { Subscription, from } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Board } from '../../../../models/board';
-import { BoardService } from '../../../../services/board.service';
+import { Board } from '@models/board';
+import { BoardService } from '@services/board.service';
 
 @Component({
     selector: 'app-dashboard',

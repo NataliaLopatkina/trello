@@ -4,8 +4,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { AuthService } from '../../../../services/auth.service';
-import { NotificationService } from '../../../../services/notification.service';
+import { AuthService } from '@services/auth.service';
+import { NotificationService } from '@services/notification.service';
 
 @Component({
     selector: 'app-registration',
