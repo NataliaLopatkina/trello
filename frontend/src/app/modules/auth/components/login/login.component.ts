@@ -46,8 +46,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         )
     }
 
-    authWithVk() {
-        this.subscription = this.authService.authWithVk()
+    authWithGoogle() {
+        this.subscription = this.authService.authWithGoogle()
         .subscribe(
             (response)=> {
                 console.log(response)

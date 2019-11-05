@@ -31,8 +31,8 @@ export class AuthService {
             }))
     }
 
-    public authWithVk() {
-        return this.httpClient.get(environment.baseUrl + 'vkontakte')
+    public authWithGoogle() {
+        return this.httpClient.get(environment.baseUrl + 'google')
     }
 
     public provideAccess() {

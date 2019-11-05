@@ -1,13 +1,13 @@
 const passport = require('passport');
-const VKontakteStrategy = require('passport-vkontakte').Strategy;
+const GoogleStrategy = require('passport-google-oauth20');
 const keys = require('./keys');
 
-passport.use(new VKontakteStrategy({
-    callbackURL: 'http://localhost:3000/vkontakte/redirect',
-    clientID: keys.vk.clientID,
-    clientSecret: keys.vk.clientSecret,
+passport.use(new GoogleStrategy({
+    callbackURL: '/redirect',
+    clientID: keys.google.clientID,
+    clientSecret: keys.google.clientSecret,
 },
-    ()=> {
-
+    (accessToken, refreshToken, profile, done)=> {
+        console.log(profile)
     }
 ));
