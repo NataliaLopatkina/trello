@@ -565,18 +565,6 @@ a {
     }
 }
 
-// Error
-
-.error {
-    padding: 10px 0 0;
-    text-align: right;
-
-    &__text {
-        font-size: 14px;
-        color: #ff0000;
-    }
-}
-
 .visually-hidden {
     position: absolute;
     clip: rect(0 0 0 0);

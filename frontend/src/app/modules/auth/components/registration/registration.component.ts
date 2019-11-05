@@ -24,7 +24,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private notificationService: NotificationService) {
-            this.email = activatedRoute.snapshot.params['email'];
+            this.email = this.activatedRoute.snapshot.params['email'];
         }
 
     ngOnInit() {
@@ -40,11 +40,9 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         .subscribe(
             (response:any) => {
                 this.router.navigate(['boards']);
-                this.notificationService.deleteNotification();
             },
 
             (error)=> {
-                console.log(error)
                 if (error.status === 403) {
                     const text = 'Почта уже используется другим аккаунтом. Вы можете использовать вход.';
                     this.notificationService.error(text);

@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 import { BoardService } from '../../../../services/board.service';
@@ -30,8 +30,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     constructor(
         private activatedRoute: ActivatedRoute,
         private boardService: BoardService,
-        private taskService: TaskService,
-        private router: Router) {
+        private taskService: TaskService) {
         this.idBoard = this.activatedRoute.snapshot.params['idBoard'];
     }
 
@@ -94,10 +93,6 @@ export class BoardComponent implements OnInit, OnDestroy {
         }
     }
 
-    addFormCreateTask(columnId) {
-        this.state = columnId;
-    }
-
     addPopupUpdateTask(task) {
         this.popupUpdateTask = true;
         this.task = task;
@@ -145,17 +140,6 @@ export class BoardComponent implements OnInit, OnDestroy {
         } else if (this.typeSort === 'descend') {
             tasks.sort(this.compareFunction).reverse();
         }
-    }
-
-    sortTasksList(id) {
-        if (id == 'todo') {
-            this.tasks = this.todoTasks;
-        } else if (id == 'doing') {
-            this.tasks = this.doingTasks;
-        } else {
-            this.tasks = this.doneTasks;
-        }
-        this.sortTasks(this.tasks);
     }
 
     closeUpdateTask() {
