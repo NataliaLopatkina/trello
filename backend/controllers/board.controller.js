@@ -77,7 +77,6 @@ exports.getBoard = async function (req, res, next) {
     }
 
     catch (e) {
-        console.log(e)
         return res.status(204).json({ message: e.message })
     }
 }

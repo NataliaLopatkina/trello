@@ -87,12 +87,10 @@ export class BoardComponent implements OnInit, OnDestroy {
     drop(event: CdkDragDrop<any>) {
         if (event.previousContainer !== event.container) {
             transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex)
-            console.log(event)
-                this.taskService.moveTask(event.container.data[0].id, event.container.id, event.currentIndex).subscribe()
+                this.taskService.moveTask(event.container.data[0].id, event.container.id, event.container.data).subscribe()
         } else {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-            console.log(event.previousIndex, event.currentIndex)
-            this.taskService.moveTask(event.container.data[0].id, event.container.id, event.currentIndex).subscribe()
+            this.taskService.moveTask(event.container.data[0].id, event.container.id, event.container.data).subscribe()
         }
     }
 

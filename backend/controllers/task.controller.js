@@ -55,16 +55,16 @@ exports.renameTask = async function (req, res, next) {
 }
 
 exports.moveTask = async function(req, res, next) {
-    const { state, order } = req.body;
-    const { id } = req.params;
+    const { state, tasks } = req.body;
     
     try {
-       await taskService.moveTask(id, state, order);
+       await taskService.moveTask(state, tasks);
        return res.status(200).json({message: 'Task is moved!'})
         
     }
 
     catch(e) {
+        console.log(e)
         return res.status(400).json({message: 'Task is not moved!'})
     }
 }

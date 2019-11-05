@@ -1,10 +1,9 @@
 const { Task } = require('../models');
 
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
+const sequelize = require('sequelize');
 
 exports.getTasks = async function (id, state) {
-    return await Task.findAll({where: { boardId: id, state: state }} )
+    return await Task.findAll({where: { boardId: id, state: state }}, ['order', 'DESC'])
 }
 
 exports.createTask = async function (query) {
@@ -19,14 +18,14 @@ exports.renameTask = async function (id, title) {
     return await Task.update({ title: title }, { where: { id: id } })
 }
 
-exports.moveTask = async function(id, state, order) {
-
-    // await Task.update({ order: Sequelize.literal(order + 1) }, {
-    //     where: {
-    //         state: state, order: {
-    //               [Op.gte]: order 
-    //             }
-    //         }
-    //     });
-    return await Task.update({state: state, order: order}, { where: { id: id } })
+exports.moveTask = async function(state, tasks) {
+    await sequelize.Promise.each(tasks, (task, index)=> {
+        return Task.update({
+            state: state, order: index
+        }, {
+            where: {
+                id: task.id
+            }
+        })
+    })
 }

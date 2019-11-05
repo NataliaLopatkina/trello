@@ -18,19 +18,19 @@ export class TaskService {
         return this.httpClient.post(environment.baseUrl + 'tasks', data);
     }
 
-    public renameTask(title, id) {
+    public renameTask(title:string, id:number) {
         return this.httpClient.patch(environment.baseUrl + 'tasks/' + id, { title })
     }
 
-    public updateDescriptionTask(descirption, id) {
+    public updateDescriptionTask(descirption:string, id:number) {
         return this.httpClient.patch(environment.baseUrl + 'tasks/' + id, { descirption })
     }
 
-    public removeTask(id) {
+    public removeTask(id:number) {
         return this.httpClient.delete(environment.baseUrl + 'tasks/' + id)
     }
 
-    public moveTask(id, state, order) {
-        return this.httpClient.patch(environment.baseUrl + 'tasks/' + id + '/move', {state, order})
+    public moveTask(id:number, state:string, tasks:Array<any>) {
+        return this.httpClient.patch(environment.baseUrl + 'tasks/' + id + '/move', {state, tasks})
     }
 }
