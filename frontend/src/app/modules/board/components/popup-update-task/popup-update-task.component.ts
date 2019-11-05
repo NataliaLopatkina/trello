@@ -28,15 +28,16 @@ export class PopupUpdateTaskComponent implements OnInit {
         private taskService: TaskService) { }
 
     ngOnInit() {
-        this.formEditDescriptionTask = this.formBuilder.group({
-            description: ['', Validators.required]
-        })
-
         this.titleTask = this.task.title;
         this.idTask = this.task.id;
+        
         if(this.task.description) {
             this.description = this.task.description;
         }
+
+        this.formEditDescriptionTask = this.formBuilder.group({
+            description: [this.description, Validators.required]
+        })
     }
 
     removePopupUpdateTask() {
@@ -65,6 +66,7 @@ export class PopupUpdateTaskComponent implements OnInit {
             .subscribe(
                 (response) => {
                     this.description = this.formEditDescriptionTask.value.description;
+                    this.popupTask.emit();
                 }
             )
     }

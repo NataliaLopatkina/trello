@@ -1,11 +1,12 @@
-const { Board } = require('../models');
+const { Board, Task } = require('../models');
 
 exports.createBoard = async function (query) {
     return await Board.create(query);
 }
 
-exports.removeBoard = async function (query) {
-    return await Board.destroy(query);
+exports.removeBoard = async function (id) {
+    await Board.destroy({where: {id: id}})
+    return await Task.destroy({where: {boardId: id}})
 }
 
 exports.updateBoard = async function (id, title) {

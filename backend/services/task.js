@@ -14,8 +14,8 @@ exports.deleteTask = async function (query) {
     return await Task.destroy(query);
 }
 
-exports.renameTask = async function (id, title) {
-    return await Task.update({ title: title }, { where: { id: id } })
+exports.updateTask = async function (id, text) {
+    return await Task.update(id, text)
 }
 
 exports.moveTask = async function(state, tasks) {

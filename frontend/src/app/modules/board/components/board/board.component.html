@@ -27,4 +27,4 @@
         </div>
     </div>
 </main>
-<app-popup-update-task *ngIf="popupUpdateTask" (popupTask)="popupUpdateTask=false" [task]="task"></app-popup-update-task>
+<app-popup-update-task *ngIf="popupUpdateTask" (popupTask)="closeUpdateTask()" [task]="task"></app-popup-update-task>

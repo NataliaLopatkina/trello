@@ -45,12 +45,27 @@ exports.renameTask = async function (req, res, next) {
     const { id } = req.params;
 
     try {
-        await taskService.renameTask(id, title)
+        await taskService.updateTask({title: title}, {where: {id: id}})
         return res.status(200).json({ message: 'Title of task is updated!' })
     }
 
     catch (e) {
         return res.status(400).json({ message: 'Title of task is not updated!' })
+    }
+}
+
+exports.updateDescription = async function (req, res, next) {
+    const { description } = req.body;
+    const { id } = req.params;
+
+    try {
+        await taskService.updateTask({ description: description }, { where: { id: id } })
+        return res.status(200).json({ message: 'Descirption of task is updated!' })
+    }
+
+    catch (e) {
+        console.log(e)
+        return res.status(400).json({ message: 'Description of task is not updated!' })
     }
 }
 
@@ -60,7 +75,6 @@ exports.moveTask = async function(req, res, next) {
     try {
        await taskService.moveTask(state, tasks);
        return res.status(200).json({message: 'Task is moved!'})
-        
     }
 
     catch(e) {

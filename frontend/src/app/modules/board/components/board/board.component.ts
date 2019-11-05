@@ -158,6 +158,11 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.sortTasks(this.tasks);
     }
 
+    closeUpdateTask() {
+        this.popupUpdateTask = false;
+        this.getBoard(this.idBoard)
+    }
+
     ngOnDestroy() {
         if(this.subscription) {
             this.subscription.unsubscribe();

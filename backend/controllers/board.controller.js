@@ -25,16 +25,7 @@ exports.removeBoard = async function (req, res, next) {
     const { id } = req.params;
 
     try {
-        await boardService.removeBoard({
-            where: {
-                id: id
-            },
-            include: [{
-                model: Task,
-                where: { boardId: id },
-                as: 'task',
-            }]
-        })
+        await boardService.removeBoard(id)
         return res.status(200).json({ message: 'Board is removed!' })
     }
 
