@@ -1,5 +1,4 @@
 const boardService = require('../services/board');
-const { Task } = require('../models');
 const taskService = require('../services/task');
 
 exports.getBoards = async function (req, res, next) {

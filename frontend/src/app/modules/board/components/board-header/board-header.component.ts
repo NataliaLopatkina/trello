@@ -48,8 +48,10 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
 
     updateNameBoard() {
         if (this.titleBoard !== this.formRenameBoard.value.title) {
-            this.subscription = this.boardService.renameBoard(this.idBoard, this.formRenameBoard.value.title).subscribe();
-            this.titleBoard = this.formRenameBoard.value.title;
+            this.subscription = this.boardService.renameBoard(this.idBoard, this.formRenameBoard.value.title)
+            .subscribe(()=> {
+                this.titleBoard = this.formRenameBoard.value.title;
+            });
         } else {
             return
         }

@@ -10,15 +10,15 @@ exports.registration = async function (req, res, next) {
         const user = await userService.getUser({ where: { email: email }});
 
         if (!user) {
-            const newUser = await userService.createUser({ name, email, password: hash });
-            return res.status(201).json({ message: 'Пользователь зарегистрирован.', newUser})
+            await userService.createUser({ name, email, password: hash });
+            return res.status(201).json({ message: 'Пользователь зарегистрирован.'})
         }
 
         throw new Error('Почта уже используется другим аккаунтом. Вы можете использовать вход.')
     }
 
     catch (e) {
-        return res.status(403).json({ message: e.message, status: 403 })
+        return res.status(403).json({ message: e.message })
     }
 }
 
@@ -35,7 +35,7 @@ exports.login = async function (req, res, next) {
             const tokenLife = { expiresIn: '3h' };
             const accessToken = jwt.sign(userData, tokenSecret, tokenLife);
 
-            return res.status(200).json({ message: 'Logged in!', accessToken: accessToken, user });
+            return res.status(200).json({ message: 'Пользователь найден!', accessToken: accessToken, user });
         }
 
         throw new Error('Неверный логин или пароль!')
@@ -45,4 +45,3 @@ exports.login = async function (req, res, next) {
         return res.status(404).json({ message: e.message })
     }
 }
-
