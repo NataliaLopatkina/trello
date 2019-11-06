@@ -43,10 +43,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
             },
 
             (error)=> {
-                if (error.status === 403) {
-                    const text = 'Почта уже используется другим аккаунтом. Вы можете использовать вход.';
-                    this.notificationService.error(text);
-                }
+                this.notificationService.error(error.error.message);
             }
         )
     }

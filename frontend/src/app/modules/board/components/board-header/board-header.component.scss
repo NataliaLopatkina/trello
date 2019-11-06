@@ -34,7 +34,8 @@
         box-sizing: border-box;
 
         &.ng-dirty.ng-invalid {
-            border: 1px solid #ff0000;
+            background: #FBEDEB;
+            border: 1px solid #EC9488;
             padding: 1px 4px;
             box-sizing: border-box;
         }

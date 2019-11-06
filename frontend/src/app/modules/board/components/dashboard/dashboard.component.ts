@@ -31,6 +31,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
             (response: any) => {
                 if (response) {
                     this.boards = response.boards;
+                } else {
+                    this.boards = [];
                 }
             },
 
@@ -41,8 +43,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     removeBoard(board) {
-        this.boardService.removeBoard(board.id).subscribe();
-        this.getBoards();
+        this.boardService.removeBoard(board.id)
+        .subscribe(
+            (response)=> {
+                this.getBoards();
+            }
+        );
     }
 
     selectBoard(board) {

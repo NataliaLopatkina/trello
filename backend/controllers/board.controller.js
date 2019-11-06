@@ -63,7 +63,6 @@ exports.getBoard = async function (req, res, next) {
         const doneTasks = await taskService.getTasks(id, 'done')
 
         return res.status(200).json({ message: 'Tasks are found!', board, tasks: {todoTasks, doingTasks, doneTasks} })
-
     }
 
     catch (e) {

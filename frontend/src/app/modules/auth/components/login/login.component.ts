@@ -35,13 +35,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         .subscribe(
             (response) => {
                 this.router.navigate(['boards']);
-                this.notificationService.deleteNotification();
             },
 
             (error)=> {
-                if (error.status === 404) {
-                    this.notificationService.error('Неверный логин или пароль!');
-                }
+                this.notificationService.error(error.error.message);
             }
         )
     }

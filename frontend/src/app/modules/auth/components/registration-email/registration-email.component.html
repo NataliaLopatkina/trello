@@ -11,6 +11,13 @@
                 </label>
                 <input id="email" type="email" placeholder="например, example@mail.com" class="form__field"
                     formControlName="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                <div class="error"
+                    *ngIf="registrationEmailForm.controls['email'].errors && !registrationEmailForm.controls['email'].pristine">
+                    <span class="error__text" *ngIf="registrationEmailForm.controls['email'].errors.required">Email is
+                        required!</span>
+                    <span class="error__text" *ngIf="registrationEmailForm.controls['email'].errors.pattern">Email is not
+                        valid!</span>
+                </div>
             </div>
             <button class="form__button" type="submit" [disabled]="!registrationEmailForm.valid"
                 (click)="registrationEmail()">Создать новый аккаунт</button>

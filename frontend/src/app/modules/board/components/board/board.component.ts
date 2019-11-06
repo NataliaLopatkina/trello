@@ -35,13 +35,13 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.boardService.getBoard(this.idBoard).subscribe()
-        this.boardService.board.subscribe(
+        this.getBoard(this.idBoard)
+        this.subscription = this.boardService.board.subscribe(
             (board: any)=> {
                 this.color = board.color;
             }
         )
-        this.boardService.tasks.subscribe(
+        this.subscription = this.boardService.tasks.subscribe(
             (tasks: any)=> {
                 if(tasks) {
                     this.todoTasks = tasks.todoTasks;
@@ -80,16 +80,19 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
 
     getBoard(idBoard) {
-        this.subscription = this.boardService.getBoard(idBoard).subscribe()
+        this.subscription = this.boardService.getBoard(idBoard)
+        .subscribe()
     }
 
     drop(event: CdkDragDrop<any>) {
         if (event.previousContainer !== event.container) {
             transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex)
-                this.taskService.moveTask(event.container.data[0].id, event.container.id, event.container.data).subscribe()
+                this.taskService.moveTask(event.container.data[0].id, event.container.id, event.container.data)
+                .subscribe()
         } else {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-            this.taskService.moveTask(event.container.data[0].id, event.container.id, event.container.data).subscribe()
+            this.taskService.moveTask(event.container.data[0].id, event.container.id, event.container.data)
+            .subscribe()
         }
     }
 
@@ -131,19 +134,26 @@ export class BoardComponent implements OnInit, OnDestroy {
         }
     }
 
-    sortTasks(tasks) {
+    sortTasks(id) {
         this.typeSort = this.typeSort === 'ascend' ? 'descend' : 'ascend';
 
+        if (id == 'todo') {
+            this.tasks = this.todoTasks
+        } else if (id == 'doing') {
+            this.tasks = this.doingTasks
+        } else {
+            this.tasks = this.doneTasks
+        }
+
         if (this.typeSort === 'ascend') {
-            tasks.sort(this.compareFunction)
+            this.tasks.sort(this.compareFunction)
 
         } else if (this.typeSort === 'descend') {
-            tasks.sort(this.compareFunction).reverse();
+            this.tasks.sort(this.compareFunction).reverse();
         }
     }
 
     closeUpdateTask() {
-        this.popupUpdateTask = false;
         this.getBoard(this.idBoard)
     }
 

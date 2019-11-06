@@ -20,6 +20,11 @@
         min-height: 54px;
         margin-bottom: 8px;
 
+        &.ng-dirty.ng-invalid {
+            background: #FBEDEB;
+            border: 1px solid #EC9488;
+        }
+
         &::placeholder {
             color: #172b4d;
         }
