@@ -1,4 +1,8 @@
-# Trello
+# Clone Trello
+
+## Requirements
+- node.js
+- postgreSQL
 
 ## Installation
 git clone `https://github.com/NataliaLopatkina/trello.git`
@@ -14,5 +18,4 @@ For starting use command `npm start`
 - express
 - sequelize
 - jsonwebtoken
-
-For database is used PostgreSQL.
+- validator joi
