@@ -33,11 +33,11 @@
             </div>
             <button class="form__button" type="submit" [disabled]="!loginForm.valid"
                 (click)="login()">Войти</button>
-            <button class="form__button-service" (click)="authWithGoogle()">
+            <button class="form__button-service" (click)="signInWithGoogle()">
                 <svg class="form__button-icon">
-                    <use xlink:href="../../assets/svg-sprite.svg#vk"></use>
+                    <use xlink:href="../../assets/svg-sprite.svg#google"></use>
                 </svg>
-                <a class="form__button-text">Войти с помощью vk</a>
+                <a class="form__button-text">Войти с помощью Google</a>
             </button>
         </form>
     </div>

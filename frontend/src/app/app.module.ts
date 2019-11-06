@@ -12,7 +12,7 @@ import { NotificationComponent } from '@components/notification/notification.com
 import { NotFoundComponent } from '@components/not-found/not-found.component';
 
 import { NotificationService } from '@services/notification.service';
-import { AuthService } from '@services/auth.service';
+import { AuthenticationService } from '@services/authentication.service';
 import { TaskService } from '@services/task.service';
 
 import { JwtInterceptor } from './helpers/jwt.interceptor';
@@ -33,7 +33,7 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
     ],
     providers: [
         NotificationService,
-        AuthService,
+        AuthenticationService,
         TaskService,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
     ],

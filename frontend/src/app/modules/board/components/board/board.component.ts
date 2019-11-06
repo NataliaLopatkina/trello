@@ -84,15 +84,18 @@ export class BoardComponent implements OnInit, OnDestroy {
         .subscribe()
     }
 
+    updateTasksList(boardId, id, tasks) {
+        this.subscription = this.taskService.moveTask(boardId, id, tasks)
+            .subscribe()
+    }
+
     drop(event: CdkDragDrop<any>) {
         if (event.previousContainer !== event.container) {
             transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex)
-                this.taskService.moveTask(event.container.data[0].id, event.container.id, event.container.data)
-                .subscribe()
+                this.updateTasksList(event.container.data[0].id, event.container.id, event.container.data)
         } else {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-            this.taskService.moveTask(event.container.data[0].id, event.container.id, event.container.data)
-            .subscribe()
+            this.updateTasksList(event.container.data[0].id, event.container.id, event.container.data)
         }
     }
 
@@ -151,6 +154,8 @@ export class BoardComponent implements OnInit, OnDestroy {
         } else if (this.typeSort === 'descend') {
             this.tasks.sort(this.compareFunction).reverse();
         }
+
+        this.updateTasksList(this.idBoard, id, this.tasks)
     }
 
     closeUpdateTask() {
