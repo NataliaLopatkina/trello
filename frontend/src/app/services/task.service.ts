@@ -16,11 +16,11 @@ export class TaskService {
     }
 
     public renameTask(title:string, id:number) {
-        return this.httpClient.patch(environment.baseUrl + 'tasks/' + id + '/title', { title })
+        return this.httpClient.patch(environment.baseUrl + 'tasks/' + id + '/update', { title })
     }
 
     public updateDescriptionTask(description:string, id:number) {
-        return this.httpClient.patch(environment.baseUrl + 'tasks/' + id + '/description', { description })
+        return this.httpClient.patch(environment.baseUrl + 'tasks/' + id + '/update', { description })
     }
 
     public removeTask(id:number) {

@@ -30,11 +30,6 @@ export class AuthService {
             }))
     }
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> cf94605329f552cbdfd1c95f5789402311d0dac4
     public authWithGoogle() {
         return this.httpClient.get(environment.baseUrl + 'google')
     }

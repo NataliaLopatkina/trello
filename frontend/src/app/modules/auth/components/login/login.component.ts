@@ -40,17 +40,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 
             (error)=> {
                 if (error.status === 404) {
-                    this.notificationService.error(error.error.message);
+                    this.notificationService.error('Неверный логин или пароль!');
                 }
             }
         )
     }
 
-<<<<<<< HEAD
     authWithGoogle() {
-=======
-    authWithVk() {
->>>>>>> cf94605329f552cbdfd1c95f5789402311d0dac4
         this.subscription = this.authService.authWithGoogle()
         .subscribe(
             (response)=> {
