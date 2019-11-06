@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
 import { map } from 'rxjs/operators';
 
-import { environment } from '../../environments/environment';
-import { User } from '../models/user';
+import { environment } from '@environments/environment';
+import { User } from '@models/user';
 
 @Injectable({providedIn: 'root'})
 
@@ -31,6 +30,11 @@ export class AuthService {
             }))
     }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> cf94605329f552cbdfd1c95f5789402311d0dac4
     public authWithGoogle() {
         return this.httpClient.get(environment.baseUrl + 'google')
     }

@@ -4,7 +4,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { BoardService } from '../../../../services/board.service';
+import { BoardService } from '@services/board.service';
 
 @Component({
     selector: 'app-board-header',

@@ -4,8 +4,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../../../services/auth.service';
-import { NotificationService } from '../../../../services/notification.service';
+import { AuthService } from '@services/auth.service';
+import { NotificationService } from '@services/notification.service';
 
 @Component({
     selector: 'app-login',
@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            email: ['nata.salimowa2015@yndex.ru', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
-            password: ['tosovu96', [Validators.required, Validators.minLength(5)]]
+            email: ['', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
+            password: ['', [Validators.required, Validators.minLength(5)]]
         })
     }
 
@@ -39,14 +39,18 @@ export class LoginComponent implements OnInit, OnDestroy {
             },
 
             (error)=> {
-                if (error.error.message === 'Неверный логин или пароль!') {
+                if (error.status === 404) {
                     this.notificationService.error(error.error.message);
                 }
             }
         )
     }
 
+<<<<<<< HEAD
     authWithGoogle() {
+=======
+    authWithVk() {
+>>>>>>> cf94605329f552cbdfd1c95f5789402311d0dac4
         this.subscription = this.authService.authWithGoogle()
         .subscribe(
             (response)=> {

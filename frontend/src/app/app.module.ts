@@ -7,13 +7,13 @@ import { AuthModule } from './modules/auth/auth.module';
 import { BoardModule } from './modules/board/board.module';
 
 import { AppComponent } from './app.component';
-import { MainComponent } from './components/main/main.component';
-import { NotificationComponent } from './components/notification/notification.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { MainComponent } from '@components/main/main.component';
+import { NotificationComponent } from '@components/notification/notification.component';
+import { NotFoundComponent } from '@components/not-found/not-found.component';
 
-import { NotificationService } from './services/notification.service';
-import { AuthService } from './services/auth.service';
-import { TaskService } from './services/task.service';
+import { NotificationService } from '@services/notification.service';
+import { AuthService } from '@services/auth.service';
+import { TaskService } from '@services/task.service';
 
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 

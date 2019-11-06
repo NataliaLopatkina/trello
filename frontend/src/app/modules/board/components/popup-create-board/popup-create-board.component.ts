@@ -4,7 +4,7 @@ import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/cor
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { BoardService } from '../../../../services/board.service';
+import { BoardService } from '@services/board.service';
 
 @Component({
     selector: 'app-popup-create-board',

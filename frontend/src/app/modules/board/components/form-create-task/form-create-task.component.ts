@@ -4,8 +4,6 @@ import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/cor
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { TaskService } from '../../../../services/task.service';
-
 @Component({
     selector: 'app-form-create-task',
     templateUrl: './form-create-task.component.html',

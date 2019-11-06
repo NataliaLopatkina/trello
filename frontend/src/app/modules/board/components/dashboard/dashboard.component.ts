@@ -3,9 +3,8 @@ import { Subscription, from } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Board } from '../../../../models/board';
-import { BoardService } from '../../../../services/board.service';
-import { TaskService } from '../../../../services/task.service';
+import { Board } from '@models/board';
+import { BoardService } from '@services/board.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -20,7 +19,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     constructor(
         private boardService: BoardService,
-        private tasksService: TaskService,
         private router: Router) { }
 
     ngOnInit() {
