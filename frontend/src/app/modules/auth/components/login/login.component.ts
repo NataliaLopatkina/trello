@@ -18,8 +18,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     loginForm: FormGroup;
     subscription: Subscription;
-    user: SocialUser;
-    idToken: string = '';
 
     constructor(
         private formBuilder: FormBuilder,
@@ -32,19 +30,23 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loginForm = this.formBuilder.group({
             email: ['', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
             password: ['', [Validators.required, Validators.minLength(5)]]
-        })        
+        })    
     }
 
     signInWithGoogle(): void {
         this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-        this.authService.authState.subscribe((user) => {
-            this.user = user;
-            this.idToken = this.user.idToken;
+        this.authService.authState.subscribe((user: SocialUser) => {
+            console.log(user)
+            if(user) {
+                this.subscription = this.authenticationService.signInWithGoogle(user.idToken)
+                .subscribe()
+            } else {
+                return
+            }
         });
 
-        this.subscription = this.authenticationService.signInWithGoogle(this.idToken)
-            .subscribe()
-      }
+        
+    }
 
     login() {
         this.subscription = this.authenticationService.login(this.loginForm.value)
